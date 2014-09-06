@@ -15,6 +15,8 @@
 #ifndef __CONTROLLERIMPLEMENTATION_H__
 #define __CONTROLLERIMPLEMENTATION_H__
 
+#include <list>
+
 namespace Leap
 {
 
@@ -24,6 +26,8 @@ namespace Leap
 	class ControllerImplementation : public Interface::Implementation
 	{
 	public:
+		ControllerImplementation();
+
 		bool				isConnected() const;
 		bool				isServiceConnected() const;
 		bool				hasFocus() const;
@@ -36,6 +40,16 @@ namespace Leap
 
 		void				enableGesture( Gesture::Type type, bool enable );
 		bool				isGestureEnabled( Gesture::Type type );
+
+		// Unit Testing.
+		// TODO: `GenerateDummyFrame()` to test `_gestureState`.
+		void				DispatchDummyFrame();
+
+	private:
+		uint32_t			_policyFlags;
+		uint32_t			_gestureState;
+
+		std::list<Listener *>	_listeners;
 	};
 
 }

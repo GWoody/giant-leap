@@ -19,7 +19,7 @@ using namespace Leap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Controller::Controller( ControllerImplementation *ref ) : Interface( ref, this )
+Controller::Controller( ControllerImplementation *ref ) : Interface( ref, this )
 {
 }
 
