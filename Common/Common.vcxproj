@@ -18,6 +18,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Implementation\ControllerImplementation.h" />
+    <ClInclude Include="Implementation\Object.h" />
     <ClInclude Include="Implementation\SharedObject.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

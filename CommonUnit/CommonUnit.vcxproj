@@ -73,6 +73,7 @@
   <ItemGroup>
     <ClCompile Include="ControllerUnit.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="SharedObjectUnit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonUnit.h" />

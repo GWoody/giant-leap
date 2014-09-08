@@ -29,23 +29,32 @@
 		BREAKPOINT();							\
 		system( "pause" );						\
 		exit( EXIT_FAILURE );					\
-}
+	}											\
+	cout << endl;
 
 //-----------------------------------------------------------------------------
 // Implements a function that tests an object.
 //-----------------------------------------------------------------------------
-#define IMPLEMENT_TEST_OBJECT( func, type, obj )	bool func( type *obj )
+#define IMPLEMENT_TEST( func )						static bool func()
+#define IMPLEMENT_TEST_OBJECT( func, type, obj )	static bool func( type *obj )
 
 //-----------------------------------------------------------------------------
 // Calls a function that tests an object.
 //-----------------------------------------------------------------------------
+#define TEST( name, func )	cout << "\tTesting " << name << endl;	\
+	if( !func() ) {							\
+		BREAKPOINT();							\
+		system( "pause" );						\
+		exit( EXIT_FAILURE );					\
+	}
+
 #define TEST_OBJECT( name, func, obj )	cout << "\tTesting " << name << endl;	\
 	if( !func( obj ) ) {						\
 		cout << #func << " failed!" << endl;	\
 		BREAKPOINT();							\
 		system( "pause" );						\
 		exit( EXIT_FAILURE );					\
-}
+	}
 
 //-----------------------------------------------------------------------------
 // Ensures a test condition passes.

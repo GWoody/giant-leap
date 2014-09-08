@@ -22,6 +22,9 @@ using namespace Leap;
 LEAP_EXPORT Interface::Interface( Implementation* reference, void* owner )
 {
 	m_object = new SharedObject( reference );
+
+	// Set the default reference count to 2. The `Interface` should never own its `Implementation`.
+	m_object->IncrementRefCount();
 }
 
 //-----------------------------------------------------------------------------
@@ -44,8 +47,13 @@ Interface::Interface( SharedObject *object )
 //-----------------------------------------------------------------------------
 LEAP_EXPORT Interface &Interface::operator=( const Interface &rhs )
 {
+	// Signal that we are releasing the old pointer.
+	m_object->DecrementRefCount();
+
+	// Attach to the new pointer.
 	m_object = rhs.m_object;
 	m_object->IncrementRefCount();
+
 	return *this;
 }
 

@@ -21,6 +21,9 @@
     <ClCompile Include="ControllerUnit.cpp">
       <Filter>Implementation</Filter>
     </ClCompile>
+    <ClCompile Include="SharedObjectUnit.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonUnit.h">

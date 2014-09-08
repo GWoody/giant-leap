@@ -14,6 +14,7 @@
 
 #include "Leap.h"
 #include "ControllerImplementation.h"
+#include "SharedObject.h"
 
 using namespace Leap;
 

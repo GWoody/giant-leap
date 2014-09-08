@@ -21,12 +21,14 @@ using namespace std;
 // Test functions.
 //-----------------------------------------------------------------------------
 bool run_controller_test();
+bool run_shared_object_test();
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 int main( int argc, char **argv )
 {
 	RUN_TEST( "ControllerImplementation", run_controller_test );
+	RUN_TEST( "SharedObject", run_shared_object_test );
 
 	system( "pause" );
 	return EXIT_SUCCESS;

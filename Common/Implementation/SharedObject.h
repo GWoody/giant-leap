@@ -23,7 +23,7 @@ namespace Leap
 	class SharedObject
 	{
 	public:
-		SharedObject( void *ptr )
+		SharedObject( Interface::Implementation *ptr )
 		{
 			_count = 1;
 			_ptr = ptr;
@@ -37,9 +37,15 @@ namespace Leap
 		void DecrementRefCount()
 		{
 			_count--;
+			if( _count < 0 )
+			{
+				_count = 0;
+			}
+
 			if( !_count )
 			{
-				delete this;
+				delete _ptr;
+				_ptr = NULL;
 			}
 		}
 
@@ -49,7 +55,7 @@ namespace Leap
 		}
 		
 	private:
-		void *				_ptr;
+		Interface::Implementation *	_ptr;
 		int					_count;
 	};
 

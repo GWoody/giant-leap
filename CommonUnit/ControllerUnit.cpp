@@ -36,9 +36,9 @@ bool run_controller_test()
 {
 	ControllerImplementation *controller = new ControllerImplementation;
 
-	TEST_OBJECT( "Policy Flags", perform_policy_flag_test, controller );
-	TEST_OBJECT( "Gesture State", perform_gesture_enable_test, controller );
-	TEST_OBJECT( "Listener", perform_listener_test, controller );
+	TEST_OBJECT( "policy Flags", perform_policy_flag_test, controller );
+	TEST_OBJECT( "gesture State", perform_gesture_enable_test, controller );
+	TEST_OBJECT( "listener", perform_listener_test, controller );
 
 	return true;
 }
@@ -180,19 +180,17 @@ IMPLEMENT_TEST_OBJECT( perform_listener_test, ControllerImplementation, controll
 	const int LISTENER_COUNT = 3;
 
 	ThreadedCounter connectionCount, frameCount;
-	UnitListener listeners[LISTENER_COUNT]{ 
-		{ connectionCount, frameCount },
-		{ connectionCount, frameCount },
-		{ connectionCount, frameCount },
-	};
+	UnitListener *listeners[LISTENER_COUNT];
 
 	for( int i = 0; i < LISTENER_COUNT; i++ )
 	{
+		listeners[i] = new UnitListener( connectionCount, frameCount );
+
 		char adding[32], checking[64];
 		_snprintf_s( adding, sizeof(adding), "Adding listener %d", i + 1 );
 		_snprintf_s( checking, sizeof(checking), "Ensuring %d listeners are connected", i + 1 );
 
-		ASSERT( adding, controller->addListener( listeners[i] ) );
+		ASSERT( adding, controller->addListener( *listeners[i] ) );
 		ASSERT( checking, connectionCount.Count() == i + 1 );
 
 		controller->DispatchDummyFrame();
@@ -206,12 +204,14 @@ IMPLEMENT_TEST_OBJECT( perform_listener_test, ControllerImplementation, controll
 		_snprintf_s( removing, sizeof(removing), "Removing listener %d", i + 1 );
 		_snprintf_s( checking, sizeof(checking), "Ensuring %d listeners are connected", i + 1 );
 
-		ASSERT( removing, controller->removeListener( listeners[i] ) );
+		ASSERT( removing, controller->removeListener( *listeners[i] ) );
 		ASSERT( checking, connectionCount.Count() == i );
 
 		controller->DispatchDummyFrame();
 		ASSERT( "Sending dummy frame", frameCount.Count() == i );
 		frameCount.Zero();
+
+		delete listeners[i];
 	}
 
 	ASSERT( "Ensuring no more listeners are connected", connectionCount.Count() == 0 );
