@@ -23,19 +23,19 @@ namespace Leap
 	{
 	public:
 		BoneImplementation();
-		Vector prevJoint();
-		Vector nextJoint();
-		Vector center();
-		Vector direction();
-		float length();
-		float width();
-		Bone::Type type();
-		Matrix basis();
-		bool isValid();
+		Vector prevJoint() const;
+		Vector nextJoint() const;
+		Vector center() const;
+		Vector direction() const;
+		float length() const;
+		float width() const;
+		Bone::Type type() const;
+		Matrix basis() const;
+		bool isValid() const;
 		static const Bone& invalid();
-		bool operator==(const Bone&);
-		bool operator!=(const Bone&); 
-		const char* toCString();
+		bool operator==(const Bone&) const;
+		bool operator!=(const Bone&) const; 
+		const char* toCString() const;
 
 	};
 

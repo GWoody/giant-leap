@@ -24,32 +24,32 @@ BoneImplementation::BoneImplementation()
 
 }
 
-Vector Bone::prevJoint() const
+Vector BoneImplementation::prevJoint() const
 {
 	return Vector(0, 0, 0);
 }
 
-Vector Bone::nextJoint() const
+Vector BoneImplementation::nextJoint() const
 {
 	return Vector(0, 0, 0);
 }
 
-Vector Bone::center() const
+Vector BoneImplementation::center() const
 {
 	return Vector(0, 0, 0);
 }
 
-Vector Bone::direction() const
+Vector BoneImplementation::direction() const
 {
 	return Vector(0, 0, 0);
 }
 
-float Bone::length() const
+float BoneImplementation::length() const
 {
 	return 0;
 }
 
-float Bone::width() const
+float BoneImplementation::width() const
 {
 	return 0;
 }
@@ -60,35 +60,34 @@ Bone::Type Bone::type() const
 	return type;
 }
 
-Matrix Bone::basis() const
+Matrix BoneImplementation::basis() const
 {
 	breakpoint();
 	return Matrix();
 }
 
-bool Bone::isValid() const
+bool BoneImplementation::isValid() const
 {
 	return true;
 }
 
-static const Bone& invalid()
+ const Bone& BoneImplementation::invalid()
 {
-	Bone bone;
-
-	return bone;
+	 static Bone invalid(NULL);
+	 return invalid;
 }
 
-bool Bone::operator==(const Bone& b) const
+bool BoneImplementation::operator==(const Bone& b) const
 {
-	return get<BoneImplementation>() == b.get<BoneImplementation>();
+	return true;
 }
 
-bool Bone::operator!=(const Bone& b) const
+bool BoneImplementation::operator!=(const Bone& b) const
 {
-	return get<BoneImplementation>() != b.get<BoneImplementation>();
+	return true;
 }
 
-const char* Bone::toCString() const
+const char* BoneImplementation::toCString() const
 {
 	breakpoint();
 	return "";

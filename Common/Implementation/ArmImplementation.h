@@ -23,16 +23,16 @@ namespace Leap
 	{
 		public:
 			ArmImplementation();
-			float width();
-			Vector direction();
-			Matrix basis();
-			Vector elbowPosition();
-			Vector wristPosition();
-			bool isValid();
+			float width() const;
+			Vector direction() const;
+			Matrix basis() const;
+			Vector elbowPosition() const;
+			Vector wristPosition() const;
+			bool isValid() const;
 			const Arm& invalid();
-			bool operator==(const Arm&);
-			bool operator!=(const Arm&);
-			const char* toCString();
+			bool operator==(const Arm&) const;
+			bool operator!=(const Arm&) const;
+			const char* toCString() const;
 
 	};
 

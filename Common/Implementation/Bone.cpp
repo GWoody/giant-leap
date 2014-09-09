@@ -75,14 +75,14 @@ LEAP_EXPORT bool Bone::isValid() const
 	return get<BoneImplementation>()->isValid();
 }
 
-LEAP_EXPORT bool Bone::operator==(const Bone&) const
+LEAP_EXPORT bool Bone::operator==(const Bone& b) const
 {
-	return true;
+	return get<BoneImplementation>() == b.get<BoneImplementation>();
 }
 
-LEAP_EXPORT bool Bone::operator!=(const Bone&) const
+LEAP_EXPORT bool Bone::operator!=(const Bone& b) const
 {
-	return true;
+	return get<BoneImplementation>() != b.get<BoneImplementation>();
 }
 
 LEAP_EXPORT std::ostream& operator<<(std::ostream& out , const Bone& b)

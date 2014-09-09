@@ -24,54 +24,54 @@ ArmImplementation::ArmImplementation()
 	
 }
 
-float ArmImplementation::width()
+float ArmImplementation::width() const
 {
 	return 0;
 }
 
-Vector Arm::direction() const 
+Vector ArmImplementation::direction() const
 {
 	return Vector(0, 0, 0);
 }
 
-Matrix Arm::basis() const
+Matrix ArmImplementation::basis() const
 {
 	breakpoint();
 	return Matrix();
 }
 
-Vector Arm::elbowPosition() const
+Vector ArmImplementation::elbowPosition() const
 {
 	return Vector(0,0,0);
 }
 
-Vector Arm::wristPosition() const
+Vector ArmImplementation::wristPosition() const
 {
 	return Vector(0, 0, 0);
 }
 
-bool Arm::isValid() const
+bool ArmImplementation::isValid() const
 {
 	return true;
 }
 
-const Arm& Arm::invalid()
+const Arm& ArmImplementation::invalid()
 {
 	static Arm invalid(NULL);
 	return invalid;
 }
 
-bool Arm::operator==(const Arm& other) const
+bool ArmImplementation::operator==(const Arm& other) const
 {
 	return true;
 }
 
-bool Arm::operator!=(const Arm& other) const
+bool ArmImplementation::operator!=(const Arm& other) const
 {
 	return true;
 }
 
-const char* Arm::toCString() const
+const char* ArmImplementation::toCString() const
 {
 	breakpoint();
 	return "";
