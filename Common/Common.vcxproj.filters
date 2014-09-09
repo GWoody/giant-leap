@@ -9,6 +9,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{73a18df1-7e31-431e-af05-a237925ea6b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Server\Main.cpp">
@@ -31,8 +34,8 @@
     <ClInclude Include="Implementation\SharedObject.h">
       <Filter>Implementation</Filter>
     </ClInclude>
-    <ClInclude Include="Implementation\Object.h">
-      <Filter>Implementation</Filter>
+    <ClInclude Include="Common.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

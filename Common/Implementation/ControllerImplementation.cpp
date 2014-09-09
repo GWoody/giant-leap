@@ -12,6 +12,8 @@
 ===============================================================================
 */
 
+#include "Common.h"
+
 #include "Leap.h"
 #include "ControllerImplementation.h"
 
@@ -29,6 +31,7 @@ ControllerImplementation::ControllerImplementation()
 //-----------------------------------------------------------------------------
 bool ControllerImplementation::isConnected() const
 {
+	breakpoint();
 	return false;
 }
 
@@ -36,6 +39,7 @@ bool ControllerImplementation::isConnected() const
 //-----------------------------------------------------------------------------
 bool ControllerImplementation::isServiceConnected() const
 {
+	breakpoint();
 	return false;
 }
 
@@ -43,6 +47,7 @@ bool ControllerImplementation::isServiceConnected() const
 //-----------------------------------------------------------------------------
 bool ControllerImplementation::hasFocus() const
 {
+	breakpoint();
 	return false;
 }
 

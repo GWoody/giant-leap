@@ -40,7 +40,10 @@ LEAP_EXPORT Interface::Interface( const Interface &rhs )
 Interface::Interface( SharedObject *object )
 {
 	m_object = object;
-	m_object->IncrementRefCount();
+	if( m_object )
+	{
+		m_object->IncrementRefCount();
+	}
 }
 
 //-----------------------------------------------------------------------------
