@@ -3,97 +3,111 @@
 
 	Giant Leap
 
-	File	:	Controller.cpp
+	File	:	FingerList.cpp
 	Authors	:	Lucas Zadrozny
 	Date	:	5th September 2014
 
-	Purpose	:	Implements the Giant Leap version of the `Controller` Leap SDK class.
+	Purpose	:	Implements the Giant Leap version of the `FingerList` Leap SDK class.
 
 ===============================================================================
 */
 
+#include "Common.h"
+
 #include "Leap.h"
-#include "ControllerImplementation.h"
+#include "ListBaseImplementation.h"
 #include "SharedObject.h"
 using namespace Leap;
 
+typedef ListBaseImplementation<Finger> ListType_t;
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Controller::Controller( ControllerImplementation *ref ) : Interface( ref, this )
+FingerList::FingerList( const ListBaseImplementation<Finger> &list ) : Interface( (Interface::Implementation *)&list, this )
 {
+
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Controller::Controller() : Interface( (SharedObject *)NULL )
+LEAP_EXPORT int FingerList::count() const
 {
+	return get<ListType_t>()->count();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Controller::~Controller()
+LEAP_EXPORT bool FingerList::isEmpty() const
 {
+	return get<ListType_t>()->isEmpty();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT bool Controller::isConnected() const
+LEAP_EXPORT Finger FingerList::operator[](int index) const
 {
-	return get<ControllerImplementation>()->isConnected();
+	return (*get<ListType_t>())[index];
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT bool Controller::isServiceConnected() const
+LEAP_EXPORT FingerList &FingerList::append( const FingerList &other )
 {
-	return get<ControllerImplementation>()->isServiceConnected();
+	get<ListType_t>()->append( *other.get<ListType_t>() );
+	return *this;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT bool Controller::hasFocus() const
+LEAP_EXPORT Finger FingerList::leftmost() const
 {
-	return get<ControllerImplementation>()->hasFocus();
+	breakpoint();
+	return Finger();
+}
+
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+LEAP_EXPORT Finger FingerList::rightmost() const
+{
+	breakpoint();
+	return Finger();
+}
+
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+LEAP_EXPORT Finger FingerList::frontmost() const
+{
+	breakpoint();
+	return Finger();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Controller::PolicyFlag Controller::policyFlags() const
+LEAP_EXPORT FingerList &FingerList::extended()
 {
-	return get<ControllerImplementation>()->policyFlags();
+	breakpoint();
+	return FingerList();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT void Controller::setPolicyFlags( PolicyFlag flags ) const
+LEAP_EXPORT FingerList &FingerList::fingerType( Finger::Type type )
 {
-	get<ControllerImplementation>()->setPolicyFlags( flags );
+	return FingerList();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT bool Controller::addListener( Listener &listener )
+LEAP_EXPORT FingerList::const_iterator FingerList::begin() const
 {
-	return get<ControllerImplementation>()->addListener( listener );
+	return const_iterator( *this, 0 );
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT bool Controller::removeListener( Listener &listener )
+LEAP_EXPORT FingerList::const_iterator FingerList::end() const
 {
-	return get<ControllerImplementation>()->removeListener( listener );
-}
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-LEAP_EXPORT void Controller::enableGesture( Gesture::Type type, bool enable /*= true*/ ) const
-{
-	get<ControllerImplementation>()->enableGesture( type, enable );
-}
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-LEAP_EXPORT bool Controller::isGestureEnabled( Gesture::Type type ) const
-{
-	return get<ControllerImplementation>()->isGestureEnabled( type );
+	return const_iterator( *this, count() );
 }

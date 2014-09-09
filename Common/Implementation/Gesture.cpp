@@ -3,97 +3,120 @@
 
 	Giant Leap
 
-	File	:	Controller.cpp
+	File	:	Gesture.cpp
 	Authors	:	Lucas Zadrozny
-	Date	:	5th September 2014
+	Date	:	9th September 2014
 
-	Purpose	:	Implements the Giant Leap version of the `Controller` Leap SDK class.
+	Purpose	:	Implements the Giant Leap version of the `Frame` Leap SDK class.
 
 ===============================================================================
 */
 
 #include "Leap.h"
-#include "ControllerImplementation.h"
+#include "GestureImplementation.h"
 #include "SharedObject.h"
 using namespace Leap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Controller::Controller( ControllerImplementation *ref ) : Interface( ref, this )
+Gesture::Gesture( GestureImplementation *ref ) : Interface( ref, this )
 {
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Controller::Controller() : Interface( (SharedObject *)NULL )
+LEAP_EXPORT Gesture::Gesture() : Interface( (SharedObject *)NULL )
+{
+
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+LEAP_EXPORT Gesture::Gesture( const Gesture& rhs ) : Interface( rhs.m_object )
 {
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Controller::~Controller()
+LEAP_EXPORT Gesture::Type Gesture::type() const
 {
+	return get<GestureImplementation>()->type();	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT bool Controller::isConnected() const
+LEAP_EXPORT Gesture::State Gesture::state() const
 {
-	return get<ControllerImplementation>()->isConnected();
+	return get<GestureImplementation>()->state();	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT bool Controller::isServiceConnected() const
+LEAP_EXPORT int32_t Gesture::id() const
 {
-	return get<ControllerImplementation>()->isServiceConnected();
+	return get<GestureImplementation>()->id();	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT bool Controller::hasFocus() const
+LEAP_EXPORT int64_t Gesture::duration() const
 {
-	return get<ControllerImplementation>()->hasFocus();
+	return get<GestureImplementation>()->duration();	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Controller::PolicyFlag Controller::policyFlags() const
+LEAP_EXPORT float Gesture::durationSeconds() const
 {
-	return get<ControllerImplementation>()->policyFlags();
+	return get<GestureImplementation>()->durationSeconds();	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT void Controller::setPolicyFlags( PolicyFlag flags ) const
+LEAP_EXPORT Frame Gesture::frame() const
 {
-	get<ControllerImplementation>()->setPolicyFlags( flags );
+	return get<GestureImplementation>()->frame();	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT bool Controller::addListener( Listener &listener )
+LEAP_EXPORT HandList Gesture::hands() const
 {
-	return get<ControllerImplementation>()->addListener( listener );
+	return get<GestureImplementation>()->hands();	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT bool Controller::removeListener( Listener &listener )
+LEAP_EXPORT PointableList Gesture::pointables() const
 {
-	return get<ControllerImplementation>()->removeListener( listener );
+	return get<GestureImplementation>()->pointables();	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT void Controller::enableGesture( Gesture::Type type, bool enable /*= true*/ ) const
+LEAP_EXPORT bool Gesture::isValid() const
 {
-	get<ControllerImplementation>()->enableGesture( type, enable );
+	return get<GestureImplementation>() != NULL;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT bool Controller::isGestureEnabled( Gesture::Type type ) const
+LEAP_EXPORT bool Gesture::operator==( const Gesture& rhs ) const
 {
-	return get<ControllerImplementation>()->isGestureEnabled( type );
+	return get<GestureImplementation>() == rhs.get<GestureImplementation>();
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+LEAP_EXPORT bool Gesture::operator!=( const Gesture& rhs ) const
+{
+	return get<GestureImplementation>() != rhs.get<GestureImplementation>();
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+LEAP_EXPORT const Gesture &Gesture::invalid()
+{
+	static Gesture g( NULL );
+	return g;
 }

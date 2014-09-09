@@ -16,7 +16,6 @@
 
 #include "Leap.h"
 #include "ControllerImplementation.h"
-
 using namespace Leap;
 
 //-----------------------------------------------------------------------------

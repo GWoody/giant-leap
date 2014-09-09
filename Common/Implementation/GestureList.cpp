@@ -3,80 +3,72 @@
 
 	Giant Leap
 
-	File	:	Interface.cpp
+	File	:	GestureList.cpp
 	Authors	:	Lucas Zadrozny
 	Date	:	5th September 2014
 
-	Purpose	:	Implements the Giant Leap version of the `Interface` Leap SDK class.
+	Purpose	:	Implements the Giant Leap version of the `GestureList` Leap SDK class.
 
 ===============================================================================
 */
 
-#include "Leap.h"
-#include "SharedObject.h"
+#include "Common.h"
 
+#include "Leap.h"
+#include "ListBaseImplementation.h"
+#include "SharedObject.h"
 using namespace Leap;
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-LEAP_EXPORT Interface::Interface( Implementation* reference, void* owner )
-{
-	m_object = new SharedObject( reference );
+typedef ListBaseImplementation<Gesture> ListType_t;
 
-	// Set the default reference count to 2. The `Interface` should never own its `Implementation`.
-	m_object->IncrementRefCount();
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+GestureList::GestureList( const ListBaseImplementation<Gesture> &list ) : Interface( (Interface::Implementation *)&list, this )
+{
+
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Interface::Interface( const Interface &rhs )
+LEAP_EXPORT int GestureList::count() const
 {
-	m_object = rhs.m_object;
-	m_object->IncrementRefCount();
+	return get<ListType_t>()->count();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Interface::Interface( SharedObject *object )
+LEAP_EXPORT bool GestureList::isEmpty() const
 {
-	m_object = object;
-	if( m_object )
-	{
-		m_object->IncrementRefCount();
-	}
+	return get<ListType_t>()->isEmpty();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Interface &Interface::operator=( const Interface &rhs )
+LEAP_EXPORT Gesture GestureList::operator[](int index) const
 {
-	// Signal that we are releasing the old pointer.
-	m_object->DecrementRefCount();
+	return (*get<ListType_t>())[index];
+}
 
-	// Attach to the new pointer.
-	m_object = rhs.m_object;
-	m_object->IncrementRefCount();
-
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+LEAP_EXPORT GestureList &GestureList::append( const GestureList &other )
+{
+	get<ListType_t>()->append( *other.get<ListType_t>() );
 	return *this;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Interface::~Interface()
+LEAP_EXPORT GestureList::const_iterator GestureList::begin() const
 {
-	m_object->DecrementRefCount();
+	breakpoint();
+	return const_iterator( *this, 0 );
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Interface::Implementation *Interface::reference() const
+LEAP_EXPORT GestureList::const_iterator GestureList::end() const
 {
-	return m_object->Get<Implementation>();
-}
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-void Interface::deleteCString( const char *cstr )
-{
-	
+	breakpoint();
+	return const_iterator( *this, count() );
 }

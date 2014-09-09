@@ -24,6 +24,15 @@
     <ClCompile Include="SharedObjectUnit.cpp">
       <Filter>Implementation</Filter>
     </ClCompile>
+    <ClCompile Include="FrameUnit.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="ListBaseUnit.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="Gesture.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonUnit.h">

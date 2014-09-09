@@ -14,11 +14,21 @@
     <ClCompile Include="..\Server\Main.cpp" />
     <ClCompile Include="Implementation\Controller.cpp" />
     <ClCompile Include="Implementation\ControllerImplementation.cpp" />
+    <ClCompile Include="Implementation\FingerList.cpp" />
+    <ClCompile Include="Implementation\Frame.cpp" />
+    <ClCompile Include="Implementation\FrameImplementation.cpp" />
+    <ClCompile Include="Implementation\Gesture.cpp" />
+    <ClCompile Include="Implementation\GestureImplementation.cpp" />
+    <ClCompile Include="Implementation\GestureList.cpp" />
     <ClCompile Include="Implementation\Interface.cpp" />
+    <ClCompile Include="Implementation\ListBaseImplementation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h" />
     <ClInclude Include="Implementation\ControllerImplementation.h" />
+    <ClInclude Include="Implementation\FrameImplementation.h" />
+    <ClInclude Include="Implementation\GestureImplementation.h" />
+    <ClInclude Include="Implementation\ListBaseImplementation.h" />
     <ClInclude Include="Implementation\SharedObject.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

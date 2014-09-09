@@ -26,6 +26,27 @@
     <ClCompile Include="Implementation\Interface.cpp">
       <Filter>Implementation</Filter>
     </ClCompile>
+    <ClCompile Include="Implementation\FrameImplementation.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\Frame.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\ListBaseImplementation.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\GestureList.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\FingerList.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\GestureImplementation.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\Gesture.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Implementation\ControllerImplementation.h">
@@ -36,6 +57,15 @@
     </ClInclude>
     <ClInclude Include="Common.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Implementation\FrameImplementation.h">
+      <Filter>Implementation</Filter>
+    </ClInclude>
+    <ClInclude Include="Implementation\ListBaseImplementation.h">
+      <Filter>Implementation</Filter>
+    </ClInclude>
+    <ClInclude Include="Implementation\GestureImplementation.h">
+      <Filter>Implementation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

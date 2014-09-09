@@ -21,7 +21,7 @@ namespace Leap
 {
 
 	//-------------------------------------------------------------------------
-	// Contains the "real" data for the Leap `Frame` class.
+	// Contains the "real" data for the Leap `Controller` class.
 	//-------------------------------------------------------------------------
 	class ControllerImplementation : public Interface::Implementation
 	{
