@@ -47,6 +47,18 @@
     <ClCompile Include="Implementation\Gesture.cpp">
       <Filter>Implementation</Filter>
     </ClCompile>
+    <ClCompile Include="Implementation\Arm.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\ArmImplementation.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\Bone.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\BoneImplementation.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Implementation\ControllerImplementation.h">
@@ -65,6 +77,12 @@
       <Filter>Implementation</Filter>
     </ClInclude>
     <ClInclude Include="Implementation\GestureImplementation.h">
+      <Filter>Implementation</Filter>
+    </ClInclude>
+    <ClInclude Include="Implementation\ArmImplementation.h">
+      <Filter>Implementation</Filter>
+    </ClInclude>
+    <ClInclude Include="Implementation\BoneImplementation.h">
       <Filter>Implementation</Filter>
     </ClInclude>
   </ItemGroup>

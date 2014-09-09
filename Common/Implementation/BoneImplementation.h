@@ -35,8 +35,6 @@ namespace Leap
 		static const Bone& invalid();
 		bool operator==(const Bone&);
 		bool operator!=(const Bone&); 
-
-	private:
 		const char* toCString();
 
 	};

@@ -71,6 +71,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ArmUnit.cpp" />
+    <ClCompile Include="BoneUnit.cpp" />
     <ClCompile Include="ControllerUnit.cpp" />
     <ClCompile Include="FrameUnit.cpp" />
     <ClCompile Include="Gesture.cpp" />

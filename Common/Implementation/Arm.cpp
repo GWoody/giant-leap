@@ -85,6 +85,6 @@ LEAP_EXPORT  std::ostream& operator<<(std::ostream& out, const Arm& a)
 
 LEAP_EXPORT const char* Arm::toCString() const
 {
-	//return get<ArmImplementation>()->toCString();
+	return get<ArmImplementation>()->toCString();
 }
 

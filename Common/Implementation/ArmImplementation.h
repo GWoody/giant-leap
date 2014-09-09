@@ -32,8 +32,6 @@ namespace Leap
 			const Arm& invalid();
 			bool operator==(const Arm&);
 			bool operator!=(const Arm&);
-
-		private:
 			const char* toCString();
 
 	};

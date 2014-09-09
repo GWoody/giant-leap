@@ -33,6 +33,12 @@
     <ClCompile Include="Gesture.cpp">
       <Filter>Implementation</Filter>
     </ClCompile>
+    <ClCompile Include="ArmUnit.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="BoneUnit.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonUnit.h">

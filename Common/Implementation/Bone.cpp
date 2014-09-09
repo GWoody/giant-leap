@@ -93,6 +93,6 @@ LEAP_EXPORT std::ostream& operator<<(std::ostream& out , const Bone& b)
 
 LEAP_EXPORT const char* Bone::toCString() const
 {
-
+	return get<BoneImplementation>()->toCString();
 }
 
