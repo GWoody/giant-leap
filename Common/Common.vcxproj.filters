@@ -12,6 +12,9 @@
     <Filter Include="Source Files">
       <UniqueIdentifier>{73a18df1-7e31-431e-af05-a237925ea6b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Network">
+      <UniqueIdentifier>{d1b3a916-b0ad-413c-b83f-930bf0897bf0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Server\Main.cpp">
@@ -110,6 +113,15 @@
     <ClCompile Include="Implementation\InteractionBox.cpp">
       <Filter>Implementation</Filter>
     </ClCompile>
+    <ClCompile Include="Network\UpdSocket.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\StreamSocket.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Network.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Implementation\ControllerImplementation.h">
@@ -153,6 +165,12 @@
     </ClInclude>
     <ClInclude Include="Implementation\SwipeGestureImplementation.h">
       <Filter>Implementation</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Network.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Socket.h">
+      <Filter>Network</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

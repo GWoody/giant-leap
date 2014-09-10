@@ -3,49 +3,48 @@
 
 	Giant Leap
 
-	File	:	Tool.cpp
+	File	:	Socket.h
 	Authors	:	Lucas Zadrozny
 	Date	:	10th September 2014
 
-	Purpose	:	##### DO NOT IMPLEMENT!!! #####
+	Purpose	:	Socket abstraction layer.
 
 ===============================================================================
 */
 
-#include "Common.h"
-
-#include "Leap.h"
-#include "TapGestureImplementation.h"
-#include "SharedObject.h"
-using namespace Leap;
+#ifndef __UDPSOCKET_H__
+#define __UDPSOCKET_H__
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Tool::Tool() : Pointable( (PointableImplementation *)NULL )
+struct address_t
 {
-}
+	char				_address[16];
+	unsigned short		_port;
+};
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Tool::Tool( ToolImplementation *finger ) : Pointable( finger )
+class StreamSocket
 {
-}
+public:
+
+};
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Tool::Tool( const Pointable &pointable ) : Pointable( pointable )
+class UdpSocket
 {
-	if( !pointable.isFinger() )
-	{
-		m_object->DecrementRefCount();
-		m_object = NULL;
-	}
-}
+public:
+	UdpSocket( bool recv, unsigned short port );
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-LEAP_EXPORT const Tool &Tool::invalid()
-{
-	static Tool t;
-	return t;
-}
+	virtual bool		Send( const void *buf, int len, const char *address );
+	virtual bool		Recv( void *buf, int buflen, address_t *addr );
+
+protected:
+	int					_fd;
+	bool				_recv;
+	unsigned short		_port;
+};
+
+#endif // __UDPSOCKET_H__

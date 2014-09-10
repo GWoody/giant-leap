@@ -3,30 +3,25 @@
 
 	Giant Leap
 
-	File	:	InteractionBox.cpp
+	File	:	Network.h
 	Authors	:	Lucas Zadrozny
 	Date	:	10th September 2014
 
-	Purpose	:	##### DO NOT IMPLEMENT!!! #####
+	Purpose	:	Global network definitions.
 
 ===============================================================================
 */
 
-#include "Common.h"
-
-#include "Leap.h"
-using namespace Leap;
+#ifndef __NETWORK_H__
+#define __NETWORK_H__
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT InteractionBox::InteractionBox() : Interface( (SharedObject *) NULL )
-{
-}
+bool network_init();
+void network_shutdown();
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT const InteractionBox &InteractionBox::invalid()
-{
-	static InteractionBox b;
-	return b;
-}
+extern bool global_net_initialized;
+
+#endif // __NETWORK_H__

@@ -30,6 +30,8 @@ bool run_pointable_test();
 bool run_gesture_test();
 bool run_tapgesture_test();
 
+bool run_udpsocket_test();
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 int main( int argc, char **argv )
@@ -43,6 +45,8 @@ int main( int argc, char **argv )
 	RUN_TEST( "Arm", run_arm_test );
 	RUN_TEST( "Bone", run_bone_test );
 	RUN_TEST( "Pointable", run_pointable_test );
+
+	RUN_TEST( "UDP ", run_udpsocket_test );
 
 	system( "pause" );
 	return EXIT_SUCCESS;

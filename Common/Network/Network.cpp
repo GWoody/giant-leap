@@ -3,30 +3,41 @@
 
 	Giant Leap
 
-	File	:	InteractionBox.cpp
+	File	:	Network.cpp
 	Authors	:	Lucas Zadrozny
 	Date	:	10th September 2014
 
-	Purpose	:	##### DO NOT IMPLEMENT!!! #####
+	Purpose	:	Global network definitions.
 
 ===============================================================================
 */
 
 #include "Common.h"
+#include "Network.h"
 
-#include "Leap.h"
-using namespace Leap;
+#include <WinSock2.h>
+
+bool global_net_initialized = false;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT InteractionBox::InteractionBox() : Interface( (SharedObject *) NULL )
+bool network_init()
 {
+	WSADATA wsaData;
+	int error = WSAStartup( MAKEWORD(2, 2), &wsaData );
+
+	if( !error )
+	{
+		global_net_initialized = true;
+		return true;
+	}
+
+	return false;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT const InteractionBox &InteractionBox::invalid()
+void network_shutdown()
 {
-	static InteractionBox b;
-	return b;
+	WSACleanup();
 }
