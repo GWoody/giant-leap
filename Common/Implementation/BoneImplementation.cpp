@@ -54,10 +54,10 @@ float BoneImplementation::width() const
 	return 0;
 }
 
-Bone::Type Bone::type() const
+Bone::Type BoneImplementation::type() const
 {
-	Type type = TYPE_METACARPAL;
-	return type;
+	Bone::Type example = Bone::TYPE_METACARPAL;
+	return example;
 }
 
 Matrix BoneImplementation::basis() const
