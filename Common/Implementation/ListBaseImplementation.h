@@ -35,6 +35,49 @@ namespace Leap
 		ThisType_t &		append( const ThisType_t &other );
 	};
 
+	//-----------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------
+	template<typename T>
+	ListBaseImplementation<T>::ListBaseImplementation()
+	{
+
+	}
+
+	//-----------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------
+	template<typename T>
+	int ListBaseImplementation<T>::count() const
+	{
+		return 0;
+	}
+
+	//-----------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------
+	template<typename T>
+	bool ListBaseImplementation<T>::isEmpty() const
+	{
+		return true;
+	}
+
+
+	//-----------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------
+	template<typename T>
+	T ListBaseImplementation<T>::operator[]( int index ) const
+	{
+		return T();
+	}
+
+
+	//-----------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------
+	template<typename T>
+	ListBaseImplementation<T> &ListBaseImplementation<T>::append( const ListBaseImplementation<T> &other )
+	{
+		breakpoint();
+		return *this;
+	}
+
 }
 
 #endif // __LISTBASEIMPLEMENTATION_H__

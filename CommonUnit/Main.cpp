@@ -24,7 +24,11 @@ bool run_controller_test();
 bool run_shared_object_test();
 bool run_frame_test();
 bool run_listbase_test();
+bool run_arm_test();
+bool run_bone_test();
+bool run_pointable_test();
 bool run_gesture_test();
+bool run_tapgesture_test();
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -35,6 +39,10 @@ int main( int argc, char **argv )
 	RUN_TEST( "Frame", run_frame_test );
 	RUN_TEST( "ListBase", run_listbase_test );
 	RUN_TEST( "Gesture", run_gesture_test );
+	RUN_TEST( "Tap Gesture", run_tapgesture_test );
+	RUN_TEST( "Arm", run_arm_test );
+	RUN_TEST( "Bone", run_bone_test );
+	RUN_TEST( "Pointable", run_pointable_test );
 
 	system( "pause" );
 	return EXIT_SUCCESS;

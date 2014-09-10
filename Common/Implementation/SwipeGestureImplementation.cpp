@@ -3,11 +3,11 @@
 
 	Giant Leap
 
-	File	:	ListBaseImplementation.cpp
+	File	:	SwipeGestureImplementation.cpp
 	Authors	:	Lucas Zadrozny
-	Date	:	9th September 2014
+	Date	:	10th September 2014
 
-	Purpose	:	Implements the actual logic behind the `ListBase` class.
+	Purpose	:	Implements the actual logic behind the `SwipeGesture` class.
 
 ===============================================================================
 */
@@ -15,48 +15,48 @@
 #include "Common.h"
 
 #include "Leap.h"
-#include "ListBaseImplementation.h"
+#include "SwipeGestureImplementation.h"
+#include "SharedObject.h"
 using namespace Leap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-template<typename T>
-ListBaseImplementation<T>::ListBaseImplementation()
+SwipeGestureImplementation::SwipeGestureImplementation()
 {
-
+	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-template<typename T>
-int ListBaseImplementation<T>::count() const
+Vector SwipeGestureImplementation::startPosition() const
 {
-	return 0;
+	return Vector();	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-template<typename T>
-bool ListBaseImplementation<T>::isEmpty() const
+Vector SwipeGestureImplementation::position() const
 {
-	return true;
+	return Vector();	
 }
 
-
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-template<typename T>
-T ListBaseImplementation<T>::operator[]( int index ) const
+Vector SwipeGestureImplementation::direction() const
 {
-	return T();
+	return Vector();	
 }
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+float SwipeGestureImplementation::speed() const
+{
+	return 0.0f;	
+}
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-template<typename T>
-ListBaseImplementation<T> &ListBaseImplementation<T>::append( const ListBaseImplementation<T> &other )
+Pointable SwipeGestureImplementation::pointable() const
 {
-	breakpoint();
-	return *this;
+	return Pointable();	
 }

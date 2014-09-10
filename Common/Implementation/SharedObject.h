@@ -49,9 +49,9 @@ namespace Leap
 			}
 		}
 
-		template<typename T> T *Get() const
+		Interface::Implementation *Get() const
 		{
-			return static_cast<T *>( _ptr );
+			return _ptr;
 		}
 		
 	private:

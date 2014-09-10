@@ -3,120 +3,127 @@
 
 	Giant Leap
 
-	File	:	Gesture.cpp
+	File	:	PointableList.cpp
 	Authors	:	Lucas Zadrozny
-	Date	:	9th September 2014
+	Date	:	10th September 2014
 
-	Purpose	:	Implements the Giant Leap version of the `Frame` Leap SDK class.
+	Purpose	:	Implements the Giant Leap version of the `GestureList` Leap SDK class.
 
 ===============================================================================
 */
 
+#include "Common.h"
+
 #include "Leap.h"
-#include "GestureImplementation.h"
+#include "ListBaseImplementation.h"
 #include "SharedObject.h"
 using namespace Leap;
 
+typedef ListBaseImplementation<Pointable> ListType_t;
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Gesture::Gesture( GestureImplementation *ref ) : Interface( ref, this )
+LEAP_EXPORT PointableList::PointableList() : Interface( (SharedObject *)NULL )
 {
+	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Gesture::Gesture() : Interface( (SharedObject *)NULL )
+PointableList::PointableList( const ListType_t &list ) : Interface( (Interface::Implementation *)&list, this )
 {
 
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Gesture::Gesture( const Gesture& rhs ) : Interface( rhs.m_object )
+LEAP_EXPORT int PointableList::count() const
 {
+	return get<ListType_t>()->count();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Gesture::Type Gesture::type() const
+LEAP_EXPORT bool PointableList::isEmpty() const
 {
-	return isValid() ? get<GestureImplementation>()->type() : Gesture::TYPE_INVALID;
+	return get<ListType_t>()->isEmpty();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Gesture::State Gesture::state() const
+LEAP_EXPORT Pointable PointableList::operator[](int index) const
 {
-	return isValid() ? get<GestureImplementation>()->state() : Gesture::STATE_INVALID;
+	return (*get<ListType_t>())[index];
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT int32_t Gesture::id() const
+LEAP_EXPORT PointableList &PointableList::append( const PointableList &other )
 {
-	return isValid() ? get<GestureImplementation>()->id() : -1;
+	get<ListType_t>()->append( *other.get<ListType_t>() );
+	return *this;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT int64_t Gesture::duration() const
+LEAP_EXPORT PointableList &PointableList::append( const FingerList &other )
 {
-	return isValid() ? get<GestureImplementation>()->duration() : 0;
+	breakpoint();
+	return *this;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT float Gesture::durationSeconds() const
+LEAP_EXPORT PointableList &PointableList::append( const ToolList &other )
 {
-	return isValid() ? get<GestureImplementation>()->durationSeconds() : 0;	
+	breakpoint();
+	return *this;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Frame Gesture::frame() const
+LEAP_EXPORT Pointable PointableList::leftmost() const
 {
-	return isValid() ? get<GestureImplementation>()->frame() : Frame::invalid();	
+	breakpoint();
+	return Pointable();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT HandList Gesture::hands() const
+LEAP_EXPORT Pointable PointableList::rightmost() const
 {
-	return isValid() ? get<GestureImplementation>()->hands() : HandList();	
+	breakpoint();
+	return Pointable();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT PointableList Gesture::pointables() const
+LEAP_EXPORT Pointable PointableList::frontmost() const
 {
-	return isValid() ? get<GestureImplementation>()->pointables() : PointableList();	
+	breakpoint();
+	return Pointable();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT bool Gesture::isValid() const
+LEAP_EXPORT PointableList &PointableList::extended()
 {
-	return get<GestureImplementation>() != NULL;
+	breakpoint();
+	return *this;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT bool Gesture::operator==( const Gesture& rhs ) const
+LEAP_EXPORT PointableList::const_iterator PointableList::begin() const
 {
-	return get<GestureImplementation>() == rhs.get<GestureImplementation>();
+	breakpoint();
+	return const_iterator( *this, 0 );
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT bool Gesture::operator!=( const Gesture& rhs ) const
+LEAP_EXPORT PointableList::const_iterator PointableList::end() const
 {
-	return get<GestureImplementation>() != rhs.get<GestureImplementation>();
-}
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-LEAP_EXPORT const Gesture &Gesture::invalid()
-{
-	static Gesture g( NULL );
-	return g;
+	breakpoint();
+	return const_iterator( *this, count() );
 }

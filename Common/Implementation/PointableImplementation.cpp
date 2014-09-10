@@ -3,120 +3,145 @@
 
 	Giant Leap
 
-	File	:	Gesture.cpp
+	File	:	PointableImplementation.cpp
 	Authors	:	Lucas Zadrozny
-	Date	:	9th September 2014
+	Date	:	10th September 2014
 
-	Purpose	:	Implements the Giant Leap version of the `Frame` Leap SDK class.
+	Purpose	:	Implements the actual logic behind the `Pointable` class.
 
 ===============================================================================
 */
 
+#include "Common.h"
+
 #include "Leap.h"
-#include "GestureImplementation.h"
-#include "SharedObject.h"
+#include "PointableImplementation.h"
 using namespace Leap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Gesture::Gesture( GestureImplementation *ref ) : Interface( ref, this )
-{
-}
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-LEAP_EXPORT Gesture::Gesture() : Interface( (SharedObject *)NULL )
+PointableImplementation::PointableImplementation()
 {
 
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Gesture::Gesture( const Gesture& rhs ) : Interface( rhs.m_object )
+int32_t PointableImplementation::id() const
 {
+	return -1;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Gesture::Type Gesture::type() const
+Frame PointableImplementation::frame() const
 {
-	return isValid() ? get<GestureImplementation>()->type() : Gesture::TYPE_INVALID;
+	breakpoint();
+	return Frame();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Gesture::State Gesture::state() const
+Hand PointableImplementation::hand() const
 {
-	return isValid() ? get<GestureImplementation>()->state() : Gesture::STATE_INVALID;
+	breakpoint();
+	return Hand::invalid();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT int32_t Gesture::id() const
+Vector PointableImplementation::tipPosition() const
 {
-	return isValid() ? get<GestureImplementation>()->id() : -1;
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT int64_t Gesture::duration() const
+Vector PointableImplementation::stabilizedTipPosition() const
 {
-	return isValid() ? get<GestureImplementation>()->duration() : 0;
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT float Gesture::durationSeconds() const
+Vector PointableImplementation::tipVelocity() const
 {
-	return isValid() ? get<GestureImplementation>()->durationSeconds() : 0;	
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Frame Gesture::frame() const
+Vector PointableImplementation::direction() const
 {
-	return isValid() ? get<GestureImplementation>()->frame() : Frame::invalid();	
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT HandList Gesture::hands() const
+float PointableImplementation::width() const
 {
-	return isValid() ? get<GestureImplementation>()->hands() : HandList();	
+	return 0.0f;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT PointableList Gesture::pointables() const
+float PointableImplementation::length() const
 {
-	return isValid() ? get<GestureImplementation>()->pointables() : PointableList();	
+	return 0.0f;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT bool Gesture::isValid() const
+float PointableImplementation::timeVisible() const
 {
-	return get<GestureImplementation>() != NULL;
+	breakpoint();
+	return 0.0f;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT bool Gesture::operator==( const Gesture& rhs ) const
+bool PointableImplementation::isFinger() const
 {
-	return get<GestureImplementation>() == rhs.get<GestureImplementation>();
+	breakpoint();
+	return false;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT bool Gesture::operator!=( const Gesture& rhs ) const
+bool PointableImplementation::isTool() const
 {
-	return get<GestureImplementation>() != rhs.get<GestureImplementation>();
+	breakpoint();
+	return false;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT const Gesture &Gesture::invalid()
+bool PointableImplementation::isExtended() const
 {
-	static Gesture g( NULL );
-	return g;
+	breakpoint();
+	return false;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+Pointable::Zone PointableImplementation::touchZone() const
+{
+	breakpoint();
+	return Pointable::Zone();
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+float PointableImplementation::touchDistance() const
+{
+	breakpoint();
+	return 0.0f;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+const char *PointableImplementation::toCString() const
+{
+	breakpoint();
+	return "";
 }

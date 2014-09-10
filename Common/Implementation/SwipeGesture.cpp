@@ -3,80 +3,72 @@
 
 	Giant Leap
 
-	File	:	Interface.cpp
+	File	:	SwipeGestureImplementation.cpp
 	Authors	:	Lucas Zadrozny
-	Date	:	5th September 2014
+	Date	:	10th September 2014
 
-	Purpose	:	Implements the Giant Leap version of the `Interface` Leap SDK class.
+	Purpose	:	Implements the actual logic behind the `SwipeGesture` class.
 
 ===============================================================================
 */
 
-#include "Leap.h"
-#include "SharedObject.h"
+#include "Common.h"
 
+#include "Leap.h"
+#include "SwipeGestureImplementation.h"
+#include "SharedObject.h"
 using namespace Leap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Interface::Interface( Implementation* reference, void* owner )
+LEAP_EXPORT SwipeGesture::SwipeGesture()
 {
-	m_object = new SharedObject( reference );
 
-	// Set the default reference count to 2. The `Interface` should never own its `Implementation`.
-	m_object->IncrementRefCount();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Interface::Interface( const Interface &rhs )
+LEAP_EXPORT SwipeGesture::SwipeGesture( const Gesture &rhs ) : Gesture( rhs )
 {
-	m_object = rhs.m_object;
-	m_object->IncrementRefCount();
-}
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-Interface::Interface( SharedObject *object )
-{
-	m_object = object;
-	if( m_object )
+	if( rhs.type() != Gesture::TYPE_SWIPE )
 	{
-		m_object->IncrementRefCount();
+		// Wrong gesture type. Make this gesture instance invalid.
+		m_object->DecrementRefCount();
+		m_object = NULL;
 	}
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Interface &Interface::operator=( const Interface &rhs )
+LEAP_EXPORT Vector SwipeGesture::startPosition() const
 {
-	// Signal that we are releasing the old pointer.
-	m_object->DecrementRefCount();
-
-	// Attach to the new pointer.
-	m_object = rhs.m_object;
-	m_object->IncrementRefCount();
-
-	return *this;
+	return Vector();	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Interface::~Interface()
+LEAP_EXPORT Vector SwipeGesture::position() const
 {
-	m_object->DecrementRefCount();
+	return Vector();	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Interface::Implementation *Interface::reference() const
+LEAP_EXPORT Vector SwipeGesture::direction() const
 {
-	return m_object->Get();
+	return Vector();	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void Interface::deleteCString( const char *cstr )
+LEAP_EXPORT float SwipeGesture::speed() const
 {
-	
+	return 0.0f;	
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+LEAP_EXPORT Pointable SwipeGesture::pointable() const
+{
+	return Pointable();	
 }

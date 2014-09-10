@@ -39,6 +39,12 @@
     <ClCompile Include="BoneUnit.cpp">
       <Filter>Implementation</Filter>
     </ClCompile>
+    <ClCompile Include="TapGestureUnit.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="PointableUnit.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonUnit.h">

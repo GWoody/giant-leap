@@ -3,240 +3,290 @@
 
 	Giant Leap
 
-	File	:	Frame.cpp
+	File	:	HandImplementation.cpp
 	Authors	:	Lucas Zadrozny
-	Date	:	9th September 2014
+	Date	:	10th September 2014
 
-	Purpose	:	Implements the Giant Leap version of the `Frame` Leap SDK class.
+	Purpose	:	Implements the actual logic behind the `Hand` class.
 
 ===============================================================================
 */
 
+#include "Common.h"
+
 #include "Leap.h"
-#include "FrameImplementation.h"
-#include "SharedObject.h"
+#include "HandImplementation.h"
 using namespace Leap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Frame::Frame( FrameImplementation *ref ) : Interface( ref, this )
+HandImplementation::HandImplementation()
 {
+
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Frame::Frame() : Interface( (SharedObject *)NULL )
+int32_t HandImplementation::id() const
 {
+	return -1;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT int64_t Frame::id() const
+Frame HandImplementation::frame() const
 {
-	return isValid() ? get<FrameImplementation>()->id() : -1;
+	breakpoint();
+	return Frame();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT int64_t Frame::timestamp() const
+Vector HandImplementation::palmPosition() const
 {
-	return isValid() ? get<FrameImplementation>()->timestamp() : 0;
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT HandList Frame::hands() const
+Vector HandImplementation::stabilizedPalmPosition() const
 {
-	return isValid() ? get<FrameImplementation>()->hands() : HandList();
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Hand Frame::hand( int32_t id ) const
+Vector HandImplementation::palmVelocity() const
 {
-	return isValid() ? get<FrameImplementation>()->hand( id ) : Hand();
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT PointableList Frame::pointables() const
+Vector HandImplementation::palmNormal() const
 {
-	return isValid() ? get<FrameImplementation>()->pointables() : PointableList();
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Pointable Frame::pointable( int32_t id ) const
+float HandImplementation::palmWidth() const
 {
-	return isValid() ? get<FrameImplementation>()->pointable( id ) : Pointable();
+	return 0.0f;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT FingerList Frame::fingers() const
+Vector HandImplementation::direction() const
 {
-	return isValid() ? get<FrameImplementation>()->fingers() : FingerList();
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Finger Frame::finger( int32_t id ) const
+Matrix HandImplementation::basis() const
 {
-	return isValid() ? get<FrameImplementation>()->finger( id ) : Finger();
+	breakpoint();
+	return Matrix::identity();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT ToolList Frame::tools() const
+Arm HandImplementation::arm() const
 {
-	return isValid() ? get<FrameImplementation>()->tools() : ToolList();
+	return Arm();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Tool Frame::tool( int32_t id ) const
+Vector HandImplementation::wristPosition() const
 {
-	return isValid() ? get<FrameImplementation>()->tool( id ) : Tool();
+	breakpoint();
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT GestureList Frame::gestures() const
+Vector HandImplementation::sphereCenter() const
 {
-	return isValid() ? get<FrameImplementation>()->gestures() : GestureList();
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Gesture Frame::gesture( int32_t id ) const
+float HandImplementation::sphereRadius() const
 {
-	return isValid() ? get<FrameImplementation>()->gesture( id ) : Gesture::invalid();
+	return 0.0f;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT GestureList Frame::gestures( const Frame& sinceFrame ) const
+float HandImplementation::pinchStrength() const
 {
-	return isValid() ? get<FrameImplementation>()->gestures( sinceFrame ) : GestureList();
+	return 0.0f;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector Frame::translation( const Frame& sinceFrame ) const
+float HandImplementation::grabStrength() const
 {
-	return isValid() ? get<FrameImplementation>()->translation( sinceFrame ) : Vector();
+	return 0.0f;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT float Frame::translationProbability( const Frame& sinceFrame ) const
+float HandImplementation::timeVisible() const
 {
-	return isValid() ? get<FrameImplementation>()->translationProbability( sinceFrame ) : 0.0f;
+	breakpoint();
+	return 0.0f;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector Frame::rotationAxis( const Frame& sinceFrame ) const
+float HandImplementation::confidence() const
 {
-	return isValid() ? get<FrameImplementation>()->rotationAxis( sinceFrame ) : Vector();
+	return 0.0f;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT float Frame::rotationAngle( const Frame& sinceFrame ) const
+bool HandImplementation::isLeft() const
 {
-	return isValid() ? get<FrameImplementation>()->rotationAngle( sinceFrame ) : 0.0f;
+	breakpoint();
+	return false;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT float Frame::rotationAngle( const Frame& sinceFrame, const Vector& axis ) const
+bool HandImplementation::isRight() const
 {
-	return isValid() ? get<FrameImplementation>()->rotationAngle( sinceFrame, axis ) : 0.0f;
+	breakpoint();
+	return false;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Matrix Frame::rotationMatrix( const Frame& sinceFrame ) const
+PointableList HandImplementation::pointables() const
 {
-	return isValid() ? get<FrameImplementation>()->rotationMatrix( sinceFrame ) : Matrix::identity();
+	breakpoint();
+	return PointableList();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT float Frame::rotationProbability( const Frame& sinceFrame ) const
+Pointable HandImplementation::pointable( int32_t id ) const
 {
-	return isValid() ? get<FrameImplementation>()->rotationProbability( sinceFrame ) : 0.0f;
+	breakpoint();
+	return Pointable();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT float Frame::scaleFactor( const Frame& sinceFrame ) const
+FingerList HandImplementation::fingers() const
 {
-	return isValid() ? get<FrameImplementation>()->scaleFactor( sinceFrame ) : 0.0f;
+	return FingerList();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT float Frame::scaleProbability( const Frame& sinceFrame ) const
+Finger HandImplementation::finger( int32_t id ) const
 {
-	return isValid() ? get<FrameImplementation>()->scaleProbability( sinceFrame ) : 0.0f;
+	breakpoint();
+	return Finger();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT InteractionBox Frame::interactionBox() const
+ToolList HandImplementation::tools() const
 {
-	return isValid() ? get<FrameImplementation>()->interactionBox() : InteractionBox::invalid();
+	breakpoint();
+	return ToolList();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT float Frame::currentFramesPerSecond() const
+Tool HandImplementation::tool( int32_t id ) const
 {
-	return isValid() ? get<FrameImplementation>()->currentFramesPerSecond() : 0;
+	breakpoint();
+	return Tool();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT bool Frame::isValid() const
+Vector HandImplementation::translation( const Frame &sinceFrame ) const
 {
-	return get<FrameImplementation>() != NULL;
+	breakpoint();
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT const Frame &Frame::invalid()
+float HandImplementation::translationProbability( const Frame &sinceFrame ) const
 {
-	static Frame invalid( NULL );
-	return invalid;
+	breakpoint();
+	return 0.0f;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT bool Frame::operator==( const Frame &other ) const
+Vector HandImplementation::rotationAxis( const Frame &sinceFrame ) const
 {
-	return get<FrameImplementation>() == other.get<FrameImplementation>();
+	breakpoint();
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT bool Frame::operator!=( const Frame &other ) const
+float HandImplementation::rotationAngle( const Frame &sinceFrame ) const
 {
-	return get<FrameImplementation>() != other.get<FrameImplementation>();
+	breakpoint();
+	return 0.0f;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT const char *Frame::toCString() const
+float HandImplementation::rotationAngle( const Frame &sinceFrame, const Vector& axis ) const
 {
-	return isValid() ? get<FrameImplementation>()->toCString() : "";
+	breakpoint();
+	return 0.0f;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT std::ostream &operator<<( std::ostream &out, Frame &f )
+Matrix HandImplementation::rotationMatrix( const Frame &sinceFrame ) const
 {
-	out << f.toString();
-	return out;
+	breakpoint();
+	return Matrix::identity();
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+float HandImplementation::rotationProbability( const Frame &sinceFrame ) const
+{
+	breakpoint();
+	return 0.0f;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+float HandImplementation::scaleFactor( const Frame &sinceFrame ) const
+{
+	breakpoint();
+	return 0.0f;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+float HandImplementation::scaleProbability( const Frame &sinceFrame ) const
+{
+	breakpoint();
+	return 0.0f;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+const char * HandImplementation::toCString() const
+{
+	breakpoint();
+	return "";
 }

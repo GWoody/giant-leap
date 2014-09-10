@@ -1,13 +1,13 @@
 /*
 ===============================================================================
 
-Giant Leap
+	Giant Leap
 
-File	:	BoneImplementation.cpp
-Authors	:	Gareth Woodorth
-Date	:   9th September 2014
+	File	:	BoneImplementation.cpp
+	Authors	:	Gareth Woodorth
+	Date	:   9th September 2014
 
-Purpose	:	Implements the Giant Leap version of the `BoneImplementation` Leap SDK class.
+	Purpose	:	Implements the Giant Leap version of the `BoneImplementation` Leap SDK class.
 
 ===============================================================================
 */
@@ -15,10 +15,11 @@ Purpose	:	Implements the Giant Leap version of the `BoneImplementation` Leap SDK
 #ifndef __BONEIMPLEMENTATION_H__
 #define __BONEIMPLEMENTATION_H__
 
-#include <list>
-
 namespace Leap
 {
+	
+	//-------------------------------------------------------------------------
+	//-------------------------------------------------------------------------
 	class BoneImplementation : public Interface::Implementation
 	{
 	public:
@@ -36,11 +37,8 @@ namespace Leap
 		bool operator==(const Bone&) const;
 		bool operator!=(const Bone&) const; 
 		const char* toCString() const;
-
 	};
 
 }
 
-
-
-#endif 
+#endif // __BONEIMPLEMENTATION_H__

@@ -23,6 +23,13 @@ typedef ListBaseImplementation<Finger> ListType_t;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+LEAP_EXPORT FingerList::FingerList() : Interface( (SharedObject *)NULL )
+{
+	
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 FingerList::FingerList( const ListBaseImplementation<Finger> &list ) : Interface( (Interface::Implementation *)&list, this )
 {
 
@@ -88,14 +95,15 @@ LEAP_EXPORT Finger FingerList::frontmost() const
 LEAP_EXPORT FingerList &FingerList::extended()
 {
 	breakpoint();
-	return FingerList();
+	return *this;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 LEAP_EXPORT FingerList &FingerList::fingerType( Finger::Type type )
 {
-	return FingerList();
+	breakpoint();
+	return *this;
 }
 
 //-----------------------------------------------------------------------------

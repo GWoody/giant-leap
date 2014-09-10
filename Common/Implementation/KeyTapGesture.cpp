@@ -3,80 +3,65 @@
 
 	Giant Leap
 
-	File	:	Interface.cpp
+	File	:	KeyTapGesture.cpp
 	Authors	:	Lucas Zadrozny
-	Date	:	5th September 2014
+	Date	:	10th September 2014
 
-	Purpose	:	Implements the Giant Leap version of the `Interface` Leap SDK class.
+	Purpose	:	Implements the actual logic behind the `KeyTapGesture` class.
 
 ===============================================================================
 */
 
-#include "Leap.h"
-#include "SharedObject.h"
+#include "Common.h"
 
+#include "Leap.h"
+#include "TapGestureImplementation.h"
+#include "SharedObject.h"
 using namespace Leap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Interface::Interface( Implementation* reference, void* owner )
+LEAP_EXPORT KeyTapGesture::KeyTapGesture()
 {
-	m_object = new SharedObject( reference );
 
-	// Set the default reference count to 2. The `Interface` should never own its `Implementation`.
-	m_object->IncrementRefCount();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Interface::Interface( const Interface &rhs )
+LEAP_EXPORT KeyTapGesture::KeyTapGesture( const Gesture &rhs ) : Gesture( rhs )
 {
-	m_object = rhs.m_object;
-	m_object->IncrementRefCount();
-}
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-Interface::Interface( SharedObject *object )
-{
-	m_object = object;
-	if( m_object )
+	if( rhs.type() != Gesture::TYPE_KEY_TAP )
 	{
-		m_object->IncrementRefCount();
+		// Wrong gesture type. Make this gesture instance invalid.
+		m_object->DecrementRefCount();
+		m_object = NULL;
 	}
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Interface &Interface::operator=( const Interface &rhs )
+LEAP_EXPORT Vector KeyTapGesture::position() const
 {
-	// Signal that we are releasing the old pointer.
-	m_object->DecrementRefCount();
-
-	// Attach to the new pointer.
-	m_object = rhs.m_object;
-	m_object->IncrementRefCount();
-
-	return *this;
+	return isValid() ? Vector() : Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Interface::~Interface()
+LEAP_EXPORT Vector KeyTapGesture::direction() const
 {
-	m_object->DecrementRefCount();
+	return isValid() ? Vector() : Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Interface::Implementation *Interface::reference() const
+LEAP_EXPORT float KeyTapGesture::progress() const
 {
-	return m_object->Get();
+	return isValid() ? 0.0f : 1.0f;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void Interface::deleteCString( const char *cstr )
+LEAP_EXPORT Pointable KeyTapGesture::pointable() const
 {
-	
+	return isValid() ? Pointable() : Pointable::invalid();
 }

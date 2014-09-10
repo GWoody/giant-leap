@@ -1,13 +1,13 @@
 /*
 ===============================================================================
 
-Giant Leap
+	Giant Leap
 
-File	:	Bone.cpp
-Authors	:	Gareth Woodorth
-Date	:   9th September 2014
+	File	:	Bone.cpp
+	Authors	:	Gareth Woodorth
+	Date	:   9th September 2014
 
-Purpose	:	Implements the Giant Leap version of the `Bone` Leap SDK class.
+	Purpose	:	Implements the Giant Leap version of the `Bone` Leap SDK class.
 
 ===============================================================================
 */
@@ -18,81 +18,109 @@ Purpose	:	Implements the Giant Leap version of the `Bone` Leap SDK class.
 
 using namespace Leap;
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 Bone::Bone(BoneImplementation *ref) : Interface(ref, this)
 {
 
 }
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 LEAP_EXPORT Bone::Bone() : Interface((SharedObject *)NULL)
 {
 
 }
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 LEAP_EXPORT Vector Bone::prevJoint() const
 {
-	return get<BoneImplementation>()->prevJoint();
+	return isValid() ? get<BoneImplementation>()->prevJoint() : Vector();
 }
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 LEAP_EXPORT Vector Bone::nextJoint() const
 {
-	return get<BoneImplementation>()->nextJoint();
+	return isValid() ? get<BoneImplementation>()->nextJoint() : Vector();
 }
 
-
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 LEAP_EXPORT Vector Bone::center() const
 {
-	return get<BoneImplementation>()->center();
+	return isValid() ? get<BoneImplementation>()->center() : Vector();
 }
 
-
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 LEAP_EXPORT Vector Bone::direction() const
 {
-	return get<BoneImplementation>()->direction();
+	return isValid() ? get<BoneImplementation>()->direction() : Vector();
 }
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 LEAP_EXPORT float Bone::length() const
 {
-	return get<BoneImplementation>()->length();
+	return isValid() ? get<BoneImplementation>()->length() : 0.0f;
 }
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 LEAP_EXPORT float Bone::width() const
 {
-	return get<BoneImplementation>()->width();
+	return isValid() ? get<BoneImplementation>()->width() : 0.0f;
 }
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 LEAP_EXPORT Bone::Type Bone::type() const
 {
-	return get<BoneImplementation>()->type();
+	return isValid() ? get<BoneImplementation>()->type() : Bone::TYPE_METACARPAL;
 }
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 LEAP_EXPORT Matrix Bone::basis() const
 {
-	return get<BoneImplementation>()->basis();
+	return isValid() ? get<BoneImplementation>()->basis() : Matrix::identity();
 }
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 LEAP_EXPORT bool Bone::isValid() const
 {
 	return get<BoneImplementation>()->isValid();
 }
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 LEAP_EXPORT bool Bone::operator==(const Bone& b) const
 {
 	return get<BoneImplementation>() == b.get<BoneImplementation>();
 }
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 LEAP_EXPORT bool Bone::operator!=(const Bone& b) const
 {
 	return get<BoneImplementation>() != b.get<BoneImplementation>();
 }
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 LEAP_EXPORT std::ostream& operator<<(std::ostream& out , const Bone& b)
 {
 	out << b.toString();
 	return out;
 }
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 LEAP_EXPORT const char* Bone::toCString() const
 {
-	return get<BoneImplementation>()->toCString();
+	return isValid() ? get<BoneImplementation>()->toCString() : "";
 }
 

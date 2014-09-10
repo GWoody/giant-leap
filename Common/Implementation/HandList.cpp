@@ -3,11 +3,11 @@
 
 	Giant Leap
 
-	File	:	GestureList.cpp
+	File	:	HandList.cpp
 	Authors	:	Lucas Zadrozny
-	Date	:	5th September 2014
+	Date	:	10th September 2014
 
-	Purpose	:	Implements the Giant Leap version of the `GestureList` Leap SDK class.
+	Purpose	:	Implements the Giant Leap version of the `HandList` Leap SDK class.
 
 ===============================================================================
 */
@@ -19,46 +19,46 @@
 #include "SharedObject.h"
 using namespace Leap;
 
-typedef ListBaseImplementation<Gesture> ListType_t;
+typedef ListBaseImplementation<Hand> ListType_t;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT GestureList::GestureList() : Interface( (SharedObject *)NULL )
+LEAP_EXPORT HandList::HandList() : Interface( (SharedObject *)NULL )
 {
 	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-GestureList::GestureList( const ListBaseImplementation<Gesture> &list ) : Interface( (Interface::Implementation *)&list, this )
+HandList::HandList( const ListBaseImplementation<Hand> &list ) : Interface( (Interface::Implementation *)&list, this )
 {
 
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT int GestureList::count() const
+LEAP_EXPORT int HandList::count() const
 {
 	return get<ListType_t>()->count();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT bool GestureList::isEmpty() const
+LEAP_EXPORT bool HandList::isEmpty() const
 {
 	return get<ListType_t>()->isEmpty();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Gesture GestureList::operator[](int index) const
+LEAP_EXPORT Hand HandList::operator[](int index) const
 {
 	return (*get<ListType_t>())[index];
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT GestureList &GestureList::append( const GestureList &other )
+LEAP_EXPORT HandList &HandList::append( const HandList &other )
 {
 	get<ListType_t>()->append( *other.get<ListType_t>() );
 	return *this;
@@ -66,16 +66,40 @@ LEAP_EXPORT GestureList &GestureList::append( const GestureList &other )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT GestureList::const_iterator GestureList::begin() const
+LEAP_EXPORT Hand HandList::leftmost() const
 {
 	breakpoint();
+	return Hand();
+}
+
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+LEAP_EXPORT Hand HandList::rightmost() const
+{
+	breakpoint();
+	return Hand();
+}
+
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+LEAP_EXPORT Hand HandList::frontmost() const
+{
+	breakpoint();
+	return Hand();
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+LEAP_EXPORT HandList::const_iterator HandList::begin() const
+{
 	return const_iterator( *this, 0 );
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT GestureList::const_iterator GestureList::end() const
+LEAP_EXPORT HandList::const_iterator HandList::end() const
 {
-	breakpoint();
 	return const_iterator( *this, count() );
 }

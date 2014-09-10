@@ -3,11 +3,11 @@
 
 	Giant Leap
 
-	File	:	BoneUnit.cpp
-	Authors	:	Gareth Woodorth
-	Date	:   9th September 2014
+	File	:	KeyTapGestureUnit.cpp
+	Authors	:	Lucas Zadrozny
+	Date	:	9th September 2014
 
-	Purpose	:	Implements the 'Bone' test cases
+	Purpose	:	`KeyTapGestureImplementation` unit tests.
 
 ===============================================================================
 */
@@ -20,12 +20,12 @@
 using namespace std;
 
 #include "Leap.h"
-#include "Implementation/BoneImplementation.h"
+#include "Implementation/TapGestureImplementation.h"
 using namespace Leap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-bool run_bone_test()
+bool run_tapgesture_test()
 {
 	return true;
 }

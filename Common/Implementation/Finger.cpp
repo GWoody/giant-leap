@@ -3,80 +3,70 @@
 
 	Giant Leap
 
-	File	:	Interface.cpp
+	File	:	Finger.cpp
 	Authors	:	Lucas Zadrozny
-	Date	:	5th September 2014
+	Date	:	10th September 2014
 
-	Purpose	:	Implements the Giant Leap version of the `Interface` Leap SDK class.
+	Purpose	:	Implements the actual logic behind the `Finger` class.
 
 ===============================================================================
 */
 
-#include "Leap.h"
-#include "SharedObject.h"
+#include "Common.h"
 
+#include "Leap.h"
+#include "FingerImplementation.h"
+#include "SharedObject.h"
 using namespace Leap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Interface::Interface( Implementation* reference, void* owner )
+LEAP_EXPORT Finger::Finger() : Pointable( (PointableImplementation *)NULL )
 {
-	m_object = new SharedObject( reference );
-
-	// Set the default reference count to 2. The `Interface` should never own its `Implementation`.
-	m_object->IncrementRefCount();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Interface::Interface( const Interface &rhs )
+Finger::Finger( FingerImplementation *finger ) : Pointable( finger )
 {
-	m_object = rhs.m_object;
-	m_object->IncrementRefCount();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Interface::Interface( SharedObject *object )
+LEAP_EXPORT Finger::Finger( const Pointable &pointable ) : Pointable( pointable )
 {
-	m_object = object;
-	if( m_object )
+	if( !pointable.isFinger() )
 	{
-		m_object->IncrementRefCount();
+		m_object->DecrementRefCount();
+		m_object = NULL;
 	}
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Interface &Interface::operator=( const Interface &rhs )
+LEAP_EXPORT Bone Finger::bone( Bone::Type idx ) const
 {
-	// Signal that we are releasing the old pointer.
-	m_object->DecrementRefCount();
-
-	// Attach to the new pointer.
-	m_object = rhs.m_object;
-	m_object->IncrementRefCount();
-
-	return *this;
+	return isValid() ? get<FingerImplementation>()->bone( idx ) : Bone();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Interface::~Interface()
+LEAP_EXPORT Finger::Type Finger::type() const
 {
-	m_object->DecrementRefCount();
+	return isValid() ? get<FingerImplementation>()->type() : Finger::Type::TYPE_THUMB;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Interface::Implementation *Interface::reference() const
+LEAP_EXPORT const char *Finger::toCString() const
 {
-	return m_object->Get();
+	return isValid() ? get<FingerImplementation>()->toCString() : "";
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void Interface::deleteCString( const char *cstr )
+LEAP_EXPORT const Finger &Finger::invalid()
 {
-	
+	static Finger f( NULL );
+	return f;
 }
