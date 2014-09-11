@@ -66,7 +66,7 @@ bool UdpSocket::Send( const void *buf, int len, const char *address )
 //-----------------------------------------------------------------------------
 bool UdpSocket::Recv( void *buf, int buflen, address_t *addr )
 {
-	if( recv )
+	if( _recv )
 	{
 		sockaddr_in from;
 		int fromlen = sizeof(from);

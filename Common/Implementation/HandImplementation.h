@@ -15,6 +15,8 @@
 #ifndef __HANDIMPLEMENTATION_H__
 #define __HANDIMPLEMENTATION_H__
 
+#include "Network/Buffer.h"
+
 namespace Leap
 {
 
@@ -25,7 +27,20 @@ namespace Leap
 	{
 	public:
 		HandImplementation();
+		HandImplementation( const Leap::Hand &hand );
 
+		// Initialization.
+		void				FromLeap( const Leap::Hand &hand );
+
+		// Networking.
+		void				Serialize( BufferWrite *buffer );
+		void				Unserialize( BufferRead *buffer );
+
+		// Manipulations.
+		void				Translate( const Vector &v );
+		void				Rotate( const Vector &v );
+
+		// Leap interface.
 		int32_t				id() const;
 		Frame				frame() const;
 		Vector				palmPosition() const;

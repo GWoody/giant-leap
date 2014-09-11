@@ -3,27 +3,27 @@
 
 	Giant Leap
 
-	File	:	Common.h
+	File	:	Common.cpp
 	Authors	:	Lucas Zadrozny
-	Date	:	9th September 2014
+	Date	:	10th September 2014
 
 	Purpose	:	Shared common module definitions.
 
 ===============================================================================
 */
 
-#ifndef __COMMON_H__
-#define __COMMON_H__
+#include "Common.h"
 
-#include <string>
-#include "Leap.h"
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-#define breakpoint()			__asm { int 3 }
+#include <sstream>
+using namespace std;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector string_to_vector( const std::string &str );
+Leap::Vector string_to_vector( const std::string &str )
+{
+	istringstream sin( str );
+	Leap::Vector v;
 
-#endif // __COMMON_H__
+	sin >> v.x >> v.y >> v.z;
+	return v;
+}

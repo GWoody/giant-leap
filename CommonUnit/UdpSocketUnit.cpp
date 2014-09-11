@@ -47,6 +47,9 @@ IMPLEMENT_TEST( perform_local_connection_test )
 	char recvBuf[512];
 	address_t addr;
 
+	ASSERT( "Ensuring client socket cannot recv", !client.Recv( recvBuf, sizeof(recvBuf), &addr ) );
+	ASSERT( "Ensuring server socket cannot send", !server.Send( testString, strlen(testString) + 1, "127.0.0.1" ) );
+
 	client.Send( testString, strlen(testString) + 1, "127.0.0.1" );
 	server.Recv( recvBuf, sizeof(recvBuf), &addr );
 

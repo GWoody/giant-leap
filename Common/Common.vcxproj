@@ -43,9 +43,11 @@
     <ClCompile Include="Implementation\ScreenTapGesture.cpp" />
     <ClCompile Include="Implementation\Tool.cpp" />
     <ClCompile Include="Implementation\ToolList.cpp" />
+    <ClCompile Include="Network\Buffer.cpp" />
     <ClCompile Include="Network\Network.cpp" />
     <ClCompile Include="Network\StreamSocket.cpp" />
     <ClCompile Include="Network\UpdSocket.cpp" />
+    <ClCompile Include="Common.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h" />
@@ -62,6 +64,7 @@
     <ClInclude Include="Implementation\TapGestureImplementation.h" />
     <ClInclude Include="Implementation\ListBaseImplementation.h" />
     <ClInclude Include="Implementation\SharedObject.h" />
+    <ClInclude Include="Network\Buffer.h" />
     <ClInclude Include="Network\Network.h" />
     <ClInclude Include="Network\Socket.h" />
   </ItemGroup>
