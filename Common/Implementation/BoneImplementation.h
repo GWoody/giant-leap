@@ -15,6 +15,8 @@
 #ifndef __BONEIMPLEMENTATION_H__
 #define __BONEIMPLEMENTATION_H__
 
+#include "Network/Buffer.h"
+
 namespace GiantLeap
 {
 	
@@ -24,19 +26,35 @@ namespace GiantLeap
 	{
 	public:
 		BoneImplementation();
-		Vector prevJoint() const;
-		Vector nextJoint() const;
-		Vector center() const;
-		Vector direction() const;
-		float length() const;
-		float width() const;
-		Bone::Type type() const;
-		Matrix basis() const;
-		bool isValid() const;
-		static const Bone& invalid();
-		bool operator==(const Bone&) const;
-		bool operator!=(const Bone&) const; 
-		const char* toCString() const;
+		BoneImplementation( const Leap::Bone &bone );
+		BoneImplementation( BufferRead *buffer );
+
+		// Initialization.
+		void				FromLeap( const Leap::Bone &bone );
+
+		// Networking.
+		bool				Serialize( BufferWrite *buffer );
+		bool				Unserialize( BufferRead *buffer );
+
+		// Manipulations.
+		void				Translate( const Vector &v );
+		void				Rotate( const Vector &v );
+
+		// Leap interface.
+		Vector				prevJoint() const;
+		Vector				nextJoint() const;
+		Vector				center() const;
+		Vector				direction() const;
+		float				length() const;
+		float				width() const;
+		Bone::Type			type() const;
+		Matrix				basis() const;
+		const char*			toCString() const;
+
+	private:
+		Bone::Type			_type;
+		Vector				_nextJoint;
+		Vector				_prevJoint;
 	};
 
 }

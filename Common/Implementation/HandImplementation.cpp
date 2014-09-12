@@ -59,37 +59,102 @@ void HandImplementation::FromLeap( const Leap::Hand &hand )
 	const Leap::FingerList &fingers = hand.fingers();
 	for( int i = 0; i < fingers.count(); i++ )
 	{
-		//FingerImplementation fi( fingers[i] );
-		//_fingers.push_back( fi );
+		FingerImplementation fi( fingers[i] );
+		_fingers.push_back( fi );
 	}
+
+	_arm.FromLeap( hand.arm() );
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void HandImplementation::Serialize( BufferWrite *buffer )
+bool HandImplementation::Serialize( BufferWrite *buffer )
 {
-	
+	buffer->WriteInt( 'hand' );
+
+	buffer->WriteInt( _id );
+	buffer->WriteVector( _palmPosition );
+	buffer->WriteVector( _stabilizedPalmPosition );
+	buffer->WriteVector( _palmVelocity );
+	buffer->WriteVector( _palmNormal );
+	buffer->WriteFloat( _palmWidth );
+	buffer->WriteVector( _direction );
+	buffer->WriteVector( _sphereCenter );
+	buffer->WriteFloat( _sphereRadius );
+	buffer->WriteFloat( _pinchStrength );
+	buffer->WriteFloat( _grabStrength );
+	buffer->WriteFloat( _confidence );
+
+	for( unsigned int i = 0; i < _fingers.size(); i++ )
+	{
+		_fingers[i].Serialize( buffer );
+	}
+
+	_arm.Serialize( buffer );
+
+	return true;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void HandImplementation::Unserialize( BufferRead *buffer )
+bool HandImplementation::Unserialize( BufferRead *buffer )
 {
-	
+	if( buffer->ReadInt() != 'hand' )
+	{
+		return false;
+	}
+
+	_id = buffer->ReadInt();
+	_palmPosition = buffer->ReadVector();
+	_stabilizedPalmPosition = buffer->ReadVector();
+	_palmVelocity = buffer->ReadVector();
+	_palmNormal = buffer->ReadVector();
+	_palmWidth = buffer->ReadFloat();
+	_direction = buffer->ReadVector();
+	_sphereCenter = buffer->ReadVector();
+	_sphereRadius = buffer->ReadFloat();
+	_pinchStrength = buffer->ReadFloat();
+	_grabStrength = buffer->ReadFloat();
+	_confidence = buffer->ReadFloat();
+
+	for( unsigned int i = 0; i < _fingers.size(); i++ )
+	{
+		_fingers[i].Unserialize( buffer );
+	}
+
+	_arm.Unserialize( buffer );
+
+	return true;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 void HandImplementation::Translate( const Vector &v )
 {
-
+	_palmPosition += v;
+	_stabilizedPalmPosition += v;
+	_sphereCenter += v;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 void HandImplementation::Rotate( const Vector &v )
 {
+	Matrix pitch( Vector::right(), v.x );
+	Matrix roll( Vector::backward(), v.y );
+	Matrix yaw( Vector::up(), v.z );
 
+	const Matrix *m[] = { &pitch, &roll, &yaw };
+
+	for( int i = 0; i < 3; i++ )
+	{
+		_palmPosition = m[i]->transformDirection( _palmPosition );
+		_stabilizedPalmPosition = m[i]->transformDirection( _stabilizedPalmPosition );
+		_palmVelocity = m[i]->transformDirection( _palmVelocity );
+		_palmNormal = m[i]->transformDirection( _palmNormal );
+		_direction = m[i]->transformDirection( _direction );
+		_sphereCenter = m[i]->transformDirection( _sphereCenter );
+	}
 }
 
 //-----------------------------------------------------------------------------

@@ -28,16 +28,82 @@ BoneImplementation::BoneImplementation()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+BoneImplementation::BoneImplementation( const Leap::Bone &bone )
+{
+	FromLeap( bone );
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+BoneImplementation::BoneImplementation( BufferRead *buffer )
+{
+	Unserialize( buffer );
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void BoneImplementation::FromLeap( const Leap::Bone &bone )
+{
+	_type = (Bone::Type)bone.type();
+	_nextJoint = bone.nextJoint();
+	_prevJoint = bone.prevJoint();
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+bool BoneImplementation::Serialize( BufferWrite *buffer )
+{
+	buffer->WriteInt( 'bone' );
+
+	buffer->WriteInt( _type );
+	buffer->WriteVector( _nextJoint );
+	buffer->WriteVector( _prevJoint );
+
+	return true;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+bool BoneImplementation::Unserialize( BufferRead *buffer )
+{
+	if( buffer->ReadInt() != 'bone' )
+	{
+		return false;
+	}
+
+	_type = (Bone::Type)buffer->ReadInt();
+	_nextJoint = buffer->ReadVector();
+	_prevJoint = buffer->ReadVector();
+
+	return true;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void BoneImplementation::Translate( const Vector &v )
+{
+
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void BoneImplementation::Rotate( const Vector &v )
+{
+
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 Vector BoneImplementation::prevJoint() const
 {
-	return Vector(0, 0, 0);
+	return _prevJoint;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 Vector BoneImplementation::nextJoint() const
 {
-	return Vector(0, 0, 0);
+	return _nextJoint;
 }
 
 //-----------------------------------------------------------------------------
@@ -52,8 +118,7 @@ Vector BoneImplementation::center() const
 //-----------------------------------------------------------------------------
 Vector BoneImplementation::direction() const
 {
-	breakpoint();
-	return Vector(0, 0, 0);
+	return ( _nextJoint - _prevJoint ).normalized();
 }
 
 //-----------------------------------------------------------------------------
@@ -76,8 +141,7 @@ float BoneImplementation::width() const
 //-----------------------------------------------------------------------------
 Bone::Type BoneImplementation::type() const
 {
-	Bone::Type type = Bone::TYPE_METACARPAL;
-	return type;
+	return _type;
 }
 
 //-----------------------------------------------------------------------------
@@ -86,35 +150,6 @@ Matrix BoneImplementation::basis() const
 {
 	breakpoint();
 	return Matrix();
-}
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-bool BoneImplementation::isValid() const
-{
-	return true;
-}
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-const Bone& BoneImplementation::invalid()
-{
-	 static Bone invalid(NULL);
-	 return invalid;
-}
- 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-bool BoneImplementation::operator==(const Bone& b) const
-{
-	return true;
-}
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-bool BoneImplementation::operator!=(const Bone& b) const
-{
-	return true;
 }
 
 //-----------------------------------------------------------------------------

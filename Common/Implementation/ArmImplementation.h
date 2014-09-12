@@ -15,6 +15,8 @@
 #ifndef __ARMIMPLEMENTATION_H__
 #define __ARMIMPLEMENTATION_H__
 
+#include "Network/Buffer.h"
+
 namespace GiantLeap
 {
 	//-------------------------------------------------------------------------
@@ -23,16 +25,33 @@ namespace GiantLeap
 	{
 	public:
 		ArmImplementation();
-		float width() const;
-		Vector direction() const;
-		Matrix basis() const;
-		Vector elbowPosition() const;
-		Vector wristPosition() const;
-		bool isValid() const;
-		const Arm& invalid();
-		bool operator==(const Arm&) const;
-		bool operator!=(const Arm&) const;
-		const char* toCString() const;
+		ArmImplementation( const Leap::Arm &arm );
+		ArmImplementation( BufferRead *buffer );
+
+		// Initialization.
+		void				FromLeap( const Leap::Arm &arm );
+
+		// Networking.
+		bool				Serialize( BufferWrite *buffer );
+		bool				Unserialize( BufferRead *buffer );
+
+		// Manipulations.
+		void				Translate( const Vector &v );
+		void				Rotate( const Vector &v );
+
+		// Leap interface.
+
+		float				width() const;
+		Vector				direction() const;
+		Matrix				basis() const;
+		Vector				elbowPosition() const;
+		Vector				wristPosition() const;
+		const char *		toCString() const;
+
+	private:
+		float				_width;
+		Vector				_elbowPosition;
+		Vector				_wristPosition;
 	};
 
 }

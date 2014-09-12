@@ -26,6 +26,8 @@ public:
 	bool				WriteShort( short s );
 	bool				WriteInt( int i );
 	bool				WriteLongLong( long long i );
+	bool				WriteFloat( float f );
+	bool				WriteVector( const GiantLeap::Vector &v );
 	bool				Write( void *buffer, int length );
 
 	// Accessors.

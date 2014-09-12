@@ -37,8 +37,8 @@ namespace GiantLeap
 		void				FromLeap( const Leap::Hand &hand );
 
 		// Networking.
-		void				Serialize( BufferWrite *buffer );
-		void				Unserialize( BufferRead *buffer );
+		bool				Serialize( BufferWrite *buffer );
+		bool				Unserialize( BufferRead *buffer );
 
 		// Manipulations.
 		void				Translate( const Vector &v );

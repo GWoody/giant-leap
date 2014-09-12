@@ -27,16 +27,109 @@ FingerImplementation::FingerImplementation()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+FingerImplementation::FingerImplementation( const Leap::Finger &finger )
+{
+	FromLeap( finger );
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+FingerImplementation::FingerImplementation( BufferRead *buffer )
+{
+	Unserialize( buffer );
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void FingerImplementation::FromLeap( const Leap::Finger &finger )
+{
+	_type = (GiantLeap::Finger::Type)finger.type();
+
+	_bones.clear();
+
+	for( int i = 0; i < 4; i++ )
+	{
+		Leap::Bone::Type leapBoneType = (Leap::Bone::Type)i;
+		const Leap::Bone &lb = finger.bone( leapBoneType );
+
+		BoneImplementation bi( lb );
+		_bones.push_back( bi );
+	}
+
+	PointableImplementation::FromLeap( finger );
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+bool FingerImplementation::Serialize( BufferWrite *buffer )
+{
+	buffer->WriteInt( 'fngr' );
+
+	buffer->WriteInt( _type );
+
+	for( unsigned int i = 0; i < _bones.size(); i++ )
+	{
+		_bones[i].Serialize( buffer );
+	}
+
+	return PointableImplementation::Serialize( buffer );
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+bool FingerImplementation::Unserialize( BufferRead *buffer )
+{
+	if( buffer->ReadInt() != 'fngr' )
+	{
+		return false;
+	}
+
+	_type = (GiantLeap::Finger::Type)buffer->ReadInt();
+
+	for( unsigned int i = 0; i < _bones.size(); i++ )
+	{
+		_bones[i].Unserialize( buffer );
+	}
+
+	return PointableImplementation::Unserialize( buffer );
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void FingerImplementation::Translate( const Vector &v )
+{
+	for( unsigned int i = 0; i < _bones.size(); i++ )
+	{
+		_bones[i].Translate( v );
+	}
+
+	PointableImplementation::Translate( v );
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void FingerImplementation::Rotate( const Vector &v )
+{
+	for( unsigned int i = 0; i < _bones.size(); i++ )
+	{
+		_bones[i].Rotate( v );
+	}
+
+	PointableImplementation::Rotate( v );
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 Bone FingerImplementation::bone( Bone::Type idx ) const
 {
-	return Bone();
+	return Bone( (BoneImplementation *)&_bones[idx] );
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 Finger::Type FingerImplementation::type() const
 {
-	return Finger::Type::TYPE_THUMB;
+	return _type;
 }
 
 //-----------------------------------------------------------------------------

@@ -72,7 +72,7 @@ LEAP_EXPORT Vector Arm::wristPosition() const
 //-----------------------------------------------------------------------------
 LEAP_EXPORT bool Arm::isValid() const
 {
-	return get<ArmImplementation>()->isValid();
+	return get<ArmImplementation>() != NULL;
 }
 
 //-----------------------------------------------------------------------------

@@ -15,6 +15,8 @@
 #ifndef __POINTABLEIMPLEMENTATION_H__
 #define __POINTABLEIMPLEMENTATION_H__
 
+#include "Network/Buffer.h"
+
 namespace GiantLeap
 {
 
@@ -25,7 +27,21 @@ namespace GiantLeap
 	{
 	public:
 		PointableImplementation();
+		PointableImplementation( const Leap::Pointable &pointable );
+		PointableImplementation( BufferRead *buffer );
 
+		// Initialization.
+		void				FromLeap( const Leap::Pointable &pointable );
+
+		// Networking.
+		bool				Serialize( BufferWrite *buffer );
+		bool				Unserialize( BufferRead *buffer );
+
+		// Manipulations.
+		void				Translate( const Vector &v );
+		void				Rotate( const Vector &v );
+
+		// Leap interface.
 		int32_t				id() const;
 		Frame				frame() const;
 		Hand				hand() const;
@@ -45,6 +61,15 @@ namespace GiantLeap
 		float				touchDistance() const;
 
 		const char *		toCString() const;
+
+	private:
+		int32_t				_id;
+		Vector				_tipPosition;
+		Vector				_stabilizedTipPosition;
+		Vector				_tipVelocity;
+		Vector				_direction;
+		float				_width;
+		float				_length;
 	};
 
 }

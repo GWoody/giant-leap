@@ -41,6 +41,20 @@ bool BufferWrite::WriteLongLong( long long l )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+bool BufferWrite::WriteFloat( float f )
+{
+	return Write( &f, sizeof(f) );
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+bool BufferWrite::WriteVector( const GiantLeap::Vector &v )
+{
+	return WriteFloat( v.x ) && WriteFloat( v.y ) && WriteFloat( v.z );
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 bool BufferWrite::Write( void *memory, int length )
 {
 	_buffer.reserve( _buffer.size() + length );

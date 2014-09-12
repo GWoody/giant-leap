@@ -92,7 +92,7 @@ LEAP_EXPORT Matrix Bone::basis() const
 //-----------------------------------------------------------------------------
 LEAP_EXPORT bool Bone::isValid() const
 {
-	return get<BoneImplementation>()->isValid();
+	return get<BoneImplementation>() != NULL;
 }
 
 //-----------------------------------------------------------------------------

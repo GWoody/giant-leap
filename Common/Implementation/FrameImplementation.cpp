@@ -82,7 +82,6 @@ BufferWrite FrameImplementation::Serialize()
 	//
 	// Write hands.
 	//
-	buf.WriteInt( 'hand' );
 	buf.WriteShort( _hands.size() );
 	for( unsigned int i = 0; i < _hands.size(); i++ )
 	{
@@ -92,7 +91,6 @@ BufferWrite FrameImplementation::Serialize()
 	//
 	// Write gestures.
 	//
-	buf.WriteInt( 'gstr' );
 	buf.WriteShort( _gestures.size() );
 	for( unsigned int i = 0; i < _gestures.size(); i++ )
 	{
@@ -106,8 +104,6 @@ BufferWrite FrameImplementation::Serialize()
 //-----------------------------------------------------------------------------
 void FrameImplementation::Unserialize( BufferRead *buffer )
 {
-	int tag;
-
 	_hands.clear();
 	_gestures.clear();
 
@@ -120,17 +116,16 @@ void FrameImplementation::Unserialize( BufferRead *buffer )
 	//
 	// Read hands.
 	//
-	tag = buffer->ReadInt();
-	if( tag != 'hand' )
-	{
-		fprintf( stderr, "FrameImplementation::Unserialize - hand tag invalid!\n" );
-		return;
-	}
-
 	short handCount = buffer->ReadShort();
 	while( handCount )
 	{
-		HandImplementation hi( buffer );
+		HandImplementation hi;
+		if( !hi.Unserialize( buffer ) )
+		{
+			std::cerr << "FrameImplementation::Unserialize - failed to read hand" << std::endl;
+			return;
+		}
+
 		_hands.push_back( hi );
 		--handCount;
 	}
@@ -138,17 +133,16 @@ void FrameImplementation::Unserialize( BufferRead *buffer )
 	//
 	// Read gestures.
 	//
-	tag = buffer->ReadInt();
-	if( tag != 'gstr' )
-	{
-		fprintf( stderr, "FrameImplementation::Unserialize - hand tag invalid!\n" );
-		return;
-	}
-
 	short gestureCount = buffer->ReadShort();
 	while( gestureCount )
 	{
-		GestureImplementation gi( buffer );
+		GestureImplementation gi;
+		if( !gi.Unserialize( buffer ) )
+		{
+			std::cerr << "FrameImplementation::Unserialize - failed to read gesture" << std::endl;
+			return;
+		}
+
 		_gestures.push_back( gi );
 		--gestureCount;
 	}

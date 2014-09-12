@@ -28,16 +28,82 @@ ArmImplementation::ArmImplementation()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+ArmImplementation::ArmImplementation( const Leap::Arm &arm )
+{
+	FromLeap( arm );
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+ArmImplementation::ArmImplementation( BufferRead *buffer )
+{
+	Unserialize( buffer );
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void ArmImplementation::FromLeap( const Leap::Arm &arm )
+{
+	_width = arm.width();
+	_elbowPosition = arm.elbowPosition();
+	_wristPosition = arm.wristPosition();
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+bool ArmImplementation::Serialize( BufferWrite *buffer )
+{
+	buffer->WriteInt( 'army' );
+
+	buffer->WriteInt( _width );
+	buffer->WriteVector( _elbowPosition );
+	buffer->WriteVector( _wristPosition );
+
+	return true;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+bool ArmImplementation::Unserialize( BufferRead *buffer )
+{
+	if( buffer->ReadInt() != 'army' )
+	{
+		return false;
+	}
+
+	_width = buffer->ReadFloat();
+	_elbowPosition = buffer->ReadVector();
+	_wristPosition = buffer->ReadVector();
+
+	return true;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void ArmImplementation::Translate( const Vector &v )
+{
+
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void ArmImplementation::Rotate( const Vector &v )
+{
+
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 float ArmImplementation::width() const
 {
-	return 0;
+	return _width;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 Vector ArmImplementation::direction() const
 {
-	return Vector(0, 0, 0);
+	return ( _wristPosition - _elbowPosition ).normalized();
 }
 
 //-----------------------------------------------------------------------------
@@ -52,43 +118,14 @@ Matrix ArmImplementation::basis() const
 //-----------------------------------------------------------------------------
 Vector ArmImplementation::elbowPosition() const
 {
-	return Vector(0,0,0);
+	return _elbowPosition;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 Vector ArmImplementation::wristPosition() const
 {
-	return Vector(0, 0, 0);
-}
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-bool ArmImplementation::isValid() const
-{
-	return true;
-}
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-const Arm& ArmImplementation::invalid()
-{
-	static Arm invalid(NULL);
-	return invalid;
-}
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-bool ArmImplementation::operator==(const Arm& other) const
-{
-	return true;
-}
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-bool ArmImplementation::operator!=(const Arm& other) const
-{
-	return true;
+	return _wristPosition;
 }
 
 //-----------------------------------------------------------------------------

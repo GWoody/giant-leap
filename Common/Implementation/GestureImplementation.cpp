@@ -47,16 +47,23 @@ void GestureImplementation::FromLeap( const Leap::Gesture &gesture )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void GestureImplementation::Serialize( BufferWrite *buffer )
+bool GestureImplementation::Serialize( BufferWrite *buffer )
 {
-	
+	buffer->WriteInt( 'gstr' );
+
+	return true;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void GestureImplementation::Unserialize( BufferRead *buffer )
+bool GestureImplementation::Unserialize( BufferRead *buffer )
 {
-	
+	if( buffer->ReadInt() != 'gstr' )
+	{
+		return false;
+	}
+
+	return true;
 }
 
 //-----------------------------------------------------------------------------

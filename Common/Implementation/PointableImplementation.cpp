@@ -27,9 +27,87 @@ PointableImplementation::PointableImplementation()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+PointableImplementation::PointableImplementation( const Leap::Pointable &pointable )
+{
+	FromLeap( pointable );
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+PointableImplementation::PointableImplementation( BufferRead *buffer )
+{
+	Unserialize( buffer );
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void PointableImplementation::FromLeap( const Leap::Pointable &pointable )
+{
+	_id = pointable.id();
+	_tipPosition = pointable.tipPosition();
+	_stabilizedTipPosition = pointable.stabilizedTipPosition();
+	_tipVelocity = pointable.tipVelocity();
+	_direction = pointable.direction();
+	_width = pointable.width();
+	_length = pointable.length();
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+bool PointableImplementation::Serialize( BufferWrite *buffer )
+{
+	buffer->WriteInt( 'ptbl' );
+
+	buffer->WriteInt( _id );
+	buffer->WriteVector( _tipPosition );
+	buffer->WriteVector( _stabilizedTipPosition );
+	buffer->WriteVector( _tipVelocity );
+	buffer->WriteVector( _direction );
+	buffer->WriteFloat( _width );
+	buffer->WriteFloat( _length );
+
+	return true;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+bool PointableImplementation::Unserialize( BufferRead *buffer )
+{
+	if( buffer->ReadInt() != 'ptbl' )
+	{
+		return false;
+	}
+
+	_id = buffer->ReadInt();
+	_tipPosition = buffer->ReadVector();
+	_stabilizedTipPosition = buffer->ReadVector();
+	_tipVelocity = buffer->ReadVector();
+	_direction = buffer->ReadVector();
+	_width = buffer->ReadFloat();
+	_length = buffer->ReadFloat();
+
+	return true;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void PointableImplementation::Translate( const Vector &v )
+{
+
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void PointableImplementation::Rotate( const Vector &v )
+{
+
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 int32_t PointableImplementation::id() const
 {
-	return -1;
+	return _id;
 }
 
 //-----------------------------------------------------------------------------
@@ -52,42 +130,42 @@ Hand PointableImplementation::hand() const
 //-----------------------------------------------------------------------------
 Vector PointableImplementation::tipPosition() const
 {
-	return Vector();
+	return _tipPosition;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 Vector PointableImplementation::stabilizedTipPosition() const
 {
-	return Vector();
+	return _stabilizedTipPosition;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 Vector PointableImplementation::tipVelocity() const
 {
-	return Vector();
+	return _tipVelocity;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 Vector PointableImplementation::direction() const
 {
-	return Vector();
+	return _direction;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 float PointableImplementation::width() const
 {
-	return 0.0f;
+	return _width;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 float PointableImplementation::length() const
 {
-	return 0.0f;
+	return _length;
 }
 
 //-----------------------------------------------------------------------------
