@@ -13,11 +13,11 @@
 */
 
 
-#include "Leap.h"
+#include "GiantLeap.h"
 #include "ArmImplementation.h"
 #include "SharedObject.h"
 
-using namespace Leap;
+using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -42,30 +42,30 @@ LEAP_EXPORT float Arm::width() const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector Arm::direction() const
+LEAP_EXPORT Leap::Vector Arm::direction() const
 {
-	return isValid() ? get<ArmImplementation>()->direction() : Vector();
+	return isValid() ? get<ArmImplementation>()->direction() : Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Matrix Arm::basis() const
+LEAP_EXPORT Leap::Matrix Arm::basis() const
 {
-	return isValid() ? get<ArmImplementation>()->basis() : Matrix::identity();
+	return isValid() ? get<ArmImplementation>()->basis() : Leap::Matrix::identity();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector Arm::elbowPosition() const
+LEAP_EXPORT Leap::Vector Arm::elbowPosition() const
 {
-	return isValid() ? get<ArmImplementation>()->elbowPosition() : Vector();
+	return isValid() ? get<ArmImplementation>()->elbowPosition() : Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector Arm::wristPosition() const
+LEAP_EXPORT Leap::Vector Arm::wristPosition() const
 {
-	return isValid() ? get<ArmImplementation>()->wristPosition() : Vector();
+	return isValid() ? get<ArmImplementation>()->wristPosition() : Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------

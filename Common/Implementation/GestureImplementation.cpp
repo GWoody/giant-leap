@@ -14,9 +14,9 @@
 
 #include "Common.h"
 
-#include "Leap.h"
+#include "GiantLeap.h"
 #include "GestureImplementation.h"
-using namespace Leap;
+using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -61,14 +61,14 @@ void GestureImplementation::Unserialize( BufferRead *buffer )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void GestureImplementation::Translate( const Vector &v )
+void GestureImplementation::Translate( const Leap::Vector &v )
 {
 
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void GestureImplementation::Rotate( const Vector &v )
+void GestureImplementation::Rotate( const Leap::Vector &v )
 {
 
 }

@@ -20,28 +20,28 @@
 #include "GestureImplementation.h"
 #include <vector>
 
-namespace Leap
+namespace GiantLeap
 {
 
 	//-------------------------------------------------------------------------
 	// Contains the "real" data for the Leap `Frame` class.
 	//-------------------------------------------------------------------------
-	class FrameImplementation : public Interface::Implementation
+	class FrameImplementation : public GiantLeap::Interface::Implementation
 	{
 	public:
 		FrameImplementation();
-		FrameImplementation( const Frame &frame );
+		FrameImplementation( const Leap::Frame &frame );
 
 		// Initialization.
-		void				FromLeap( const Frame &frame );
+		void				FromLeap( const Leap::Frame &frame );
 
 		// Networking.
 		BufferWrite			Serialize();
 		void				Unserialize( BufferRead *buffer );
 
 		// Manipulations.
-		void				Translate( const Vector &v );
-		void				Rotate( const Vector &v );
+		void				Translate( const Leap::Vector &v );
+		void				Rotate( const Leap::Vector &v );
 
 		// Leap interface.
 		int64_t				id() const;
@@ -60,12 +60,12 @@ namespace Leap
 		Gesture				gesture( int32_t id ) const;
 		GestureList			gestures() const;
 		GestureList			gestures( const Frame &sinceFrame ) const;
-		Vector				translation( const Frame &sinceFrame ) const;
+		Leap::Vector		translation( const Frame &sinceFrame ) const;
 		float				translationProbability( const Frame &sinceFrame ) const;
-		Vector				rotationAxis( const Frame &sinceFrame ) const;
+		Leap::Vector		rotationAxis( const Frame &sinceFrame ) const;
 		float				rotationAngle( const Frame &sinceFrame ) const;
-		float				rotationAngle( const Frame &sinceFrame, const Vector& axis ) const;
-		Matrix				rotationMatrix( const Frame &sinceFrame ) const;
+		float				rotationAngle( const Frame &sinceFrame, const Leap::Vector& axis ) const;
+		Leap::Matrix		rotationMatrix( const Frame &sinceFrame ) const;
 		float				rotationProbability( const Frame &sinceFrame ) const;
 		float				scaleFactor( const Frame &sinceFrame ) const;
 		float				scaleProbability( const Frame &sinceFrame ) const;

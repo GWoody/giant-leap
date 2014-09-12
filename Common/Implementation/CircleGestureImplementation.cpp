@@ -14,9 +14,9 @@
 
 #include "Common.h"
 
-#include "Leap.h"
+#include "GiantLeap.h"
 #include "CircleGestureImplementation.h"
-using namespace Leap;
+using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -26,16 +26,16 @@ CircleGestureImplementation::CircleGestureImplementation()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Vector CircleGestureImplementation::center() const
+Leap::Vector CircleGestureImplementation::center() const
 {
-	return Vector();
+	return Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Vector CircleGestureImplementation::normal() const
+Leap::Vector CircleGestureImplementation::normal() const
 {
-	return Vector();
+	return Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------

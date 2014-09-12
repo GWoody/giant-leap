@@ -14,9 +14,9 @@
 
 #include "Common.h"
 
-#include "Leap.h"
+#include "GiantLeap.h"
 #include "ControllerImplementation.h"
-using namespace Leap;
+using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

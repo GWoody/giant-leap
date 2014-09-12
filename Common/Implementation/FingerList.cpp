@@ -14,10 +14,10 @@
 
 #include "Common.h"
 
-#include "Leap.h"
+#include "GiantLeap.h"
 #include "ListBaseImplementation.h"
 #include "SharedObject.h"
-using namespace Leap;
+using namespace GiantLeap;
 
 typedef ListBaseImplementation<Finger> ListType_t;
 

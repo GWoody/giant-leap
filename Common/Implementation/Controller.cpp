@@ -12,10 +12,10 @@
 ===============================================================================
 */
 
-#include "Leap.h"
+#include "GiantLeap.h"
 #include "ControllerImplementation.h"
 #include "SharedObject.h"
-using namespace Leap;
+using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

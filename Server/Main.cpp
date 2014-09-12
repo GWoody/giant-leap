@@ -12,7 +12,7 @@
 ===============================================================================
 */
 
-#include "Leap.h"
+#include "GiantLeap.h"
 
 #include <Windows.h>
 #include <Subauth.h>

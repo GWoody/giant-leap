@@ -15,7 +15,7 @@
 #ifndef __POINTABLEIMPLEMENTATION_H__
 #define __POINTABLEIMPLEMENTATION_H__
 
-namespace Leap
+namespace GiantLeap
 {
 
 	//-------------------------------------------------------------------------
@@ -29,10 +29,10 @@ namespace Leap
 		int32_t				id() const;
 		Frame				frame() const;
 		Hand				hand() const;
-		Vector				tipPosition() const;
-		Vector				stabilizedTipPosition() const;
-		Vector				tipVelocity() const;
-		Vector				direction() const;
+		Leap::Vector				tipPosition() const;
+		Leap::Vector				stabilizedTipPosition() const;
+		Leap::Vector				tipVelocity() const;
+		Leap::Vector				direction() const;
 		float				width() const;
 		float				length() const;
 		float				timeVisible() const;

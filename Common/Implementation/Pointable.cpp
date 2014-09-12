@@ -14,11 +14,11 @@
 
 #include "Common.h"
 
-#include "Leap.h"
+#include "GiantLeap.h"
 #include "PointableImplementation.h"
 #include "FingerImplementation.h"
 #include "SharedObject.h"
-using namespace Leap;
+using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -70,30 +70,30 @@ LEAP_EXPORT Hand Pointable::hand() const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector Pointable::tipPosition() const
+LEAP_EXPORT Leap::Vector Pointable::tipPosition() const
 {
-	return isValid() ? get<PointableImplementation>()->tipPosition() : Vector();
+	return isValid() ? get<PointableImplementation>()->tipPosition() : Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector Pointable::stabilizedTipPosition() const
+LEAP_EXPORT Leap::Vector Pointable::stabilizedTipPosition() const
 {
-	return isValid() ? get<PointableImplementation>()->stabilizedTipPosition() : Vector();
+	return isValid() ? get<PointableImplementation>()->stabilizedTipPosition() : Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector Pointable::tipVelocity() const
+LEAP_EXPORT Leap::Vector Pointable::tipVelocity() const
 {
-	return isValid() ? get<PointableImplementation>()->tipVelocity() : Vector();
+	return isValid() ? get<PointableImplementation>()->tipVelocity() : Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector Pointable::direction() const
+LEAP_EXPORT Leap::Vector Pointable::direction() const
 {
-	return isValid() ? get<PointableImplementation>()->direction() : Vector();
+	return isValid() ? get<PointableImplementation>()->direction() : Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------

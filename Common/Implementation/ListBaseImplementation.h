@@ -17,7 +17,7 @@
 
 #include <vector>
 
-namespace Leap
+namespace GiantLeap
 {
 
 	//-------------------------------------------------------------------------

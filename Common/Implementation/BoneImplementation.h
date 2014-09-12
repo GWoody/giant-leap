@@ -15,7 +15,7 @@
 #ifndef __BONEIMPLEMENTATION_H__
 #define __BONEIMPLEMENTATION_H__
 
-namespace Leap
+namespace GiantLeap
 {
 	
 	//-------------------------------------------------------------------------
@@ -24,14 +24,14 @@ namespace Leap
 	{
 	public:
 		BoneImplementation();
-		Vector prevJoint() const;
-		Vector nextJoint() const;
-		Vector center() const;
-		Vector direction() const;
+		Leap::Vector prevJoint() const;
+		Leap::Vector nextJoint() const;
+		Leap::Vector center() const;
+		Leap::Vector direction() const;
 		float length() const;
 		float width() const;
 		Bone::Type type() const;
-		Matrix basis() const;
+		Leap::Matrix basis() const;
 		bool isValid() const;
 		static const Bone& invalid();
 		bool operator==(const Bone&) const;

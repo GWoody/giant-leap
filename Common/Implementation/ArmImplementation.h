@@ -15,7 +15,7 @@
 #ifndef __ARMIMPLEMENTATION_H__
 #define __ARMIMPLEMENTATION_H__
 
-namespace Leap
+namespace GiantLeap
 {
 	//-------------------------------------------------------------------------
 	//-------------------------------------------------------------------------
@@ -24,10 +24,10 @@ namespace Leap
 	public:
 		ArmImplementation();
 		float width() const;
-		Vector direction() const;
-		Matrix basis() const;
-		Vector elbowPosition() const;
-		Vector wristPosition() const;
+		Leap::Vector direction() const;
+		Leap::Matrix basis() const;
+		Leap::Vector elbowPosition() const;
+		Leap::Vector wristPosition() const;
 		bool isValid() const;
 		const Arm& invalid();
 		bool operator==(const Arm&) const;

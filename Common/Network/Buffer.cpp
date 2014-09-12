@@ -15,8 +15,8 @@
 #include "Common.h"
 #include "Buffer.h"
 
-#include "Leap.h"
-using namespace Leap;
+#include "GiantLeap.h"
+using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -137,9 +137,9 @@ float BufferRead::ReadFloat()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Vector BufferRead::ReadVector()
+Leap::Vector BufferRead::ReadVector()
 {
-	Vector v;
+	Leap::Vector v;
 
 	v.x = ReadFloat();
 	v.y = ReadFloat();

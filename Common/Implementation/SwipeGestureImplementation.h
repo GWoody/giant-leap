@@ -17,7 +17,7 @@
 
 #include "GestureImplementation.h"
 
-namespace Leap
+namespace GiantLeap
 {
 
 	//-------------------------------------------------------------------------
@@ -28,9 +28,9 @@ namespace Leap
 	public:
 		SwipeGestureImplementation();
 
-		Vector				startPosition() const;
-		Vector				position() const;
-		Vector				direction() const;
+		Leap::Vector				startPosition() const;
+		Leap::Vector				position() const;
+		Leap::Vector				direction() const;
 		float				speed() const;
 		Pointable			pointable() const;
 	};

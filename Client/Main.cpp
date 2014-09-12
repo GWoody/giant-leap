@@ -16,33 +16,33 @@
 #include "Network/Socket.h"
 #include "Implementation/FrameImplementation.h"
 
-#include "Leap.h"
-using namespace Leap;
+#include "GiantLeap.h"
+using namespace GiantLeap;
 
 #include <iostream>
 using namespace std;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-class ClientListener : public Listener
+class ClientListener : public Leap::Listener
 {
 public:
-	virtual void onFrame( const Controller &controller );
+	virtual void onFrame( const Leap::Controller &controller );
 };
 
 //-----------------------------------------------------------------------------
 // Prototypes.
 //-----------------------------------------------------------------------------
 static string get_target_ip_address();
-static Vector get_device_translation();
-static Vector get_device_rotation();
+static Leap::Vector get_device_translation();
+static Leap::Vector get_device_rotation();
 static void wait_for_exit();
 
 //-----------------------------------------------------------------------------
 // Global variables.
 //-----------------------------------------------------------------------------
 static string global_server_address;
-static Vector global_device_translation, global_device_rotation;
+static Leap::Vector global_device_translation, global_device_rotation;
 static UdpSocket global_socket( false, GIANT_LEAP_PORT );
 
 //-----------------------------------------------------------------------------
@@ -64,7 +64,7 @@ int main( int argc, char **argv )
 	// Setup the Leap Motion.
 	//
 	ClientListener listener;
-	Controller controller( listener );
+	Leap::Controller controller( listener );
 
 	cout << endl;
 	cout << "Leap Motion initialized!" << endl;
@@ -90,7 +90,7 @@ static string get_target_ip_address()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-static Vector get_device_translation()
+static Leap::Vector get_device_translation()
 {
 	string str;
 
@@ -102,7 +102,7 @@ static Vector get_device_translation()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-static Vector get_device_rotation()
+static Leap::Vector get_device_rotation()
 {
 	string str;
 
@@ -127,7 +127,7 @@ static void wait_for_exit()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void ClientListener::onFrame( const Controller &controller )
+void ClientListener::onFrame( const Leap::Controller &controller )
 {
 	// Make a copy of the Leap Motion frame we can manipulate.
 	FrameImplementation frame( controller.frame() );

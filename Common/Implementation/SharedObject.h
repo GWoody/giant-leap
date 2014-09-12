@@ -15,7 +15,7 @@
 #ifndef __SHAREDOBJECT_H__
 #define __SHAREDOBJECT_H__
 
-namespace Leap
+namespace GiantLeap
 {
 
 	//-------------------------------------------------------------------------

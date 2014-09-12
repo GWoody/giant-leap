@@ -17,7 +17,7 @@
 
 #include "PointableImplementation.h"
 
-namespace Leap
+namespace GiantLeap
 {
 
 	//-------------------------------------------------------------------------

@@ -14,9 +14,9 @@
 
 #include "Common.h"
 
-#include "Leap.h"
+#include "GiantLeap.h"
 #include "PointableImplementation.h"
-using namespace Leap;
+using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -50,30 +50,30 @@ Hand PointableImplementation::hand() const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Vector PointableImplementation::tipPosition() const
+Leap::Vector PointableImplementation::tipPosition() const
 {
-	return Vector();
+	return Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Vector PointableImplementation::stabilizedTipPosition() const
+Leap::Vector PointableImplementation::stabilizedTipPosition() const
 {
-	return Vector();
+	return Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Vector PointableImplementation::tipVelocity() const
+Leap::Vector PointableImplementation::tipVelocity() const
 {
-	return Vector();
+	return Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Vector PointableImplementation::direction() const
+Leap::Vector PointableImplementation::direction() const
 {
-	return Vector();
+	return Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------

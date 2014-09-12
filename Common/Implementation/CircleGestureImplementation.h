@@ -15,7 +15,7 @@
 #ifndef __CIRCLEGESTUREIMPLEMENTATION_H__
 #define __CIRCLEGESTUREIMPLEMENTATION_H__
 
-namespace Leap
+namespace GiantLeap
 {
 
 	//-------------------------------------------------------------------------
@@ -26,8 +26,8 @@ namespace Leap
 	public:
 		CircleGestureImplementation();
 
-		Vector				center() const;
-		Vector				normal() const;
+		Leap::Vector				center() const;
+		Leap::Vector				normal() const;
 		float				progress() const;
 		float				radius() const;
 		Pointable			pointable() const;

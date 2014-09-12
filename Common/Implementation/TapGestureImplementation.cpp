@@ -14,10 +14,10 @@
 
 #include "Common.h"
 
-#include "Leap.h"
+#include "GiantLeap.h"
 #include "TapGestureImplementation.h"
 #include "SharedObject.h"
-using namespace Leap;
+using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -27,16 +27,16 @@ TapGestureImplementation::TapGestureImplementation()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Vector TapGestureImplementation::position() const
+Leap::Vector TapGestureImplementation::position() const
 {
-	return Vector();
+	return Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Vector TapGestureImplementation::direction() const
+Leap::Vector TapGestureImplementation::direction() const
 {
-	return Vector();
+	return Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------

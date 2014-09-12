@@ -12,11 +12,11 @@
 ===============================================================================
 */
 
-#include "Leap.h"
+#include "GiantLeap.h"
 #include "BoneImplementation.h"
 #include "SharedObject.h"
 
-using namespace Leap;
+using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -34,30 +34,30 @@ LEAP_EXPORT Bone::Bone() : Interface((SharedObject *)NULL)
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector Bone::prevJoint() const
+LEAP_EXPORT Leap::Vector Bone::prevJoint() const
 {
-	return isValid() ? get<BoneImplementation>()->prevJoint() : Vector();
+	return isValid() ? get<BoneImplementation>()->prevJoint() : Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector Bone::nextJoint() const
+LEAP_EXPORT Leap::Vector Bone::nextJoint() const
 {
-	return isValid() ? get<BoneImplementation>()->nextJoint() : Vector();
+	return isValid() ? get<BoneImplementation>()->nextJoint() : Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector Bone::center() const
+LEAP_EXPORT Leap::Vector Bone::center() const
 {
-	return isValid() ? get<BoneImplementation>()->center() : Vector();
+	return isValid() ? get<BoneImplementation>()->center() : Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector Bone::direction() const
+LEAP_EXPORT Leap::Vector Bone::direction() const
 {
-	return isValid() ? get<BoneImplementation>()->direction() : Vector();
+	return isValid() ? get<BoneImplementation>()->direction() : Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
@@ -83,9 +83,9 @@ LEAP_EXPORT Bone::Type Bone::type() const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Matrix Bone::basis() const
+LEAP_EXPORT Leap::Matrix Bone::basis() const
 {
-	return isValid() ? get<BoneImplementation>()->basis() : Matrix::identity();
+	return isValid() ? get<BoneImplementation>()->basis() : Leap::Matrix::identity();
 }
 
 //-----------------------------------------------------------------------------

@@ -17,7 +17,7 @@
 
 #include "GestureImplementation.h"
 
-namespace Leap
+namespace GiantLeap
 {
 
 	//-------------------------------------------------------------------------
@@ -28,8 +28,8 @@ namespace Leap
 	public:
 		TapGestureImplementation();
 		
-		Vector				position() const;
-		Vector				direction() const;
+		Leap::Vector				position() const;
+		Leap::Vector				direction() const;
 		float				progress() const;
 		Pointable			pointable() const;
 	};

@@ -17,7 +17,7 @@
 
 #include "Network/Buffer.h"
 
-namespace Leap
+namespace GiantLeap
 {
 
 	//-------------------------------------------------------------------------
@@ -38,8 +38,8 @@ namespace Leap
 		void				Unserialize( BufferRead *buffer );
 
 		// Manipulations.
-		void				Translate( const Vector &v );
-		void				Rotate( const Vector &v );
+		void				Translate( const Leap::Vector &v );
+		void				Rotate( const Leap::Vector &v );
 
 		int32_t				id() const;
 		Gesture::Type		type() const;

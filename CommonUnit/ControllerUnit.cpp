@@ -19,9 +19,9 @@
 #include <iostream>
 using namespace std;
 
-#include "Leap.h"
+#include "GiantLeap.h"
 #include "Implementation/ControllerImplementation.h"
-using namespace Leap;
+using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 // Tests.

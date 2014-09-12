@@ -14,10 +14,10 @@
 
 #include "Common.h"
 
-#include "Leap.h"
+#include "GiantLeap.h"
 #include "BoneImplementation.h"
 
-using namespace Leap;
+using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -28,32 +28,32 @@ BoneImplementation::BoneImplementation()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Vector BoneImplementation::prevJoint() const
+Leap::Vector BoneImplementation::prevJoint() const
 {
-	return Vector(0, 0, 0);
+	return Leap::Vector(0, 0, 0);
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Vector BoneImplementation::nextJoint() const
+Leap::Vector BoneImplementation::nextJoint() const
 {
-	return Vector(0, 0, 0);
+	return Leap::Vector(0, 0, 0);
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Vector BoneImplementation::center() const
+Leap::Vector BoneImplementation::center() const
 {
 	breakpoint();
-	return Vector(0, 0, 0);
+	return Leap::Vector(0, 0, 0);
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Vector BoneImplementation::direction() const
+Leap::Vector BoneImplementation::direction() const
 {
 	breakpoint();
-	return Vector(0, 0, 0);
+	return Leap::Vector(0, 0, 0);
 }
 
 //-----------------------------------------------------------------------------
@@ -82,10 +82,10 @@ Bone::Type BoneImplementation::type() const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Matrix BoneImplementation::basis() const
+Leap::Matrix BoneImplementation::basis() const
 {
 	breakpoint();
-	return Matrix();
+	return Leap::Matrix();
 }
 
 //-----------------------------------------------------------------------------

@@ -14,8 +14,8 @@
 
 #include "Common.h"
 
-#include "Leap.h"
-using namespace Leap;
+#include "GiantLeap.h"
+using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

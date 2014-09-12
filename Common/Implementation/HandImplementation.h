@@ -20,7 +20,7 @@
 #include "ArmImplementation.h"
 #include <vector>
 
-namespace Leap
+namespace GiantLeap
 {
 
 	//-------------------------------------------------------------------------
@@ -41,22 +41,22 @@ namespace Leap
 		void				Unserialize( BufferRead *buffer );
 
 		// Manipulations.
-		void				Translate( const Vector &v );
-		void				Rotate( const Vector &v );
+		void				Translate( const Leap::Vector &v );
+		void				Rotate( const Leap::Vector &v );
 
 		// Leap interface.
 		int32_t				id() const;
 		Frame				frame() const;
-		Vector				palmPosition() const;
-		Vector				stabilizedPalmPosition() const;
-		Vector				palmVelocity() const;
-		Vector				palmNormal() const;
+		Leap::Vector				palmPosition() const;
+		Leap::Vector				stabilizedPalmPosition() const;
+		Leap::Vector				palmVelocity() const;
+		Leap::Vector				palmNormal() const;
 		float				palmWidth() const;
-		Vector				direction() const;
-		Matrix				basis() const;
+		Leap::Vector				direction() const;
+		Leap::Matrix				basis() const;
 		Arm					arm() const;
-		Vector				wristPosition() const;
-		Vector				sphereCenter() const;
+		Leap::Vector				wristPosition() const;
+		Leap::Vector				sphereCenter() const;
 		float				sphereRadius() const;
 		float				pinchStrength() const;
 		float				grabStrength() const;
@@ -72,12 +72,12 @@ namespace Leap
 		ToolList			tools() const;
 		Tool				tool( int32_t id ) const;
 
-		Vector				translation( const Frame &sinceFrame ) const;
+		Leap::Vector				translation( const Frame &sinceFrame ) const;
 		float				translationProbability( const Frame &sinceFrame ) const;
-		Vector				rotationAxis( const Frame &sinceFrame ) const;
+		Leap::Vector				rotationAxis( const Frame &sinceFrame ) const;
 		float				rotationAngle( const Frame &sinceFrame ) const;
-		float				rotationAngle( const Frame &sinceFrame, const Vector& axis ) const;
-		Matrix				rotationMatrix( const Frame &sinceFrame ) const;
+		float				rotationAngle( const Frame &sinceFrame, const Leap::Vector& axis ) const;
+		Leap::Matrix				rotationMatrix( const Frame &sinceFrame ) const;
 		float				rotationProbability( const Frame &sinceFrame ) const;
 		float				scaleFactor( const Frame &sinceFrame ) const;
 		float				scaleProbability( const Frame &sinceFrame ) const;
@@ -90,13 +90,13 @@ namespace Leap
 		std::vector<FingerImplementation>	_fingers;
 		ArmImplementation	_arm;
 
-		Vector				_palmPosition;
-		Vector				_stabilizedPalmPosition;
-		Vector				_palmVelocity;
-		Vector				_palmNormal;
+		Leap::Vector				_palmPosition;
+		Leap::Vector				_stabilizedPalmPosition;
+		Leap::Vector				_palmVelocity;
+		Leap::Vector				_palmNormal;
 		float				_palmWidth;
-		Vector				_direction;
-		Vector				_sphereCenter;
+		Leap::Vector				_direction;
+		Leap::Vector				_sphereCenter;
 		float				_sphereRadius;
 		float				_pinchStrength;
 		float				_grabStrength;

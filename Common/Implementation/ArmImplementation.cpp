@@ -14,10 +14,10 @@
 
 #include "Common.h"
 
-#include "Leap.h"
+#include "GiantLeap.h"
 #include "ArmImplementation.h"
 
-using namespace Leap;
+using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -35,31 +35,31 @@ float ArmImplementation::width() const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Vector ArmImplementation::direction() const
+Leap::Vector ArmImplementation::direction() const
 {
-	return Vector(0, 0, 0);
+	return Leap::Vector(0, 0, 0);
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Matrix ArmImplementation::basis() const
+Leap::Matrix ArmImplementation::basis() const
 {
 	breakpoint();
-	return Matrix();
+	return Leap::Matrix();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Vector ArmImplementation::elbowPosition() const
+Leap::Vector ArmImplementation::elbowPosition() const
 {
-	return Vector(0,0,0);
+	return Leap::Vector(0,0,0);
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Vector ArmImplementation::wristPosition() const
+Leap::Vector ArmImplementation::wristPosition() const
 {
-	return Vector(0, 0, 0);
+	return Leap::Vector(0, 0, 0);
 }
 
 //-----------------------------------------------------------------------------

@@ -14,10 +14,10 @@
 
 #include "Common.h"
 
-#include "Leap.h"
+#include "GiantLeap.h"
 #include "TapGestureImplementation.h"
 #include "SharedObject.h"
-using namespace Leap;
+using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -40,16 +40,16 @@ LEAP_EXPORT KeyTapGesture::KeyTapGesture( const Gesture &rhs ) : Gesture( rhs )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector KeyTapGesture::position() const
+LEAP_EXPORT Leap::Vector KeyTapGesture::position() const
 {
-	return isValid() ? Vector() : Vector();
+	return isValid() ? Leap::Vector() : Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector KeyTapGesture::direction() const
+LEAP_EXPORT Leap::Vector KeyTapGesture::direction() const
 {
-	return isValid() ? Vector() : Vector();
+	return isValid() ? Leap::Vector() : Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------

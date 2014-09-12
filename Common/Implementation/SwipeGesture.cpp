@@ -14,10 +14,10 @@
 
 #include "Common.h"
 
-#include "Leap.h"
+#include "GiantLeap.h"
 #include "SwipeGestureImplementation.h"
 #include "SharedObject.h"
-using namespace Leap;
+using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -40,23 +40,23 @@ LEAP_EXPORT SwipeGesture::SwipeGesture( const Gesture &rhs ) : Gesture( rhs )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector SwipeGesture::startPosition() const
+LEAP_EXPORT Leap::Vector SwipeGesture::startPosition() const
 {
-	return Vector();	
+	return Leap::Vector();	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector SwipeGesture::position() const
+LEAP_EXPORT Leap::Vector SwipeGesture::position() const
 {
-	return Vector();	
+	return Leap::Vector();	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector SwipeGesture::direction() const
+LEAP_EXPORT Leap::Vector SwipeGesture::direction() const
 {
-	return Vector();	
+	return Leap::Vector();	
 }
 
 //-----------------------------------------------------------------------------

@@ -14,9 +14,9 @@
 
 #include "Common.h"
 
-#include "Leap.h"
+#include "GiantLeap.h"
 #include "HandImplementation.h"
-using namespace Leap;
+using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -48,30 +48,30 @@ LEAP_EXPORT Frame Hand::frame() const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector Hand::palmPosition() const
+LEAP_EXPORT Leap::Vector Hand::palmPosition() const
 {
-	return isValid() ? get<HandImplementation>()->palmPosition() : Vector();
+	return isValid() ? get<HandImplementation>()->palmPosition() : Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector Hand::stabilizedPalmPosition() const
+LEAP_EXPORT Leap::Vector Hand::stabilizedPalmPosition() const
 {
-	return isValid() ? get<HandImplementation>()->stabilizedPalmPosition() : Vector();
+	return isValid() ? get<HandImplementation>()->stabilizedPalmPosition() : Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector Hand::palmVelocity() const
+LEAP_EXPORT Leap::Vector Hand::palmVelocity() const
 {
-	return isValid() ? get<HandImplementation>()->palmVelocity() : Vector();
+	return isValid() ? get<HandImplementation>()->palmVelocity() : Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector Hand::palmNormal() const
+LEAP_EXPORT Leap::Vector Hand::palmNormal() const
 {
-	return isValid() ? get<HandImplementation>()->palmNormal() : Vector();
+	return isValid() ? get<HandImplementation>()->palmNormal() : Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
@@ -83,16 +83,16 @@ LEAP_EXPORT float Hand::palmWidth() const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector Hand::direction() const
+LEAP_EXPORT Leap::Vector Hand::direction() const
 {
-	return isValid() ? get<HandImplementation>()->direction() : Vector();
+	return isValid() ? get<HandImplementation>()->direction() : Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Matrix Hand::basis() const
+LEAP_EXPORT Leap::Matrix Hand::basis() const
 {
-	return isValid() ? get<HandImplementation>()->basis() : Matrix::identity();
+	return isValid() ? get<HandImplementation>()->basis() : Leap::Matrix::identity();
 }
 
 //-----------------------------------------------------------------------------
@@ -104,16 +104,16 @@ LEAP_EXPORT Arm Hand::arm() const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector Hand::wristPosition() const
+LEAP_EXPORT Leap::Vector Hand::wristPosition() const
 {
-	return isValid() ? get<HandImplementation>()->wristPosition() : Vector();
+	return isValid() ? get<HandImplementation>()->wristPosition() : Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector Hand::sphereCenter() const
+LEAP_EXPORT Leap::Vector Hand::sphereCenter() const
 {
-	return isValid() ? get<HandImplementation>()->sphereCenter() : Vector();
+	return isValid() ? get<HandImplementation>()->sphereCenter() : Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
@@ -209,9 +209,9 @@ LEAP_EXPORT Tool Hand::tool( int32_t id ) const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector Hand::translation( const Frame &sinceFrame ) const
+LEAP_EXPORT Leap::Vector Hand::translation( const Frame &sinceFrame ) const
 {
-	return isValid() ? get<HandImplementation>()->translation( sinceFrame ) : Vector();
+	return isValid() ? get<HandImplementation>()->translation( sinceFrame ) : Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
@@ -223,9 +223,9 @@ LEAP_EXPORT float Hand::translationProbability( const Frame &sinceFrame ) const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Vector Hand::rotationAxis( const Frame &sinceFrame ) const
+LEAP_EXPORT Leap::Vector Hand::rotationAxis( const Frame &sinceFrame ) const
 {
-	return isValid() ? get<HandImplementation>()->rotationAxis( sinceFrame ) : Vector();
+	return isValid() ? get<HandImplementation>()->rotationAxis( sinceFrame ) : Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
@@ -237,16 +237,16 @@ LEAP_EXPORT float Hand::rotationAngle( const Frame &sinceFrame ) const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT float Hand::rotationAngle( const Frame &sinceFrame, const Vector& axis ) const
+LEAP_EXPORT float Hand::rotationAngle( const Frame &sinceFrame, const Leap::Vector& axis ) const
 {
 	return isValid() ? get<HandImplementation>()->rotationAngle( sinceFrame ) : 0.0f;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Matrix Hand::rotationMatrix( const Frame &sinceFrame ) const
+LEAP_EXPORT Leap::Matrix Hand::rotationMatrix( const Frame &sinceFrame ) const
 {
-	return isValid() ? get<HandImplementation>()->rotationMatrix( sinceFrame ) : Matrix::identity();
+	return isValid() ? get<HandImplementation>()->rotationMatrix( sinceFrame ) : Leap::Matrix::identity();
 }
 
 //-----------------------------------------------------------------------------

@@ -14,12 +14,12 @@
 
 #include "Common.h"
 
-#include "Leap.h"
+#include "GiantLeap.h"
 #include "FrameImplementation.h"
 #include "HandImplementation.h"
 #include "GestureImplementation.h"
 #include "ListBaseImplementation.h"
-using namespace Leap;
+using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -30,17 +30,17 @@ FrameImplementation::FrameImplementation()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-FrameImplementation::FrameImplementation( const Frame &frame )
+FrameImplementation::FrameImplementation( const Leap::Frame &frame )
 {
 	FromLeap( frame );
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void FrameImplementation::FromLeap( const Frame &frame )
+void FrameImplementation::FromLeap( const Leap::Frame &frame )
 {
-	const HandList &hands = frame.hands();
-	const GestureList &gestures = frame.gestures();
+	const Leap::HandList &hands = frame.hands();
+	const Leap::GestureList &gestures = frame.gestures();
 
 	//
 	// Store frame info.
@@ -156,7 +156,7 @@ void FrameImplementation::Unserialize( BufferRead *buffer )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void FrameImplementation::Translate( const Vector &v )
+void FrameImplementation::Translate( const Leap::Vector &v )
 {
 	for( unsigned int i = 0; i < _hands.size(); i++ )
 	{
@@ -171,7 +171,7 @@ void FrameImplementation::Translate( const Vector &v )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void FrameImplementation::Rotate( const Vector &v )
+void FrameImplementation::Rotate( const Leap::Vector &v )
 {
 	for( unsigned int i = 0; i < _hands.size(); i++ )
 	{
@@ -324,10 +324,10 @@ GestureList FrameImplementation::gestures( const Frame &sinceFrame ) const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Vector FrameImplementation::translation( const Frame &sinceFrame ) const
+Leap::Vector FrameImplementation::translation( const Frame &sinceFrame ) const
 {
 	breakpoint();
-	return Vector();
+	return Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
@@ -340,10 +340,10 @@ float FrameImplementation::translationProbability( const Frame &sinceFrame ) con
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Vector FrameImplementation::rotationAxis( const Frame &sinceFrame ) const
+Leap::Vector FrameImplementation::rotationAxis( const Frame &sinceFrame ) const
 {
 	breakpoint();
-	return Vector();
+	return Leap::Vector();
 }
 
 //-----------------------------------------------------------------------------
@@ -356,7 +356,7 @@ float FrameImplementation::rotationAngle( const Frame &sinceFrame ) const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-float FrameImplementation::rotationAngle( const Frame &sinceFrame, const Vector& axis ) const
+float FrameImplementation::rotationAngle( const Frame &sinceFrame, const Leap::Vector& axis ) const
 {
 	breakpoint();
 	return 0.0f;
@@ -364,10 +364,10 @@ float FrameImplementation::rotationAngle( const Frame &sinceFrame, const Vector&
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Matrix FrameImplementation::rotationMatrix( const Frame &sinceFrame ) const
+Leap::Matrix FrameImplementation::rotationMatrix( const Frame &sinceFrame ) const
 {
 	breakpoint();
-	return Matrix();
+	return Leap::Matrix();
 }
 
 //-----------------------------------------------------------------------------
