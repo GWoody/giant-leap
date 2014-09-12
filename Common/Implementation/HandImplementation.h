@@ -28,6 +28,7 @@ namespace Leap
 	public:
 		HandImplementation();
 		HandImplementation( const Leap::Hand &hand );
+		HandImplementation( BufferRead *buffer );
 
 		// Initialization.
 		void				FromLeap( const Leap::Hand &hand );

@@ -34,6 +34,13 @@ HandImplementation::HandImplementation( const Hand &hand )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+HandImplementation::HandImplementation( BufferRead *buffer )
+{
+	Unserialize( buffer );
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 void HandImplementation::FromLeap( const Hand &hand )
 {
 	

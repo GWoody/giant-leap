@@ -15,6 +15,8 @@
 #ifndef __GESTUREIMPLEMENTATION_H__
 #define __GESTUREIMPLEMENTATION_H__
 
+#include "Network/Buffer.h"
+
 namespace Leap
 {
 
@@ -25,6 +27,19 @@ namespace Leap
 	{
 	public:
 		GestureImplementation();
+		GestureImplementation( const Leap::Gesture &gesture );
+		GestureImplementation( BufferRead *buffer );
+
+		// Initialization.
+		void				FromLeap( const Leap::Gesture &gesture );
+
+		// Networking.
+		void				Serialize( BufferWrite *buffer );
+		void				Unserialize( BufferRead *buffer );
+
+		// Manipulations.
+		void				Translate( const Vector &v );
+		void				Rotate( const Vector &v );
 
 		int32_t				id() const;
 		Gesture::Type		type() const;

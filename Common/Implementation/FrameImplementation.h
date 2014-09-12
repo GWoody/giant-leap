@@ -16,6 +16,7 @@
 #define __FRAMEIMPLEMENTATION_H__
 
 #include "Network/Buffer.h"
+#include <vector>
 
 namespace Leap
 {
@@ -69,6 +70,9 @@ namespace Leap
 
 	private:
 		int64_t				_id, _timestamp;
+
+		std::vector<HandImplementation>	_hands;
+		std::vector<GestureImplementation>	_gestures;
 	};
 
 }

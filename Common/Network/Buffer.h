@@ -23,6 +23,9 @@ class BufferWrite
 {
 public:
 	// Writing.
+	bool				WriteShort( short s );
+	bool				WriteInt( int i );
+	bool				WriteLongLong( long long i );
 	bool				Write( void *buffer, int length );
 
 	// Accessors.

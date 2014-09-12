@@ -11,6 +11,18 @@
     <Filter Include="Network">
       <UniqueIdentifier>{d1b3a916-b0ad-413c-b83f-930bf0897bf0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Implementation\Unused">
+      <UniqueIdentifier>{3ebc55ec-226e-4b3b-9d23-dac70c66e1c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Implementation\Gestures">
+      <UniqueIdentifier>{0ef1d134-3d1c-45bf-b1ef-2d74729358dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Implementation\Pointables">
+      <UniqueIdentifier>{04fcfd24-b28d-4298-82c5-028a78ae6505}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Implementation\Hand">
+      <UniqueIdentifier>{9227e95d-5392-4457-8f44-11704b387043}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Server\Main.cpp">
@@ -31,84 +43,6 @@
     <ClCompile Include="Implementation\Frame.cpp">
       <Filter>Implementation</Filter>
     </ClCompile>
-    <ClCompile Include="Implementation\GestureList.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\FingerList.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\GestureImplementation.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\Gesture.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\Arm.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\ArmImplementation.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\Bone.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\BoneImplementation.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\KeyTapGesture.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\ScreenTapGesture.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\TapGestureImplementation.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\CircleGestureImplementation.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\CircleGesture.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\PointableImplementation.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\Pointable.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\FingerImplementation.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\Finger.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\PointableList.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\HandImplementation.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\Hand.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\HandList.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\SwipeGestureImplementation.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\SwipeGesture.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\Tool.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\ToolList.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="Implementation\InteractionBox.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
     <ClCompile Include="Network\UpdSocket.cpp">
       <Filter>Network</Filter>
     </ClCompile>
@@ -123,6 +57,84 @@
     </ClCompile>
     <ClCompile Include="Network\Buffer.cpp">
       <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\InteractionBox.cpp">
+      <Filter>Implementation\Unused</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\Pointable.cpp">
+      <Filter>Implementation\Pointables</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\PointableImplementation.cpp">
+      <Filter>Implementation\Pointables</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\FingerImplementation.cpp">
+      <Filter>Implementation\Pointables</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\FingerList.cpp">
+      <Filter>Implementation\Pointables</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\CircleGesture.cpp">
+      <Filter>Implementation\Gestures</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\CircleGestureImplementation.cpp">
+      <Filter>Implementation\Gestures</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\GestureImplementation.cpp">
+      <Filter>Implementation\Gestures</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\GestureList.cpp">
+      <Filter>Implementation\Gestures</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\Gesture.cpp">
+      <Filter>Implementation\Gestures</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\TapGestureImplementation.cpp">
+      <Filter>Implementation\Gestures</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\SwipeGestureImplementation.cpp">
+      <Filter>Implementation\Gestures</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\KeyTapGesture.cpp">
+      <Filter>Implementation\Gestures</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\ScreenTapGesture.cpp">
+      <Filter>Implementation\Gestures</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\SwipeGesture.cpp">
+      <Filter>Implementation\Gestures</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\PointableList.cpp">
+      <Filter>Implementation\Pointables</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\Finger.cpp">
+      <Filter>Implementation\Pointables</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\Arm.cpp">
+      <Filter>Implementation\Hand</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\ArmImplementation.cpp">
+      <Filter>Implementation\Hand</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\Bone.cpp">
+      <Filter>Implementation\Hand</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\BoneImplementation.cpp">
+      <Filter>Implementation\Hand</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\Hand.cpp">
+      <Filter>Implementation\Hand</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\HandImplementation.cpp">
+      <Filter>Implementation\Hand</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\HandList.cpp">
+      <Filter>Implementation\Hand</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\Tool.cpp">
+      <Filter>Implementation\Unused</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\ToolList.cpp">
+      <Filter>Implementation\Unused</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -141,33 +153,6 @@
     <ClInclude Include="Implementation\ListBaseImplementation.h">
       <Filter>Implementation</Filter>
     </ClInclude>
-    <ClInclude Include="Implementation\GestureImplementation.h">
-      <Filter>Implementation</Filter>
-    </ClInclude>
-    <ClInclude Include="Implementation\ArmImplementation.h">
-      <Filter>Implementation</Filter>
-    </ClInclude>
-    <ClInclude Include="Implementation\BoneImplementation.h">
-      <Filter>Implementation</Filter>
-    </ClInclude>
-    <ClInclude Include="Implementation\TapGestureImplementation.h">
-      <Filter>Implementation</Filter>
-    </ClInclude>
-    <ClInclude Include="Implementation\CircleGestureImplementation.h">
-      <Filter>Implementation</Filter>
-    </ClInclude>
-    <ClInclude Include="Implementation\PointableImplementation.h">
-      <Filter>Implementation</Filter>
-    </ClInclude>
-    <ClInclude Include="Implementation\FingerImplementation.h">
-      <Filter>Implementation</Filter>
-    </ClInclude>
-    <ClInclude Include="Implementation\HandImplementation.h">
-      <Filter>Implementation</Filter>
-    </ClInclude>
-    <ClInclude Include="Implementation\SwipeGestureImplementation.h">
-      <Filter>Implementation</Filter>
-    </ClInclude>
     <ClInclude Include="Network\Network.h">
       <Filter>Network</Filter>
     </ClInclude>
@@ -176,6 +161,33 @@
     </ClInclude>
     <ClInclude Include="Network\Buffer.h">
       <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Implementation\PointableImplementation.h">
+      <Filter>Implementation\Pointables</Filter>
+    </ClInclude>
+    <ClInclude Include="Implementation\FingerImplementation.h">
+      <Filter>Implementation\Pointables</Filter>
+    </ClInclude>
+    <ClInclude Include="Implementation\CircleGestureImplementation.h">
+      <Filter>Implementation\Gestures</Filter>
+    </ClInclude>
+    <ClInclude Include="Implementation\GestureImplementation.h">
+      <Filter>Implementation\Gestures</Filter>
+    </ClInclude>
+    <ClInclude Include="Implementation\TapGestureImplementation.h">
+      <Filter>Implementation\Gestures</Filter>
+    </ClInclude>
+    <ClInclude Include="Implementation\SwipeGestureImplementation.h">
+      <Filter>Implementation\Gestures</Filter>
+    </ClInclude>
+    <ClInclude Include="Implementation\ArmImplementation.h">
+      <Filter>Implementation\Hand</Filter>
+    </ClInclude>
+    <ClInclude Include="Implementation\BoneImplementation.h">
+      <Filter>Implementation\Hand</Filter>
+    </ClInclude>
+    <ClInclude Include="Implementation\HandImplementation.h">
+      <Filter>Implementation\Hand</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

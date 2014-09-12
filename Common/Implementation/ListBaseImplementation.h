@@ -15,6 +15,8 @@
 #ifndef __LISTBASEIMPLEMENTATION_H__
 #define __LISTBASEIMPLEMENTATION_H__
 
+#include <vector>
+
 namespace Leap
 {
 
@@ -33,6 +35,11 @@ namespace Leap
 		bool				isEmpty() const;
 		T					operator[]( int index ) const;
 		ThisType_t &		append( const ThisType_t &other );
+
+		void				push_back( const T &element );
+
+	private:
+		std::vector<T>		_list;
 	};
 
 	//-----------------------------------------------------------------------------
@@ -48,7 +55,7 @@ namespace Leap
 	template<typename T>
 	int ListBaseImplementation<T>::count() const
 	{
-		return 0;
+		return _list.size();
 	}
 
 	//-----------------------------------------------------------------------------
@@ -56,18 +63,16 @@ namespace Leap
 	template<typename T>
 	bool ListBaseImplementation<T>::isEmpty() const
 	{
-		return true;
+		return _list.size() == 0;
 	}
-
 
 	//-----------------------------------------------------------------------------
 	//-----------------------------------------------------------------------------
 	template<typename T>
 	T ListBaseImplementation<T>::operator[]( int index ) const
 	{
-		return T();
+		return _list[index];
 	}
-
 
 	//-----------------------------------------------------------------------------
 	//-----------------------------------------------------------------------------
@@ -76,6 +81,14 @@ namespace Leap
 	{
 		breakpoint();
 		return *this;
+	}
+
+	//-----------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------
+	template<typename T>
+	void ListBaseImplementation<T>::push_back( const T &element )
+	{
+		_list.push_back( element );
 	}
 
 }
