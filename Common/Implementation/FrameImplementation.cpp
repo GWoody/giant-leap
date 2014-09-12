@@ -267,7 +267,7 @@ GestureList FrameImplementation::gestures() const
 {
 	ListBaseImplementation<Gesture> list;
 
-	for( unsigned int i = 0; i < _hands.size(); i++ )
+	for( unsigned int i = 0; i < _gestures.size(); i++ )
 	{
 		GestureImplementation *gi = (GestureImplementation *)&_gestures[i];
 		Gesture g( gi );

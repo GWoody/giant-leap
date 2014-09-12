@@ -43,7 +43,25 @@ HandImplementation::HandImplementation( BufferRead *buffer )
 //-----------------------------------------------------------------------------
 void HandImplementation::FromLeap( const Hand &hand )
 {
-	
+	_id = hand.id();
+	_palmPosition = hand.palmPosition();
+	_stabilizedPalmPosition = hand.stabilizedPalmPosition();
+	_palmVelocity = hand.palmVelocity();
+	_palmNormal = hand.palmNormal();
+	_palmWidth = hand.palmWidth();
+	_direction = hand.direction();
+	_sphereCenter = hand.sphereCenter();
+	_sphereRadius = hand.sphereRadius();
+	_pinchStrength = hand.pinchStrength();
+	_grabStrength = hand.grabStrength();
+	_confidence = hand.confidence();
+
+	const FingerList &fingers = hand.fingers();
+	for( int i = 0; i < fingers.count(); i++ )
+	{
+		//FingerImplementation fi( fingers[i] );
+		//_fingers.push_back( fi );
+	}
 }
 
 //-----------------------------------------------------------------------------
@@ -78,7 +96,7 @@ void HandImplementation::Rotate( const Vector &v )
 //-----------------------------------------------------------------------------
 int32_t HandImplementation::id() const
 {
-	return -1;
+	return _id;
 }
 
 //-----------------------------------------------------------------------------
@@ -93,42 +111,42 @@ Frame HandImplementation::frame() const
 //-----------------------------------------------------------------------------
 Vector HandImplementation::palmPosition() const
 {
-	return Vector();
+	return _palmPosition;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 Vector HandImplementation::stabilizedPalmPosition() const
 {
-	return Vector();
+	return _stabilizedPalmPosition;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 Vector HandImplementation::palmVelocity() const
 {
-	return Vector();
+	return _palmVelocity;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 Vector HandImplementation::palmNormal() const
 {
-	return Vector();
+	return _palmNormal;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 float HandImplementation::palmWidth() const
 {
-	return 0.0f;
+	return _palmWidth;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 Vector HandImplementation::direction() const
 {
-	return Vector();
+	return _direction;
 }
 
 //-----------------------------------------------------------------------------
@@ -143,7 +161,7 @@ Matrix HandImplementation::basis() const
 //-----------------------------------------------------------------------------
 Arm HandImplementation::arm() const
 {
-	return Arm();
+	return Arm( (ArmImplementation *)&_arm );
 }
 
 //-----------------------------------------------------------------------------
@@ -158,28 +176,28 @@ Vector HandImplementation::wristPosition() const
 //-----------------------------------------------------------------------------
 Vector HandImplementation::sphereCenter() const
 {
-	return Vector();
+	return _sphereCenter;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 float HandImplementation::sphereRadius() const
 {
-	return 0.0f;
+	return _sphereRadius;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 float HandImplementation::pinchStrength() const
 {
-	return 0.0f;
+	return _pinchStrength;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 float HandImplementation::grabStrength() const
 {
-	return 0.0f;
+	return _grabStrength;
 }
 
 //-----------------------------------------------------------------------------
@@ -194,7 +212,7 @@ float HandImplementation::timeVisible() const
 //-----------------------------------------------------------------------------
 float HandImplementation::confidence() const
 {
-	return 0.0f;
+	return _confidence;
 }
 
 //-----------------------------------------------------------------------------

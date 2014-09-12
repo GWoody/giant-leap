@@ -16,6 +16,9 @@
 #define __HANDIMPLEMENTATION_H__
 
 #include "Network/Buffer.h"
+#include "FingerImplementation.h"
+#include "ArmImplementation.h"
+#include <vector>
 
 namespace Leap
 {
@@ -80,6 +83,24 @@ namespace Leap
 		float				scaleProbability( const Frame &sinceFrame ) const;
 
 		const char *		toCString() const;
+
+	private:
+		int32_t				_id;
+
+		std::vector<FingerImplementation>	_fingers;
+		ArmImplementation	_arm;
+
+		Vector				_palmPosition;
+		Vector				_stabilizedPalmPosition;
+		Vector				_palmVelocity;
+		Vector				_palmNormal;
+		float				_palmWidth;
+		Vector				_direction;
+		Vector				_sphereCenter;
+		float				_sphereRadius;
+		float				_pinchStrength;
+		float				_grabStrength;
+		float				_confidence;
 	};
 
 }

@@ -16,6 +16,8 @@
 #define __FRAMEIMPLEMENTATION_H__
 
 #include "Network/Buffer.h"
+#include "HandImplementation.h"
+#include "GestureImplementation.h"
 #include <vector>
 
 namespace Leap
