@@ -50,30 +50,30 @@ Hand PointableImplementation::hand() const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector PointableImplementation::tipPosition() const
+Vector PointableImplementation::tipPosition() const
 {
-	return Leap::Vector();
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector PointableImplementation::stabilizedTipPosition() const
+Vector PointableImplementation::stabilizedTipPosition() const
 {
-	return Leap::Vector();
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector PointableImplementation::tipVelocity() const
+Vector PointableImplementation::tipVelocity() const
 {
-	return Leap::Vector();
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector PointableImplementation::direction() const
+Vector PointableImplementation::direction() const
 {
-	return Leap::Vector();
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------

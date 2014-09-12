@@ -35,31 +35,31 @@ float ArmImplementation::width() const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector ArmImplementation::direction() const
+Vector ArmImplementation::direction() const
 {
-	return Leap::Vector(0, 0, 0);
+	return Vector(0, 0, 0);
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Matrix ArmImplementation::basis() const
+Matrix ArmImplementation::basis() const
 {
 	breakpoint();
-	return Leap::Matrix();
+	return Matrix();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector ArmImplementation::elbowPosition() const
+Vector ArmImplementation::elbowPosition() const
 {
-	return Leap::Vector(0,0,0);
+	return Vector(0,0,0);
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector ArmImplementation::wristPosition() const
+Vector ArmImplementation::wristPosition() const
 {
-	return Leap::Vector(0, 0, 0);
+	return Vector(0, 0, 0);
 }
 
 //-----------------------------------------------------------------------------

@@ -137,9 +137,9 @@ float BufferRead::ReadFloat()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector BufferRead::ReadVector()
+Vector BufferRead::ReadVector()
 {
-	Leap::Vector v;
+	Vector v;
 
 	v.x = ReadFloat();
 	v.y = ReadFloat();

@@ -34,15 +34,15 @@ public:
 // Prototypes.
 //-----------------------------------------------------------------------------
 static string get_target_ip_address();
-static Leap::Vector get_device_translation();
-static Leap::Vector get_device_rotation();
+static Vector get_device_translation();
+static Vector get_device_rotation();
 static void wait_for_exit();
 
 //-----------------------------------------------------------------------------
 // Global variables.
 //-----------------------------------------------------------------------------
 static string global_server_address;
-static Leap::Vector global_device_translation, global_device_rotation;
+static Vector global_device_translation, global_device_rotation;
 static UdpSocket global_socket( false, GIANT_LEAP_PORT );
 
 //-----------------------------------------------------------------------------
@@ -90,7 +90,7 @@ static string get_target_ip_address()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-static Leap::Vector get_device_translation()
+static Vector get_device_translation()
 {
 	string str;
 
@@ -102,7 +102,7 @@ static Leap::Vector get_device_translation()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-static Leap::Vector get_device_rotation()
+static Vector get_device_rotation()
 {
 	string str;
 

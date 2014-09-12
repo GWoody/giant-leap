@@ -26,16 +26,16 @@ CircleGestureImplementation::CircleGestureImplementation()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector CircleGestureImplementation::center() const
+Vector CircleGestureImplementation::center() const
 {
-	return Leap::Vector();
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector CircleGestureImplementation::normal() const
+Vector CircleGestureImplementation::normal() const
 {
-	return Leap::Vector();
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------

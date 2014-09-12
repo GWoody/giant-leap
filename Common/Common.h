@@ -24,6 +24,6 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector string_to_vector( const std::string &str );
+GiantLeap::Vector string_to_vector( const std::string &str );
 
 #endif // __COMMON_H__

@@ -27,16 +27,16 @@ TapGestureImplementation::TapGestureImplementation()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector TapGestureImplementation::position() const
+Vector TapGestureImplementation::position() const
 {
-	return Leap::Vector();
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector TapGestureImplementation::direction() const
+Vector TapGestureImplementation::direction() const
 {
-	return Leap::Vector();
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------

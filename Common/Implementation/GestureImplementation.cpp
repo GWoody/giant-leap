@@ -61,14 +61,14 @@ void GestureImplementation::Unserialize( BufferRead *buffer )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void GestureImplementation::Translate( const Leap::Vector &v )
+void GestureImplementation::Translate( const Vector &v )
 {
 
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void GestureImplementation::Rotate( const Leap::Vector &v )
+void GestureImplementation::Rotate( const Vector &v )
 {
 
 }

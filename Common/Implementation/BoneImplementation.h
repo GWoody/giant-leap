@@ -24,14 +24,14 @@ namespace GiantLeap
 	{
 	public:
 		BoneImplementation();
-		Leap::Vector prevJoint() const;
-		Leap::Vector nextJoint() const;
-		Leap::Vector center() const;
-		Leap::Vector direction() const;
+		Vector prevJoint() const;
+		Vector nextJoint() const;
+		Vector center() const;
+		Vector direction() const;
 		float length() const;
 		float width() const;
 		Bone::Type type() const;
-		Leap::Matrix basis() const;
+		Matrix basis() const;
 		bool isValid() const;
 		static const Bone& invalid();
 		bool operator==(const Bone&) const;

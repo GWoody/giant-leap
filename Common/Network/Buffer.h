@@ -48,7 +48,7 @@ public:
 	int					ReadInt();
 	long long			ReadLongLong();
 	float				ReadFloat();
-	Leap::Vector		ReadVector();
+	GiantLeap::Vector	ReadVector();
 	void				Read( void *buffer, int length );
 
 	// Accessors.

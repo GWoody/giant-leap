@@ -28,32 +28,32 @@ BoneImplementation::BoneImplementation()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector BoneImplementation::prevJoint() const
+Vector BoneImplementation::prevJoint() const
 {
-	return Leap::Vector(0, 0, 0);
+	return Vector(0, 0, 0);
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector BoneImplementation::nextJoint() const
+Vector BoneImplementation::nextJoint() const
 {
-	return Leap::Vector(0, 0, 0);
+	return Vector(0, 0, 0);
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector BoneImplementation::center() const
+Vector BoneImplementation::center() const
 {
 	breakpoint();
-	return Leap::Vector(0, 0, 0);
+	return Vector(0, 0, 0);
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector BoneImplementation::direction() const
+Vector BoneImplementation::direction() const
 {
 	breakpoint();
-	return Leap::Vector(0, 0, 0);
+	return Vector(0, 0, 0);
 }
 
 //-----------------------------------------------------------------------------
@@ -82,10 +82,10 @@ Bone::Type BoneImplementation::type() const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Matrix BoneImplementation::basis() const
+Matrix BoneImplementation::basis() const
 {
 	breakpoint();
-	return Leap::Matrix();
+	return Matrix();
 }
 
 //-----------------------------------------------------------------------------

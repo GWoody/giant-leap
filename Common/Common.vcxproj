@@ -51,6 +51,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h" />
+    <ClInclude Include="GiantLeap.h" />
+    <ClInclude Include="GiantLeapMath.h" />
     <ClInclude Include="Implementation\ArmImplementation.h" />
     <ClInclude Include="Implementation\BoneImplementation.h" />
     <ClInclude Include="Implementation\CircleGestureImplementation.h" />

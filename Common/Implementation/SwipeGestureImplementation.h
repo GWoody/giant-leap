@@ -28,9 +28,9 @@ namespace GiantLeap
 	public:
 		SwipeGestureImplementation();
 
-		Leap::Vector				startPosition() const;
-		Leap::Vector				position() const;
-		Leap::Vector				direction() const;
+		Vector				startPosition() const;
+		Vector				position() const;
+		Vector				direction() const;
 		float				speed() const;
 		Pointable			pointable() const;
 	};

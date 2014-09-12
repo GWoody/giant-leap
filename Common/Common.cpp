@@ -13,16 +13,17 @@
 */
 
 #include "Common.h"
+using namespace GiantLeap;
 
 #include <sstream>
 using namespace std;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector string_to_vector( const std::string &str )
+Vector string_to_vector( const std::string &str )
 {
 	istringstream sin( str );
-	Leap::Vector v;
+	Vector v;
 
 	sin >> v.x >> v.y >> v.z;
 	return v;

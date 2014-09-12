@@ -28,23 +28,23 @@ SwipeGestureImplementation::SwipeGestureImplementation()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector SwipeGestureImplementation::startPosition() const
+Vector SwipeGestureImplementation::startPosition() const
 {
-	return Leap::Vector();	
+	return Vector();	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector SwipeGestureImplementation::position() const
+Vector SwipeGestureImplementation::position() const
 {
-	return Leap::Vector();	
+	return Vector();	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector SwipeGestureImplementation::direction() const
+Vector SwipeGestureImplementation::direction() const
 {
-	return Leap::Vector();	
+	return Vector();	
 }
 
 //-----------------------------------------------------------------------------

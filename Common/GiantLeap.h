@@ -10,6 +10,7 @@
 #define __GiantLeap_h__
 
 #include "Leap.h"
+#include "GiantLeapMath.h"
 
 namespace GiantLeap {
 
@@ -187,20 +188,20 @@ namespace GiantLeap {
      *
      * \include Pointable_tipPosition.txt
      *
-     * @returns The Leap::Vector containing the coordinates of the tip position.
+     * @returns The Vector containing the coordinates of the tip position.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector tipPosition() const;
+    LEAP_EXPORT Vector tipPosition() const;
 
     /**
      * The rate of change of the tip position in millimeters/second.
      *
      * \include Pointable_tipVelocity.txt
      *
-     * @returns The Leap::Vector containing the coordinates of the tip velocity.
+     * @returns The Vector containing the coordinates of the tip velocity.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector tipVelocity() const;
+    LEAP_EXPORT Vector tipVelocity() const;
 
     /**
      * The direction in which this finger or tool is pointing.
@@ -212,11 +213,11 @@ namespace GiantLeap {
      *
      * \image html images/Leap_Finger_Model.png
      *
-     * @returns The Leap::Vector pointing in the same direction as the tip of this
+     * @returns The Vector pointing in the same direction as the tip of this
      * Pointable object.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector direction() const;
+    LEAP_EXPORT Vector direction() const;
 
     /**
      * The estimated width of the finger or tool in millimeters.
@@ -354,7 +355,7 @@ namespace GiantLeap {
      * with some additional smoothing and stabilization applied.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector stabilizedTipPosition() const;
+    LEAP_EXPORT Vector stabilizedTipPosition() const;
 
     /**
      * The duration of time this Pointable has been visible to the Leap Motion Controller.
@@ -464,10 +465,10 @@ namespace GiantLeap {
     *
     * @since 2.0.3
     */
-    LEAP_EXPORT Leap::Vector direction() const;
+    LEAP_EXPORT Vector direction() const;
 
     /**
-     * The orthonormal basis vectors for the Arm bone as a Leap::Matrix.
+     * The orthonormal basis vectors for the Arm bone as a Matrix.
      *
      * Basis vectors specify the orientation of a bone.
      *
@@ -494,7 +495,7 @@ namespace GiantLeap {
      * @returns The basis of the arm bone as a matrix.
      * @since 2.0.3
      */
-    LEAP_EXPORT Leap::Matrix basis() const;
+    LEAP_EXPORT Matrix basis() const;
 
     /**
     * The position of the elbow.
@@ -506,7 +507,7 @@ namespace GiantLeap {
     *
     * @since 2.0.3
     */
-    LEAP_EXPORT Leap::Vector elbowPosition() const;
+    LEAP_EXPORT Vector elbowPosition() const;
 
     /**
     * The position of the wrist.
@@ -519,7 +520,7 @@ namespace GiantLeap {
     *
     * @since 2.0.3
     */
-    LEAP_EXPORT Leap::Vector wristPosition() const;
+    LEAP_EXPORT Vector wristPosition() const;
 
     /**
     * Reports whether this is a valid Arm object.
@@ -649,10 +650,10 @@ namespace GiantLeap {
 
      * \include Bone_prevJoint.txt
      *
-     * @returns The Leap::Vector containing the coordinates of the previous joint position.
+     * @returns The Vector containing the coordinates of the previous joint position.
      * @since 2.0
      */
-    LEAP_EXPORT Leap::Vector prevJoint() const;
+    LEAP_EXPORT Vector prevJoint() const;
 
     /**
      * The end of the bone, closest to the finger tip.
@@ -661,10 +662,10 @@ namespace GiantLeap {
      *
      * \include Bone_nextJoint.txt
      *
-     * @returns The Leap::Vector containing the coordinates of the next joint position.
+     * @returns The Vector containing the coordinates of the next joint position.
      * @since 2.0
      */
-    LEAP_EXPORT Leap::Vector nextJoint() const;
+    LEAP_EXPORT Vector nextJoint() const;
 
     /**
      * The midpoint of the bone.
@@ -674,7 +675,7 @@ namespace GiantLeap {
      * @returns The midpoint in the center of the bone.
      * @since 2.0
      */
-    LEAP_EXPORT Leap::Vector center() const;
+    LEAP_EXPORT Vector center() const;
 
     /**
      * The normalized direction of the bone from base to tip.
@@ -684,7 +685,7 @@ namespace GiantLeap {
      * @returns The normalized direction of the bone from base to tip.
      * @since 2.0
      */
-    LEAP_EXPORT Leap::Vector direction() const;
+    LEAP_EXPORT Vector direction() const;
 
     /**
      * The estimated length of the bone in millimeters.
@@ -718,7 +719,7 @@ namespace GiantLeap {
     LEAP_EXPORT Type type() const;
 
     /**
-     * The orthonormal basis vectors for this Bone as a Leap::Matrix.
+     * The orthonormal basis vectors for this Bone as a Matrix.
      *
      * Basis vectors specify the orientation of a bone.
      *
@@ -748,7 +749,7 @@ namespace GiantLeap {
      * @returns The basis of the bone as a matrix.
      * @since 2.0
      */
-    LEAP_EXPORT Leap::Matrix basis() const;
+    LEAP_EXPORT Matrix basis() const;
 
     /**
      * Reports whether this is a valid Bone object.
@@ -892,7 +893,7 @@ namespace GiantLeap {
      * Deprecated as of version 2.0
      * Use 'bone' method instead.
      */
-    LEAP_EXPORT Leap::Vector jointPosition(Joint jointIx) const;
+    LEAP_EXPORT Vector jointPosition(Joint jointIx) const;
 
     /**
      * The bone at a given bone index on this finger.
@@ -1208,10 +1209,10 @@ namespace GiantLeap {
      *
      * \include Hand_palmPosition.txt
      *
-     * @returns The Leap::Vector representing the coordinates of the palm position.
+     * @returns The Vector representing the coordinates of the palm position.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector palmPosition() const;
+    LEAP_EXPORT Vector palmPosition() const;
 
     /**
      * The stabilized palm position of this Hand.
@@ -1227,17 +1228,17 @@ namespace GiantLeap {
      * with some additional smoothing and stabilization applied.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector stabilizedPalmPosition() const;
+    LEAP_EXPORT Vector stabilizedPalmPosition() const;
 
     /**
      * The rate of change of the palm position in millimeters/second.
      *
      * \include Hand_palmVelocity.txt
      *
-     * @returns The Leap::Vector representing the coordinates of the palm velocity.
+     * @returns The Vector representing the coordinates of the palm velocity.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector palmVelocity() const;
+    LEAP_EXPORT Vector palmVelocity() const;
 
     /**
      * The normal vector to the palm. If your hand is flat, this vector will
@@ -1253,10 +1254,10 @@ namespace GiantLeap {
      *
      * \include Hand_Get_Angles.txt
      *
-     * @returns The Leap::Vector normal to the plane formed by the palm.
+     * @returns The Vector normal to the plane formed by the palm.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector palmNormal() const;
+    LEAP_EXPORT Vector palmNormal() const;
 
     /**
      * The estimated width of the palm when the hand is in a flat position.
@@ -1279,10 +1280,10 @@ namespace GiantLeap {
      *
      * \include Hand_Get_Angles.txt
      *
-     * @returns The Leap::Vector pointing from the palm position toward the fingers.
+     * @returns The Vector pointing from the palm position toward the fingers.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector direction() const;
+    LEAP_EXPORT Vector direction() const;
 
     /**
      * The orientation of the hand as a basis matrix.
@@ -1301,7 +1302,7 @@ namespace GiantLeap {
      * @returns The basis of the hand as a matrix.
      * @since 2.0
      */
-    LEAP_EXPORT Leap::Matrix basis() const;
+    LEAP_EXPORT Matrix basis() const;
 
     /**
      * The arm to which this hand is attached.
@@ -1322,7 +1323,7 @@ namespace GiantLeap {
      * @returns A vector containing the coordinates of the wrist position in millimeters.
      * @since 2.0.3
      */
-    LEAP_EXPORT Leap::Vector wristPosition() const;
+    LEAP_EXPORT Vector wristPosition() const;
 
 
     /**
@@ -1334,10 +1335,10 @@ namespace GiantLeap {
      *
      * \image html images/Leap_Hand_Ball.png
      *
-     * @returns The Leap::Vector representing the center position of the sphere.
+     * @returns The Vector representing the center position of the sphere.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector sphereCenter() const;
+    LEAP_EXPORT Vector sphereCenter() const;
 
     /**
      * The radius of a sphere fit to the curvature of this hand.
@@ -1395,12 +1396,12 @@ namespace GiantLeap {
      * returns a zero vector.
      *
      * @param sinceFrame The starting frame for computing the translation.
-     * @returns A Leap::Vector representing the heuristically determined change in
+     * @returns A Vector representing the heuristically determined change in
      * hand position between the current frame and that specified in the
      * sinceFrame parameter.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector translation(const Frame& sinceFrame) const;
+    LEAP_EXPORT Vector translation(const Frame& sinceFrame) const;
 
     /**
      * The estimated probability that the hand motion between the current
@@ -1434,12 +1435,12 @@ namespace GiantLeap {
      * returns a zero vector.
      *
      * @param sinceFrame The starting frame for computing the relative rotation.
-     * @returns A normalized direction Leap::Vector representing the heuristically
+     * @returns A normalized direction Vector representing the heuristically
      * determined axis of rotational change of the hand between the current
      * frame and that specified in the sinceFrame parameter.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector rotationAxis(const Frame& sinceFrame) const;
+    LEAP_EXPORT Vector rotationAxis(const Frame& sinceFrame) const;
 
     /**
      * The angle of rotation around the rotation axis derived from the change
@@ -1486,7 +1487,7 @@ namespace GiantLeap {
      * sinceFrame parameter around the specified axis.
      * @since 1.0
      */
-    LEAP_EXPORT float rotationAngle(const Frame& sinceFrame, const Leap::Vector& axis) const;
+    LEAP_EXPORT float rotationAngle(const Frame& sinceFrame, const Vector& axis) const;
 
     /**
      * The transform matrix expressing the rotation derived from the change
@@ -1500,12 +1501,12 @@ namespace GiantLeap {
      * returns an identity matrix.
      *
      * @param sinceFrame The starting frame for computing the relative rotation.
-     * @returns A transformation Leap::Matrix representing the heuristically determined
+     * @returns A transformation Matrix representing the heuristically determined
      * rotational change of the hand between the current frame and that specified
      * in the sinceFrame parameter.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Matrix rotationMatrix(const Frame& sinceFrame) const;
+    LEAP_EXPORT Matrix rotationMatrix(const Frame& sinceFrame) const;
 
     /**
      * The estimated probability that the hand motion between the current
@@ -2090,22 +2091,22 @@ namespace GiantLeap {
      *
      * \include SwipeGesture_startPosition.txt
      *
-     * @returns Leap::Vector The starting position within the Leap Motion frame of
+     * @returns Vector The starting position within the Leap Motion frame of
      * reference, in mm.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector startPosition() const;
+    LEAP_EXPORT Vector startPosition() const;
 
     /**
      * The current position of the swipe.
      *
      * \include SwipeGesture_position.txt
      *
-     * @returns Leap::Vector The current swipe position within the Leap Motion frame of
+     * @returns Vector The current swipe position within the Leap Motion frame of
      * reference, in mm.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector position() const;
+    LEAP_EXPORT Vector position() const;
 
     /**
      * The unit direction vector parallel to the swipe motion.
@@ -2117,11 +2118,11 @@ namespace GiantLeap {
      * for two dimensional scrolling, you can compare the x and y values to
      * determine if the swipe is primarily horizontal or vertical.
      *
-     * @returns Leap::Vector The unit direction vector representing the swipe
+     * @returns Vector The unit direction vector representing the swipe
      * motion.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector direction() const;
+    LEAP_EXPORT Vector direction() const;
 
     /**
      * The swipe speed in mm/second.
@@ -2226,10 +2227,10 @@ namespace GiantLeap {
      * The center point of the circle within the Leap Motion frame of reference.
      *
      * \include CircleGesture_center.txt
-     * @returns Leap::Vector The center of the circle in mm from the Leap Motion origin.
+     * @returns Vector The center of the circle in mm from the Leap Motion origin.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector center() const;
+    LEAP_EXPORT Vector center() const;
 
     /**
      * Returns the normal vector for the circle being traced.
@@ -2242,10 +2243,10 @@ namespace GiantLeap {
      *
      * \include Gesture_Circle_Direction.txt
      *
-     * @return Leap::Vector the normal vector for the circle being traced
+     * @return Vector the normal vector for the circle being traced
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector normal() const;
+    LEAP_EXPORT Vector normal() const;
 
     /**
      * The number of times the finger tip has traversed the circle.
@@ -2369,20 +2370,20 @@ namespace GiantLeap {
      *
      * \include ScreenTapGesture_position.txt
      *
-     * @return Leap::Vector A Leap::Vector containing the coordinates of screen tap location.
+     * @return Vector A Vector containing the coordinates of screen tap location.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector position() const;
+    LEAP_EXPORT Vector position() const;
 
     /**
      * The direction of finger tip motion.
      *
      * \include ScreenTapGesture_direction.txt
      *
-     * @returns Leap::Vector A unit direction vector.
+     * @returns Vector A unit direction vector.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector direction() const;
+    LEAP_EXPORT Vector direction() const;
 
     /**
      * The progress value is always 1.0 for a screen tap gesture.
@@ -2485,21 +2486,21 @@ namespace GiantLeap {
      *
      * \include KeyTapGesture_position.txt
      *
-     * @return Leap::Vector A Leap::Vector containing the coordinates of tap location.
+     * @return Vector A Vector containing the coordinates of tap location.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector position() const;
+    LEAP_EXPORT Vector position() const;
 
     /**
      * The direction of finger tip motion.
      *
      * \include KeyTapGesture_direction.txt
      *
-     * @returns Leap::Vector A unit direction vector if the finger tip is moving;
+     * @returns Vector A unit direction vector if the finger tip is moving;
      * otherwise, a zero-vector.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector direction() const;
+    LEAP_EXPORT Vector direction() const;
 
     /**
      * The progress value is always 1.0 for a key tap gesture.
@@ -2532,25 +2533,25 @@ namespace GiantLeap {
 
     LEAP_EXPORT int32_t id() const;
 
-    LEAP_EXPORT Leap::Vector intersect(const Pointable& pointable, bool normalize, float clampRatio = 1.0f) const;
+    LEAP_EXPORT Vector intersect(const Pointable& pointable, bool normalize, float clampRatio = 1.0f) const;
 
-    LEAP_EXPORT Leap::Vector intersect(const Leap::Vector& position, const Leap::Vector& direction, bool normalize, float clampRatio = 1.0f) const;
+    LEAP_EXPORT Vector intersect(const Vector& position, const Vector& direction, bool normalize, float clampRatio = 1.0f) const;
 
-    LEAP_EXPORT Leap::Vector project(const Leap::Vector& position, bool normalize, float clampRatio = 1.0f) const;
+    LEAP_EXPORT Vector project(const Vector& position, bool normalize, float clampRatio = 1.0f) const;
 
-    LEAP_EXPORT Leap::Vector horizontalAxis() const;
+    LEAP_EXPORT Vector horizontalAxis() const;
 
-    LEAP_EXPORT Leap::Vector verticalAxis() const;
+    LEAP_EXPORT Vector verticalAxis() const;
 
-    LEAP_EXPORT Leap::Vector bottomLeftCorner() const;
+    LEAP_EXPORT Vector bottomLeftCorner() const;
 
-    LEAP_EXPORT Leap::Vector normal() const;
+    LEAP_EXPORT Vector normal() const;
 
     LEAP_EXPORT int widthPixels() const;
 
     LEAP_EXPORT int heightPixels() const;
 
-    LEAP_EXPORT float distanceToPoint(const Leap::Vector& point) const;
+    LEAP_EXPORT float distanceToPoint(const Vector& point) const;
 
     LEAP_EXPORT bool isValid() const;
 
@@ -2684,7 +2685,7 @@ namespace GiantLeap {
      * @returns The distance in millimeters from the input position to the nearest boundary.
      * @since 1.0
      */
-    LEAP_EXPORT float distanceToBoundary(const Leap::Vector& position) const;
+    LEAP_EXPORT float distanceToBoundary(const Vector& position) const;
 
     /**
      * Reports whether this device is embedded in another computer or computer
@@ -3450,9 +3451,9 @@ namespace GiantLeap {
 
     LEAP_EXPORT Screen closestScreenHit(const Pointable& pointable) const;
 
-    LEAP_EXPORT Screen closestScreenHit(const Leap::Vector& position, const Leap::Vector& direction) const;
+    LEAP_EXPORT Screen closestScreenHit(const Vector& position, const Vector& direction) const;
 
-    LEAP_EXPORT Screen closestScreen(const Leap::Vector& position) const;
+    LEAP_EXPORT Screen closestScreen(const Vector& position) const;
   };
 
   /**
@@ -3563,7 +3564,7 @@ namespace GiantLeap {
      * @returns The normalized position.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector normalizePoint(const Leap::Vector& position, bool clamp = true) const;
+    LEAP_EXPORT Vector normalizePoint(const Vector& position, bool clamp = true) const;
 
     /**
      * Converts a position defined by normalized InteractionBox coordinates into device
@@ -3577,7 +3578,7 @@ namespace GiantLeap {
      * @returns The corresponding denormalized position in device coordinates.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector denormalizePoint(const Leap::Vector& normalizedPosition) const;
+    LEAP_EXPORT Vector denormalizePoint(const Vector& normalizedPosition) const;
 
     /**
      * The center of the InteractionBox in device coordinates (millimeters). This point
@@ -3588,7 +3589,7 @@ namespace GiantLeap {
      * @returns The InteractionBox center in device coordinates.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector center() const;
+    LEAP_EXPORT Vector center() const;
 
     /**
      * The width of the InteractionBox in millimeters, measured along the x-axis.
@@ -3950,12 +3951,12 @@ namespace GiantLeap {
      * method returns a zero vector.
      *
      * @param sinceFrame The starting frame for computing the relative translation.
-     * @returns A Leap::Vector representing the heuristically determined change in
+     * @returns A Vector representing the heuristically determined change in
      * position of all objects between the current frame and that specified
      * in the sinceFrame parameter.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector translation(const Frame& sinceFrame) const;
+    LEAP_EXPORT Vector translation(const Frame& sinceFrame) const;
 
     /**
      * The estimated probability that the overall motion between the current
@@ -3989,12 +3990,12 @@ namespace GiantLeap {
      * rotation is detected between the two frames, a zero vector is returned.
      *
      * @param sinceFrame The starting frame for computing the relative rotation.
-     * @returns A normalized direction Leap::Vector representing the axis of the
+     * @returns A normalized direction Vector representing the axis of the
      * heuristically determined rotational change between the current frame
      * and that specified in the sinceFrame parameter.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Vector rotationAxis(const Frame& sinceFrame) const;
+    LEAP_EXPORT Vector rotationAxis(const Frame& sinceFrame) const;
 
     /**
      * The angle of rotation around the rotation axis derived from the overall
@@ -4043,7 +4044,7 @@ namespace GiantLeap {
      * parameter around the given axis.
      * @since 1.0
      */
-    LEAP_EXPORT float rotationAngle(const Frame& sinceFrame, const Leap::Vector& axis) const;
+    LEAP_EXPORT float rotationAngle(const Frame& sinceFrame, const Vector& axis) const;
 
     /**
      * The transform matrix expressing the rotation derived from the overall
@@ -4058,12 +4059,12 @@ namespace GiantLeap {
      * method returns an identity matrix.
      *
      * @param sinceFrame The starting frame for computing the relative rotation.
-     * @returns A transformation Leap::Matrix containing the heuristically determined
+     * @returns A transformation Matrix containing the heuristically determined
      * rotational change between the current frame and that specified in the
      * sinceFrame parameter.
      * @since 1.0
      */
-    LEAP_EXPORT Leap::Matrix rotationMatrix(const Frame& sinceFrame) const;
+    LEAP_EXPORT Matrix rotationMatrix(const Frame& sinceFrame) const;
 
     /**
      * The estimated probability that the overall motion between the current
@@ -4153,7 +4154,7 @@ namespace GiantLeap {
     /**
      * Reports whether this Frame instance is valid.
      *
-     * A valid Frame is one generated by the Leap::Controller object that contains
+     * A valid Frame is one generated by the Controller object that contains
      * tracking data for all detected entities. An invalid Frame contains no
      * actual tracking data, but you can call its functions without risk of a
      * null pointer exception. The invalid Frame mechanism makes it more
@@ -4477,7 +4478,7 @@ namespace GiantLeap {
    *
    * Polling is an appropriate strategy for applications which already have an
    * intrinsic update loop, such as a game. You can also add an instance of a
-   * subclass of Leap::Listener to the controller to handle events as they occur.
+   * subclass of Listener to the controller to handle events as they occur.
    * The Controller dispatches events to the listener upon initialization and exiting,
    * on connection changes, when the application gains and loses the OS input focus,
    * and when a new frame of tracking data is available.
@@ -4518,7 +4519,7 @@ namespace GiantLeap {
      * Constructs a Controller object.
      *
      * When creating a Controller object, you may optionally pass in a
-     * reference to an instance of a subclass of Leap::Listener. Alternatively,
+     * reference to an instance of a subclass of Listener. Alternatively,
      * you may add a listener using the Controller::addListener() function.
      *
      * @since 1.0
@@ -4529,12 +4530,12 @@ namespace GiantLeap {
      * Constructs a Controller object.
      *
      * When creating a Controller object, you may optionally pass in a
-     * reference to an instance of a subclass of Leap::Listener. Alternatively,
+     * reference to an instance of a subclass of Listener. Alternatively,
      * you may add a listener using the Controller::addListener() function.
      *
      * \include Controller_Controller.txt
      *
-     * @param listener An instance of Leap::Listener implementing the callback
+     * @param listener An instance of Listener implementing the callback
      * functions for the Leap Motion events you want to handle in your application.
      * @since 1.0
      */
@@ -4674,7 +4675,7 @@ namespace GiantLeap {
      *
      * \include Controller_addListener.txt
      *
-     * @param listener A subclass of Leap::Listener implementing the callback
+     * @param listener A subclass of Listener implementing the callback
      * functions for the Leap Motion events you want to handle in your application.
      * @returns Whether or not the listener was successfully added to the list
      * of listeners.

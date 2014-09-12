@@ -156,7 +156,7 @@ void FrameImplementation::Unserialize( BufferRead *buffer )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void FrameImplementation::Translate( const Leap::Vector &v )
+void FrameImplementation::Translate( const Vector &v )
 {
 	for( unsigned int i = 0; i < _hands.size(); i++ )
 	{
@@ -171,7 +171,7 @@ void FrameImplementation::Translate( const Leap::Vector &v )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void FrameImplementation::Rotate( const Leap::Vector &v )
+void FrameImplementation::Rotate( const Vector &v )
 {
 	for( unsigned int i = 0; i < _hands.size(); i++ )
 	{
@@ -324,10 +324,10 @@ GestureList FrameImplementation::gestures( const Frame &sinceFrame ) const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector FrameImplementation::translation( const Frame &sinceFrame ) const
+Vector FrameImplementation::translation( const Frame &sinceFrame ) const
 {
 	breakpoint();
-	return Leap::Vector();
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------
@@ -340,10 +340,10 @@ float FrameImplementation::translationProbability( const Frame &sinceFrame ) con
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector FrameImplementation::rotationAxis( const Frame &sinceFrame ) const
+Vector FrameImplementation::rotationAxis( const Frame &sinceFrame ) const
 {
 	breakpoint();
-	return Leap::Vector();
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------
@@ -356,7 +356,7 @@ float FrameImplementation::rotationAngle( const Frame &sinceFrame ) const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-float FrameImplementation::rotationAngle( const Frame &sinceFrame, const Leap::Vector& axis ) const
+float FrameImplementation::rotationAngle( const Frame &sinceFrame, const Vector& axis ) const
 {
 	breakpoint();
 	return 0.0f;
@@ -364,10 +364,10 @@ float FrameImplementation::rotationAngle( const Frame &sinceFrame, const Leap::V
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Matrix FrameImplementation::rotationMatrix( const Frame &sinceFrame ) const
+Matrix FrameImplementation::rotationMatrix( const Frame &sinceFrame ) const
 {
 	breakpoint();
-	return Leap::Matrix();
+	return Matrix();
 }
 
 //-----------------------------------------------------------------------------

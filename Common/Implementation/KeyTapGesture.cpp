@@ -40,16 +40,16 @@ LEAP_EXPORT KeyTapGesture::KeyTapGesture( const Gesture &rhs ) : Gesture( rhs )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Leap::Vector KeyTapGesture::position() const
+LEAP_EXPORT Vector KeyTapGesture::position() const
 {
-	return isValid() ? Leap::Vector() : Leap::Vector();
+	return isValid() ? Vector() : Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Leap::Vector KeyTapGesture::direction() const
+LEAP_EXPORT Vector KeyTapGesture::direction() const
 {
-	return isValid() ? Leap::Vector() : Leap::Vector();
+	return isValid() ? Vector() : Vector();
 }
 
 //-----------------------------------------------------------------------------

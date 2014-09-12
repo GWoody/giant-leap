@@ -28,8 +28,8 @@ namespace GiantLeap
 	public:
 		TapGestureImplementation();
 		
-		Leap::Vector				position() const;
-		Leap::Vector				direction() const;
+		Vector				position() const;
+		Vector				direction() const;
 		float				progress() const;
 		Pointable			pointable() const;
 	};

@@ -24,10 +24,10 @@ namespace GiantLeap
 	public:
 		ArmImplementation();
 		float width() const;
-		Leap::Vector direction() const;
-		Leap::Matrix basis() const;
-		Leap::Vector elbowPosition() const;
-		Leap::Vector wristPosition() const;
+		Vector direction() const;
+		Matrix basis() const;
+		Vector elbowPosition() const;
+		Vector wristPosition() const;
 		bool isValid() const;
 		const Arm& invalid();
 		bool operator==(const Arm&) const;

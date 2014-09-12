@@ -74,6 +74,14 @@ struct Vector {
   Vector(float _x, float _y, float _z) :
     x(_x), y(_y), z(_z) {}
 
+  Vector( const Leap::Vector &v ) :
+    x(v.x), y(v.y), z(v.z) {}
+	
+  Vector &operator=( const Vector &v ) {
+    x = v.x; y = v.y; z = v.z;
+	return *this;
+  }
+	
   /**
    * Copies the specified Vector.
    *
@@ -565,7 +573,7 @@ struct Vector {
   }
 
   /**
-   * Convert a Leap::Vector to another 3-component Vector type.
+   * Convert a Vector to another 3-component Vector type.
    *
    * The specified type must define a constructor that takes the x, y, and z
    * components as separate parameters.
@@ -577,7 +585,7 @@ struct Vector {
   }
 
   /**
-   * Convert a Leap::Vector to another 4-component Vector type.
+   * Convert a Vector to another 4-component Vector type.
    *
    * The specified type must define a constructor that takes the x, y, z, and w
    * components as separate parameters. (The homogeneous coordinate, w, is set
@@ -896,7 +904,7 @@ struct Matrix
   }
 
   /**
-   * Convert a Leap::Matrix object to another 3x3 matrix type.
+   * Convert a Matrix object to another 3x3 matrix type.
    *
    * The new type must define a constructor function that takes each matrix
    * element as a parameter in row-major order.
@@ -912,7 +920,7 @@ struct Matrix
   }
 
   /**
-   * Convert a Leap::Matrix object to another 4x4 matrix type.
+   * Convert a Matrix object to another 4x4 matrix type.
    *
    * The new type must define a constructor function that takes each matrix
    * element as a parameter in row-major order.
@@ -1045,6 +1053,6 @@ struct Matrix
   Vector origin;
 };
 
-}; // namespace Leap
+}; // namespace GiantLeap
 
 #endif // __GiantLeapMath_h__

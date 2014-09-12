@@ -40,16 +40,16 @@ LEAP_EXPORT ScreenTapGesture::ScreenTapGesture( const Gesture &rhs ) : Gesture( 
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Leap::Vector ScreenTapGesture::position() const
+LEAP_EXPORT Vector ScreenTapGesture::position() const
 {
-	return isValid() ? Leap::Vector() : Leap::Vector();
+	return isValid() ? Vector() : Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Leap::Vector ScreenTapGesture::direction() const
+LEAP_EXPORT Vector ScreenTapGesture::direction() const
 {
-	return isValid() ? Leap::Vector() : Leap::Vector();
+	return isValid() ? Vector() : Vector();
 }
 
 //-----------------------------------------------------------------------------

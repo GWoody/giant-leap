@@ -39,16 +39,16 @@ LEAP_EXPORT CircleGesture::CircleGesture( const Gesture &rhs ) : Gesture( rhs )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Leap::Vector CircleGesture::center() const
+LEAP_EXPORT Vector CircleGesture::center() const
 {
-	return isValid() ? get<CircleGestureImplementation>()->center() : Leap::Vector();
+	return isValid() ? get<CircleGestureImplementation>()->center() : Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Leap::Vector CircleGesture::normal() const
+LEAP_EXPORT Vector CircleGesture::normal() const
 {
-	return isValid() ? get<CircleGestureImplementation>()->normal() : Leap::Vector();
+	return isValid() ? get<CircleGestureImplementation>()->normal() : Vector();
 }
 
 //-----------------------------------------------------------------------------

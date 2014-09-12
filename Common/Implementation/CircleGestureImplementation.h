@@ -26,8 +26,8 @@ namespace GiantLeap
 	public:
 		CircleGestureImplementation();
 
-		Leap::Vector				center() const;
-		Leap::Vector				normal() const;
+		Vector				center() const;
+		Vector				normal() const;
 		float				progress() const;
 		float				radius() const;
 		Pointable			pointable() const;

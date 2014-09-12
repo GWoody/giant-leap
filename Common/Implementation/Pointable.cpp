@@ -70,30 +70,30 @@ LEAP_EXPORT Hand Pointable::hand() const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Leap::Vector Pointable::tipPosition() const
+LEAP_EXPORT Vector Pointable::tipPosition() const
 {
-	return isValid() ? get<PointableImplementation>()->tipPosition() : Leap::Vector();
+	return isValid() ? get<PointableImplementation>()->tipPosition() : Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Leap::Vector Pointable::stabilizedTipPosition() const
+LEAP_EXPORT Vector Pointable::stabilizedTipPosition() const
 {
-	return isValid() ? get<PointableImplementation>()->stabilizedTipPosition() : Leap::Vector();
+	return isValid() ? get<PointableImplementation>()->stabilizedTipPosition() : Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Leap::Vector Pointable::tipVelocity() const
+LEAP_EXPORT Vector Pointable::tipVelocity() const
 {
-	return isValid() ? get<PointableImplementation>()->tipVelocity() : Leap::Vector();
+	return isValid() ? get<PointableImplementation>()->tipVelocity() : Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Leap::Vector Pointable::direction() const
+LEAP_EXPORT Vector Pointable::direction() const
 {
-	return isValid() ? get<PointableImplementation>()->direction() : Leap::Vector();
+	return isValid() ? get<PointableImplementation>()->direction() : Vector();
 }
 
 //-----------------------------------------------------------------------------

@@ -80,14 +80,14 @@ void HandImplementation::Unserialize( BufferRead *buffer )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void HandImplementation::Translate( const Leap::Vector &v )
+void HandImplementation::Translate( const Vector &v )
 {
 
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void HandImplementation::Rotate( const Leap::Vector &v )
+void HandImplementation::Rotate( const Vector &v )
 {
 
 }
@@ -109,28 +109,28 @@ Frame HandImplementation::frame() const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector HandImplementation::palmPosition() const
+Vector HandImplementation::palmPosition() const
 {
 	return _palmPosition;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector HandImplementation::stabilizedPalmPosition() const
+Vector HandImplementation::stabilizedPalmPosition() const
 {
 	return _stabilizedPalmPosition;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector HandImplementation::palmVelocity() const
+Vector HandImplementation::palmVelocity() const
 {
 	return _palmVelocity;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector HandImplementation::palmNormal() const
+Vector HandImplementation::palmNormal() const
 {
 	return _palmNormal;
 }
@@ -144,17 +144,17 @@ float HandImplementation::palmWidth() const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector HandImplementation::direction() const
+Vector HandImplementation::direction() const
 {
 	return _direction;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Matrix HandImplementation::basis() const
+Matrix HandImplementation::basis() const
 {
 	breakpoint();
-	return Leap::Matrix::identity();
+	return Matrix::identity();
 }
 
 //-----------------------------------------------------------------------------
@@ -166,15 +166,15 @@ Arm HandImplementation::arm() const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector HandImplementation::wristPosition() const
+Vector HandImplementation::wristPosition() const
 {
 	breakpoint();
-	return Leap::Vector();
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector HandImplementation::sphereCenter() const
+Vector HandImplementation::sphereCenter() const
 {
 	return _sphereCenter;
 }
@@ -280,10 +280,10 @@ Tool HandImplementation::tool( int32_t id ) const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector HandImplementation::translation( const Frame &sinceFrame ) const
+Vector HandImplementation::translation( const Frame &sinceFrame ) const
 {
 	breakpoint();
-	return Leap::Vector();
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------
@@ -296,10 +296,10 @@ float HandImplementation::translationProbability( const Frame &sinceFrame ) cons
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Vector HandImplementation::rotationAxis( const Frame &sinceFrame ) const
+Vector HandImplementation::rotationAxis( const Frame &sinceFrame ) const
 {
 	breakpoint();
-	return Leap::Vector();
+	return Vector();
 }
 
 //-----------------------------------------------------------------------------
@@ -312,7 +312,7 @@ float HandImplementation::rotationAngle( const Frame &sinceFrame ) const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-float HandImplementation::rotationAngle( const Frame &sinceFrame, const Leap::Vector& axis ) const
+float HandImplementation::rotationAngle( const Frame &sinceFrame, const Vector& axis ) const
 {
 	breakpoint();
 	return 0.0f;
@@ -320,10 +320,10 @@ float HandImplementation::rotationAngle( const Frame &sinceFrame, const Leap::Ve
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Leap::Matrix HandImplementation::rotationMatrix( const Frame &sinceFrame ) const
+Matrix HandImplementation::rotationMatrix( const Frame &sinceFrame ) const
 {
 	breakpoint();
-	return Leap::Matrix::identity();
+	return Matrix::identity();
 }
 
 //-----------------------------------------------------------------------------

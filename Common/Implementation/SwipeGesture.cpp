@@ -40,23 +40,23 @@ LEAP_EXPORT SwipeGesture::SwipeGesture( const Gesture &rhs ) : Gesture( rhs )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Leap::Vector SwipeGesture::startPosition() const
+LEAP_EXPORT Vector SwipeGesture::startPosition() const
 {
-	return Leap::Vector();	
+	return Vector();	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Leap::Vector SwipeGesture::position() const
+LEAP_EXPORT Vector SwipeGesture::position() const
 {
-	return Leap::Vector();	
+	return Vector();	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Leap::Vector SwipeGesture::direction() const
+LEAP_EXPORT Vector SwipeGesture::direction() const
 {
-	return Leap::Vector();	
+	return Vector();	
 }
 
 //-----------------------------------------------------------------------------

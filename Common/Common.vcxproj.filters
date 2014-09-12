@@ -189,5 +189,11 @@
     <ClInclude Include="Implementation\HandImplementation.h">
       <Filter>Implementation\Hand</Filter>
     </ClInclude>
+    <ClInclude Include="GiantLeap.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GiantLeapMath.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

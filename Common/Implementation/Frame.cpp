@@ -122,9 +122,9 @@ LEAP_EXPORT GestureList Frame::gestures( const Frame& sinceFrame ) const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Leap::Vector Frame::translation( const Frame& sinceFrame ) const
+LEAP_EXPORT Vector Frame::translation( const Frame& sinceFrame ) const
 {
-	return isValid() ? get<FrameImplementation>()->translation( sinceFrame ) : Leap::Vector();
+	return isValid() ? get<FrameImplementation>()->translation( sinceFrame ) : Vector();
 }
 
 //-----------------------------------------------------------------------------
@@ -136,9 +136,9 @@ LEAP_EXPORT float Frame::translationProbability( const Frame& sinceFrame ) const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Leap::Vector Frame::rotationAxis( const Frame& sinceFrame ) const
+LEAP_EXPORT Vector Frame::rotationAxis( const Frame& sinceFrame ) const
 {
-	return isValid() ? get<FrameImplementation>()->rotationAxis( sinceFrame ) : Leap::Vector();
+	return isValid() ? get<FrameImplementation>()->rotationAxis( sinceFrame ) : Vector();
 }
 
 //-----------------------------------------------------------------------------
@@ -150,16 +150,16 @@ LEAP_EXPORT float Frame::rotationAngle( const Frame& sinceFrame ) const
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT float Frame::rotationAngle( const Frame& sinceFrame, const Leap::Vector& axis ) const
+LEAP_EXPORT float Frame::rotationAngle( const Frame& sinceFrame, const Vector& axis ) const
 {
 	return isValid() ? get<FrameImplementation>()->rotationAngle( sinceFrame, axis ) : 0.0f;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Leap::Matrix Frame::rotationMatrix( const Frame& sinceFrame ) const
+LEAP_EXPORT Matrix Frame::rotationMatrix( const Frame& sinceFrame ) const
 {
-	return isValid() ? get<FrameImplementation>()->rotationMatrix( sinceFrame ) : Leap::Matrix::identity();
+	return isValid() ? get<FrameImplementation>()->rotationMatrix( sinceFrame ) : Matrix::identity();
 }
 
 //-----------------------------------------------------------------------------
