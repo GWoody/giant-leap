@@ -111,7 +111,7 @@ Vector ArmImplementation::direction() const
 //-----------------------------------------------------------------------------
 Matrix ArmImplementation::basis() const
 {
-	breakpoint();
+	C_breakpoint();
 	return Matrix();
 }
 
@@ -133,6 +133,6 @@ Vector ArmImplementation::wristPosition() const
 //-----------------------------------------------------------------------------
 const char* ArmImplementation::toCString() const
 {
-	breakpoint();
+	C_breakpoint();
 	return "";
 }

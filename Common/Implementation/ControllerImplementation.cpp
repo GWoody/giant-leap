@@ -18,10 +18,21 @@
 #include "ControllerImplementation.h"
 using namespace GiantLeap;
 
+#include <iostream>
+using namespace std;
+
+ControllerImplementation *ControllerImplementation::_instance = NULL;
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 ControllerImplementation::ControllerImplementation()
 {
+	if( _instance )
+	{
+		cout << "WARNING: Created more than 1 controller instance!" << endl;
+	}
+	_instance = this;
+
 	_policyFlags = Controller::POLICY_DEFAULT;
 	_gestureState = 0;
 }
@@ -30,7 +41,7 @@ ControllerImplementation::ControllerImplementation()
 //-----------------------------------------------------------------------------
 bool ControllerImplementation::isConnected() const
 {
-	breakpoint();
+	C_breakpoint();
 	return false;
 }
 
@@ -38,7 +49,7 @@ bool ControllerImplementation::isConnected() const
 //-----------------------------------------------------------------------------
 bool ControllerImplementation::isServiceConnected() const
 {
-	breakpoint();
+	C_breakpoint();
 	return false;
 }
 
@@ -46,7 +57,7 @@ bool ControllerImplementation::isServiceConnected() const
 //-----------------------------------------------------------------------------
 bool ControllerImplementation::hasFocus() const
 {
-	breakpoint();
+	C_breakpoint();
 	return false;
 }
 
@@ -91,6 +102,14 @@ bool ControllerImplementation::removeListener( Listener &listener )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+Frame ControllerImplementation::frame( int history )
+{
+	history = C_clamp( history, 0, 60 );
+	return Frame( &_frames[history] );
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 void ControllerImplementation::enableGesture( Gesture::Type type, bool enable )
 {
 	if( type != Gesture::TYPE_INVALID )
@@ -120,7 +139,7 @@ bool ControllerImplementation::isGestureEnabled( Gesture::Type type )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void ControllerImplementation::DispatchDummyFrame()
+void ControllerImplementation::DispatchFrame()
 {
 	Controller c( this );
 	
@@ -128,4 +147,16 @@ void ControllerImplementation::DispatchDummyFrame()
 	{
 		listener->onFrame( c );
 	}
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void ControllerImplementation::PushFrame( const FrameImplementation &frame )
+{
+	while( _frames.size() >= 60 )
+	{
+		_frames.pop_back();
+	}
+
+	_frames.push_front( frame );
 }

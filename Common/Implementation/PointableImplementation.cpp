@@ -115,7 +115,7 @@ int32_t PointableImplementation::id() const
 //-----------------------------------------------------------------------------
 Frame PointableImplementation::frame() const
 {
-	breakpoint();
+	C_breakpoint();
 	return Frame();
 }
 
@@ -123,7 +123,7 @@ Frame PointableImplementation::frame() const
 //-----------------------------------------------------------------------------
 Hand PointableImplementation::hand() const
 {
-	breakpoint();
+	C_breakpoint();
 	return Hand::invalid();
 }
 
@@ -173,7 +173,7 @@ float PointableImplementation::length() const
 //-----------------------------------------------------------------------------
 float PointableImplementation::timeVisible() const
 {
-	breakpoint();
+	C_breakpoint();
 	return 0.0f;
 }
 
@@ -181,7 +181,7 @@ float PointableImplementation::timeVisible() const
 //-----------------------------------------------------------------------------
 bool PointableImplementation::isFinger() const
 {
-	breakpoint();
+	C_breakpoint();
 	return false;
 }
 
@@ -189,7 +189,7 @@ bool PointableImplementation::isFinger() const
 //-----------------------------------------------------------------------------
 bool PointableImplementation::isTool() const
 {
-	breakpoint();
+	C_breakpoint();
 	return false;
 }
 
@@ -197,7 +197,7 @@ bool PointableImplementation::isTool() const
 //-----------------------------------------------------------------------------
 bool PointableImplementation::isExtended() const
 {
-	breakpoint();
+	C_breakpoint();
 	return false;
 }
 
@@ -205,7 +205,7 @@ bool PointableImplementation::isExtended() const
 //-----------------------------------------------------------------------------
 Pointable::Zone PointableImplementation::touchZone() const
 {
-	breakpoint();
+	C_breakpoint();
 	return Pointable::Zone();
 }
 
@@ -213,7 +213,7 @@ Pointable::Zone PointableImplementation::touchZone() const
 //-----------------------------------------------------------------------------
 float PointableImplementation::touchDistance() const
 {
-	breakpoint();
+	C_breakpoint();
 	return 0.0f;
 }
 
@@ -221,6 +221,6 @@ float PointableImplementation::touchDistance() const
 //-----------------------------------------------------------------------------
 const char *PointableImplementation::toCString() const
 {
-	breakpoint();
+	C_breakpoint();
 	return "";
 }

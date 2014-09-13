@@ -79,7 +79,7 @@ namespace GiantLeap
 	template<typename T>
 	ListBaseImplementation<T> &ListBaseImplementation<T>::append( const ListBaseImplementation<T> &other )
 	{
-		breakpoint();
+		C_breakpoint();
 		return *this;
 	}
 

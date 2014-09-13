@@ -143,6 +143,6 @@ Finger::Type FingerImplementation::type() const
 //-----------------------------------------------------------------------------
 const char *FingerImplementation::toCString() const
 {
-	breakpoint();
+	C_breakpoint();
 	return "";
 }

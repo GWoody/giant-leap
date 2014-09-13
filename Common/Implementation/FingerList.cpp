@@ -68,7 +68,7 @@ LEAP_EXPORT FingerList &FingerList::append( const FingerList &other )
 //-----------------------------------------------------------------------------
 LEAP_EXPORT Finger FingerList::leftmost() const
 {
-	breakpoint();
+	C_breakpoint();
 	return Finger();
 }
 
@@ -77,7 +77,7 @@ LEAP_EXPORT Finger FingerList::leftmost() const
 //-----------------------------------------------------------------------------
 LEAP_EXPORT Finger FingerList::rightmost() const
 {
-	breakpoint();
+	C_breakpoint();
 	return Finger();
 }
 
@@ -86,7 +86,7 @@ LEAP_EXPORT Finger FingerList::rightmost() const
 //-----------------------------------------------------------------------------
 LEAP_EXPORT Finger FingerList::frontmost() const
 {
-	breakpoint();
+	C_breakpoint();
 	return Finger();
 }
 
@@ -94,7 +94,7 @@ LEAP_EXPORT Finger FingerList::frontmost() const
 //-----------------------------------------------------------------------------
 LEAP_EXPORT FingerList &FingerList::extended()
 {
-	breakpoint();
+	C_breakpoint();
 	return *this;
 }
 
@@ -102,7 +102,7 @@ LEAP_EXPORT FingerList &FingerList::extended()
 //-----------------------------------------------------------------------------
 LEAP_EXPORT FingerList &FingerList::fingerType( Finger::Type type )
 {
-	breakpoint();
+	C_breakpoint();
 	return *this;
 }
 

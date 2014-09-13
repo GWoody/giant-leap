@@ -68,7 +68,7 @@ LEAP_EXPORT ToolList &ToolList::append( const ToolList &other )
 //-----------------------------------------------------------------------------
 LEAP_EXPORT Tool ToolList::leftmost() const
 {
-	breakpoint();
+	C_breakpoint();
 	return Tool();
 }
 
@@ -76,7 +76,7 @@ LEAP_EXPORT Tool ToolList::leftmost() const
 //-----------------------------------------------------------------------------
 LEAP_EXPORT Tool ToolList::rightmost() const
 {
-	breakpoint();
+	C_breakpoint();
 	return Tool();
 }
 
@@ -84,7 +84,7 @@ LEAP_EXPORT Tool ToolList::rightmost() const
 //-----------------------------------------------------------------------------
 LEAP_EXPORT Tool ToolList::frontmost() const
 {
-	breakpoint();
+	C_breakpoint();
 	return Tool();
 }
 
@@ -92,7 +92,7 @@ LEAP_EXPORT Tool ToolList::frontmost() const
 //-----------------------------------------------------------------------------
 LEAP_EXPORT ToolList::const_iterator ToolList::begin() const
 {
-	breakpoint();
+	C_breakpoint();
 	return const_iterator( *this, 0 );
 }
 
@@ -100,6 +100,6 @@ LEAP_EXPORT ToolList::const_iterator ToolList::begin() const
 //-----------------------------------------------------------------------------
 LEAP_EXPORT ToolList::const_iterator ToolList::end() const
 {
-	breakpoint();
+	C_breakpoint();
 	return const_iterator( *this, count() );
 }

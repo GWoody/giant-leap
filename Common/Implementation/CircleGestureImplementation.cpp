@@ -56,6 +56,6 @@ float CircleGestureImplementation::radius() const
 //-----------------------------------------------------------------------------
 Pointable CircleGestureImplementation::pointable() const
 {
-	breakpoint();
+	C_breakpoint();
 	return Pointable();
 }

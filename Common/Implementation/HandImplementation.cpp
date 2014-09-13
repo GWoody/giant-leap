@@ -175,7 +175,7 @@ int32_t HandImplementation::id() const
 //-----------------------------------------------------------------------------
 Frame HandImplementation::frame() const
 {
-	breakpoint();
+	C_breakpoint();
 	return Frame();
 }
 
@@ -225,7 +225,7 @@ Vector HandImplementation::direction() const
 //-----------------------------------------------------------------------------
 Matrix HandImplementation::basis() const
 {
-	breakpoint();
+	C_breakpoint();
 	return Matrix::identity();
 }
 
@@ -240,7 +240,7 @@ Arm HandImplementation::arm() const
 //-----------------------------------------------------------------------------
 Vector HandImplementation::wristPosition() const
 {
-	breakpoint();
+	C_breakpoint();
 	return Vector();
 }
 
@@ -276,7 +276,7 @@ float HandImplementation::grabStrength() const
 //-----------------------------------------------------------------------------
 float HandImplementation::timeVisible() const
 {
-	breakpoint();
+	C_breakpoint();
 	return 0.0f;
 }
 
@@ -291,7 +291,7 @@ float HandImplementation::confidence() const
 //-----------------------------------------------------------------------------
 bool HandImplementation::isLeft() const
 {
-	breakpoint();
+	C_breakpoint();
 	return false;
 }
 
@@ -299,7 +299,7 @@ bool HandImplementation::isLeft() const
 //-----------------------------------------------------------------------------
 bool HandImplementation::isRight() const
 {
-	breakpoint();
+	C_breakpoint();
 	return false;
 }
 
@@ -307,7 +307,7 @@ bool HandImplementation::isRight() const
 //-----------------------------------------------------------------------------
 PointableList HandImplementation::pointables() const
 {
-	breakpoint();
+	C_breakpoint();
 	return PointableList();
 }
 
@@ -315,7 +315,7 @@ PointableList HandImplementation::pointables() const
 //-----------------------------------------------------------------------------
 Pointable HandImplementation::pointable( int32_t id ) const
 {
-	breakpoint();
+	C_breakpoint();
 	return Pointable();
 }
 
@@ -330,7 +330,7 @@ FingerList HandImplementation::fingers() const
 //-----------------------------------------------------------------------------
 Finger HandImplementation::finger( int32_t id ) const
 {
-	breakpoint();
+	C_breakpoint();
 	return Finger();
 }
 
@@ -338,7 +338,7 @@ Finger HandImplementation::finger( int32_t id ) const
 //-----------------------------------------------------------------------------
 ToolList HandImplementation::tools() const
 {
-	breakpoint();
+	C_breakpoint();
 	return ToolList();
 }
 
@@ -346,7 +346,7 @@ ToolList HandImplementation::tools() const
 //-----------------------------------------------------------------------------
 Tool HandImplementation::tool( int32_t id ) const
 {
-	breakpoint();
+	C_breakpoint();
 	return Tool();
 }
 
@@ -354,7 +354,7 @@ Tool HandImplementation::tool( int32_t id ) const
 //-----------------------------------------------------------------------------
 Vector HandImplementation::translation( const Frame &sinceFrame ) const
 {
-	breakpoint();
+	C_breakpoint();
 	return Vector();
 }
 
@@ -362,7 +362,7 @@ Vector HandImplementation::translation( const Frame &sinceFrame ) const
 //-----------------------------------------------------------------------------
 float HandImplementation::translationProbability( const Frame &sinceFrame ) const
 {
-	breakpoint();
+	C_breakpoint();
 	return 0.0f;
 }
 
@@ -370,7 +370,7 @@ float HandImplementation::translationProbability( const Frame &sinceFrame ) cons
 //-----------------------------------------------------------------------------
 Vector HandImplementation::rotationAxis( const Frame &sinceFrame ) const
 {
-	breakpoint();
+	C_breakpoint();
 	return Vector();
 }
 
@@ -378,7 +378,7 @@ Vector HandImplementation::rotationAxis( const Frame &sinceFrame ) const
 //-----------------------------------------------------------------------------
 float HandImplementation::rotationAngle( const Frame &sinceFrame ) const
 {
-	breakpoint();
+	C_breakpoint();
 	return 0.0f;
 }
 
@@ -386,7 +386,7 @@ float HandImplementation::rotationAngle( const Frame &sinceFrame ) const
 //-----------------------------------------------------------------------------
 float HandImplementation::rotationAngle( const Frame &sinceFrame, const Vector& axis ) const
 {
-	breakpoint();
+	C_breakpoint();
 	return 0.0f;
 }
 
@@ -394,7 +394,7 @@ float HandImplementation::rotationAngle( const Frame &sinceFrame, const Vector& 
 //-----------------------------------------------------------------------------
 Matrix HandImplementation::rotationMatrix( const Frame &sinceFrame ) const
 {
-	breakpoint();
+	C_breakpoint();
 	return Matrix::identity();
 }
 
@@ -402,7 +402,7 @@ Matrix HandImplementation::rotationMatrix( const Frame &sinceFrame ) const
 //-----------------------------------------------------------------------------
 float HandImplementation::rotationProbability( const Frame &sinceFrame ) const
 {
-	breakpoint();
+	C_breakpoint();
 	return 0.0f;
 }
 
@@ -410,7 +410,7 @@ float HandImplementation::rotationProbability( const Frame &sinceFrame ) const
 //-----------------------------------------------------------------------------
 float HandImplementation::scaleFactor( const Frame &sinceFrame ) const
 {
-	breakpoint();
+	C_breakpoint();
 	return 0.0f;
 }
 
@@ -418,7 +418,7 @@ float HandImplementation::scaleFactor( const Frame &sinceFrame ) const
 //-----------------------------------------------------------------------------
 float HandImplementation::scaleProbability( const Frame &sinceFrame ) const
 {
-	breakpoint();
+	C_breakpoint();
 	return 0.0f;
 }
 
@@ -426,6 +426,6 @@ float HandImplementation::scaleProbability( const Frame &sinceFrame ) const
 //-----------------------------------------------------------------------------
 const char * HandImplementation::toCString() const
 {
-	breakpoint();
+	C_breakpoint();
 	return "";
 }

@@ -25,7 +25,7 @@ Controller::Controller( ControllerImplementation *ref ) : Interface( ref, this )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Controller::Controller() : Interface( (SharedObject *)NULL )
+LEAP_EXPORT Controller::Controller() : Interface( new ControllerImplementation(), this )
 {
 }
 
@@ -82,6 +82,13 @@ LEAP_EXPORT bool Controller::addListener( Listener &listener )
 LEAP_EXPORT bool Controller::removeListener( Listener &listener )
 {
 	return get<ControllerImplementation>()->removeListener( listener );
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+LEAP_EXPORT Frame Controller::frame( int history ) const
+{
+	return get<ControllerImplementation>()->frame( history );
 }
 
 //-----------------------------------------------------------------------------

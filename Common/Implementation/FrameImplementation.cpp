@@ -203,7 +203,7 @@ int64_t FrameImplementation::timestamp() const
 //-----------------------------------------------------------------------------
 InteractionBox FrameImplementation::interactionBox() const
 {
-	breakpoint();
+	C_breakpoint();
 	return InteractionBox();
 }
 
@@ -218,7 +218,7 @@ float FrameImplementation::currentFramesPerSecond() const
 //-----------------------------------------------------------------------------
 const char *FrameImplementation::toCString() const
 {
-	breakpoint();
+	C_breakpoint();
 	return "";
 }
 
@@ -226,23 +226,23 @@ const char *FrameImplementation::toCString() const
 //-----------------------------------------------------------------------------
 HandList FrameImplementation::hands() const
 {
-	ListBaseImplementation<Hand> list;
+	ListBaseImplementation<Hand> *list = new ListBaseImplementation<Hand>;
 
 	for( unsigned int i = 0; i < _hands.size(); i++ )
 	{
 		HandImplementation *hi = (HandImplementation *)&_hands[i];
 		Hand h( hi );
-		list.push_back( h );
+		list->push_back( h );
 	}
 
-	return HandList( list );
+	return HandList( *list );
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 PointableList FrameImplementation::pointables() const
 {
-	breakpoint();
+	C_breakpoint();
 	return PointableList();
 }
 
@@ -250,7 +250,7 @@ PointableList FrameImplementation::pointables() const
 //-----------------------------------------------------------------------------
 FingerList FrameImplementation::fingers() const
 {
-	breakpoint();
+	C_breakpoint();
 	return FingerList();
 }
 
@@ -258,7 +258,7 @@ FingerList FrameImplementation::fingers() const
 //-----------------------------------------------------------------------------
 ToolList FrameImplementation::tools() const
 {
-	breakpoint();
+	C_breakpoint();
 	return ToolList();
 }
 
@@ -289,7 +289,7 @@ Hand FrameImplementation::hand( int32_t id ) const
 //-----------------------------------------------------------------------------
 Pointable FrameImplementation::pointable( int32_t id )
 {
-	breakpoint();
+	C_breakpoint();
 	return Pointable();
 }
 
@@ -297,7 +297,7 @@ Pointable FrameImplementation::pointable( int32_t id )
 //-----------------------------------------------------------------------------
 Finger FrameImplementation::finger( int32_t id ) const
 {
-	breakpoint();
+	C_breakpoint();
 	return Finger();
 }
 
@@ -305,7 +305,7 @@ Finger FrameImplementation::finger( int32_t id ) const
 //-----------------------------------------------------------------------------
 Tool FrameImplementation::tool( int32_t id ) const
 {
-	breakpoint();
+	C_breakpoint();
 	return Tool();
 }
 
@@ -327,7 +327,7 @@ GestureList FrameImplementation::gestures( const Frame &sinceFrame ) const
 //-----------------------------------------------------------------------------
 Vector FrameImplementation::translation( const Frame &sinceFrame ) const
 {
-	breakpoint();
+	C_breakpoint();
 	return Vector();
 }
 
@@ -335,7 +335,7 @@ Vector FrameImplementation::translation( const Frame &sinceFrame ) const
 //-----------------------------------------------------------------------------
 float FrameImplementation::translationProbability( const Frame &sinceFrame ) const
 {
-	breakpoint();
+	C_breakpoint();
 	return 0.0f;
 }
 
@@ -343,7 +343,7 @@ float FrameImplementation::translationProbability( const Frame &sinceFrame ) con
 //-----------------------------------------------------------------------------
 Vector FrameImplementation::rotationAxis( const Frame &sinceFrame ) const
 {
-	breakpoint();
+	C_breakpoint();
 	return Vector();
 }
 
@@ -351,7 +351,7 @@ Vector FrameImplementation::rotationAxis( const Frame &sinceFrame ) const
 //-----------------------------------------------------------------------------
 float FrameImplementation::rotationAngle( const Frame &sinceFrame ) const
 {
-	breakpoint();
+	C_breakpoint();
 	return 0.0f;
 }
 
@@ -359,7 +359,7 @@ float FrameImplementation::rotationAngle( const Frame &sinceFrame ) const
 //-----------------------------------------------------------------------------
 float FrameImplementation::rotationAngle( const Frame &sinceFrame, const Vector& axis ) const
 {
-	breakpoint();
+	C_breakpoint();
 	return 0.0f;
 }
 
@@ -367,7 +367,7 @@ float FrameImplementation::rotationAngle( const Frame &sinceFrame, const Vector&
 //-----------------------------------------------------------------------------
 Matrix FrameImplementation::rotationMatrix( const Frame &sinceFrame ) const
 {
-	breakpoint();
+	C_breakpoint();
 	return Matrix();
 }
 
@@ -375,7 +375,7 @@ Matrix FrameImplementation::rotationMatrix( const Frame &sinceFrame ) const
 //-----------------------------------------------------------------------------
 float FrameImplementation::rotationProbability( const Frame &sinceFrame ) const
 {
-	breakpoint();
+	C_breakpoint();
 	return 0.0f;
 }
 
@@ -383,7 +383,7 @@ float FrameImplementation::rotationProbability( const Frame &sinceFrame ) const
 //-----------------------------------------------------------------------------
 float FrameImplementation::scaleFactor( const Frame &sinceFrame ) const
 {
-	breakpoint();
+	C_breakpoint();
 	return 0.0f;
 }
 
@@ -391,6 +391,6 @@ float FrameImplementation::scaleFactor( const Frame &sinceFrame ) const
 //-----------------------------------------------------------------------------
 float FrameImplementation::scaleProbability( const Frame &sinceFrame ) const
 {
-	breakpoint();
+	C_breakpoint();
 	return 0.0f;
 }

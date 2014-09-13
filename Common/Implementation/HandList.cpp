@@ -32,7 +32,7 @@ LEAP_EXPORT HandList::HandList() : Interface( (SharedObject *)NULL )
 //-----------------------------------------------------------------------------
 HandList::HandList( const ListBaseImplementation<Hand> &list ) : Interface( (Interface::Implementation *)&list, this )
 {
-
+	m_object->DecrementRefCount();
 }
 
 //-----------------------------------------------------------------------------
@@ -68,7 +68,7 @@ LEAP_EXPORT HandList &HandList::append( const HandList &other )
 //-----------------------------------------------------------------------------
 LEAP_EXPORT Hand HandList::leftmost() const
 {
-	breakpoint();
+	C_breakpoint();
 	return Hand();
 }
 
@@ -77,7 +77,7 @@ LEAP_EXPORT Hand HandList::leftmost() const
 //-----------------------------------------------------------------------------
 LEAP_EXPORT Hand HandList::rightmost() const
 {
-	breakpoint();
+	C_breakpoint();
 	return Hand();
 }
 
@@ -86,7 +86,7 @@ LEAP_EXPORT Hand HandList::rightmost() const
 //-----------------------------------------------------------------------------
 LEAP_EXPORT Hand HandList::frontmost() const
 {
-	breakpoint();
+	C_breakpoint();
 	return Hand();
 }
 

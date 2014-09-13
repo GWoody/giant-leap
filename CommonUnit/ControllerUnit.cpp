@@ -193,7 +193,7 @@ IMPLEMENT_TEST_OBJECT( perform_listener_test, ControllerImplementation, controll
 		ASSERT( adding, controller->addListener( *listeners[i] ) );
 		ASSERT( checking, connectionCount.Count() == i + 1 );
 
-		controller->DispatchDummyFrame();
+		controller->DispatchFrame();
 		ASSERT( "Sending dummy frame", frameCount.Count() == i + 1 );
 		frameCount.Zero();
 	}
@@ -207,7 +207,7 @@ IMPLEMENT_TEST_OBJECT( perform_listener_test, ControllerImplementation, controll
 		ASSERT( removing, controller->removeListener( *listeners[i] ) );
 		ASSERT( checking, connectionCount.Count() == i );
 
-		controller->DispatchDummyFrame();
+		controller->DispatchFrame();
 		ASSERT( "Sending dummy frame", frameCount.Count() == i );
 		frameCount.Zero();
 

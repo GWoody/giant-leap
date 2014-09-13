@@ -68,7 +68,7 @@ LEAP_EXPORT GestureList &GestureList::append( const GestureList &other )
 //-----------------------------------------------------------------------------
 LEAP_EXPORT GestureList::const_iterator GestureList::begin() const
 {
-	breakpoint();
+	C_breakpoint();
 	return const_iterator( *this, 0 );
 }
 
@@ -76,6 +76,6 @@ LEAP_EXPORT GestureList::const_iterator GestureList::begin() const
 //-----------------------------------------------------------------------------
 LEAP_EXPORT GestureList::const_iterator GestureList::end() const
 {
-	breakpoint();
+	C_breakpoint();
 	return const_iterator( *this, count() );
 }

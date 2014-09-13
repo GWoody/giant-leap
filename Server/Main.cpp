@@ -13,9 +13,12 @@
 */
 
 #include "GiantLeap.h"
+#include "Common.h"
 #include "Network/Socket.h"
 #include "Network/Buffer.h"
 #include "Implementation/FrameImplementation.h"
+#include "Implementation/ControllerImplementation.h"
+using namespace GiantLeap;
 
 #include <Windows.h>
 #include <Subauth.h>
@@ -43,6 +46,15 @@ LEAP_EXPORT GiantLeap::Init::Init()
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+LEAP_EXPORT GiantLeap::Init::~Init()
+{
+	// TODO: kill thread.
+
+	_CrtDumpMemoryLeaks();
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 DWORD WINAPI thread_main( LPVOID lpParam )
 {
 	void *buf = malloc( 65535 );
@@ -53,7 +65,11 @@ DWORD WINAPI thread_main( LPVOID lpParam )
 		int len = global_socket.Recv( buf, 65535, &addr );
 
 		BufferRead rb( buf, len );
-		GiantLeap::FrameImplementation frame( &rb );
+		FrameImplementation frame( &rb );
+
+		ControllerImplementation *controller = ControllerImplementation::Get();
+		controller->PushFrame( frame );
+		controller->DispatchFrame();
 	}
 
 	return 0;

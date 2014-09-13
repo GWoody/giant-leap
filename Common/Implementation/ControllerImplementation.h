@@ -16,6 +16,8 @@
 #define __CONTROLLERIMPLEMENTATION_H__
 
 #include <list>
+#include <deque>
+#include "FrameImplementation.h"
 
 namespace GiantLeap
 {
@@ -38,18 +40,28 @@ namespace GiantLeap
 		bool				addListener( Listener &listener );
 		bool				removeListener( Listener &listener );
 
+		Frame				frame( int history );
+
 		void				enableGesture( Gesture::Type type, bool enable );
 		bool				isGestureEnabled( Gesture::Type type );
 
 		// Unit Testing.
 		// TODO: `GenerateDummyFrame()` to test `_gestureState`.
-		void				DispatchDummyFrame();
+		void				DispatchFrame();
+
+		static ControllerImplementation *	Get()		{ return _instance; }
+
+		// Frame updating.
+		void				PushFrame( const FrameImplementation &frame );
 
 	private:
 		uint32_t			_policyFlags;
 		uint32_t			_gestureState;
 
 		std::list<Listener *>	_listeners;
+
+		static ControllerImplementation *_instance;
+		std::deque<FrameImplementation>	_frames;
 	};
 
 }

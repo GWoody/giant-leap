@@ -68,7 +68,7 @@ LEAP_EXPORT PointableList &PointableList::append( const PointableList &other )
 //-----------------------------------------------------------------------------
 LEAP_EXPORT PointableList &PointableList::append( const FingerList &other )
 {
-	breakpoint();
+	C_breakpoint();
 	return *this;
 }
 
@@ -76,7 +76,7 @@ LEAP_EXPORT PointableList &PointableList::append( const FingerList &other )
 //-----------------------------------------------------------------------------
 LEAP_EXPORT PointableList &PointableList::append( const ToolList &other )
 {
-	breakpoint();
+	C_breakpoint();
 	return *this;
 }
 
@@ -84,7 +84,7 @@ LEAP_EXPORT PointableList &PointableList::append( const ToolList &other )
 //-----------------------------------------------------------------------------
 LEAP_EXPORT Pointable PointableList::leftmost() const
 {
-	breakpoint();
+	C_breakpoint();
 	return Pointable();
 }
 
@@ -92,7 +92,7 @@ LEAP_EXPORT Pointable PointableList::leftmost() const
 //-----------------------------------------------------------------------------
 LEAP_EXPORT Pointable PointableList::rightmost() const
 {
-	breakpoint();
+	C_breakpoint();
 	return Pointable();
 }
 
@@ -100,7 +100,7 @@ LEAP_EXPORT Pointable PointableList::rightmost() const
 //-----------------------------------------------------------------------------
 LEAP_EXPORT Pointable PointableList::frontmost() const
 {
-	breakpoint();
+	C_breakpoint();
 	return Pointable();
 }
 
@@ -108,7 +108,7 @@ LEAP_EXPORT Pointable PointableList::frontmost() const
 //-----------------------------------------------------------------------------
 LEAP_EXPORT PointableList &PointableList::extended()
 {
-	breakpoint();
+	C_breakpoint();
 	return *this;
 }
 
@@ -116,7 +116,7 @@ LEAP_EXPORT PointableList &PointableList::extended()
 //-----------------------------------------------------------------------------
 LEAP_EXPORT PointableList::const_iterator PointableList::begin() const
 {
-	breakpoint();
+	C_breakpoint();
 	return const_iterator( *this, 0 );
 }
 
@@ -124,6 +124,6 @@ LEAP_EXPORT PointableList::const_iterator PointableList::begin() const
 //-----------------------------------------------------------------------------
 LEAP_EXPORT PointableList::const_iterator PointableList::end() const
 {
-	breakpoint();
+	C_breakpoint();
 	return const_iterator( *this, count() );
 }

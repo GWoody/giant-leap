@@ -43,7 +43,7 @@ public:
 class Check : public Interface
 {
 public:
-	Check( CheckImplementation *ref ) : Interface( ref, this )
+	Check( CheckImplementation *ref ) : Interface( ref, ref )
 	{
 
 	}

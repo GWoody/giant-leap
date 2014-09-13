@@ -43,7 +43,7 @@ Vector TapGestureImplementation::direction() const
 //-----------------------------------------------------------------------------
 float TapGestureImplementation::progress() const
 {
-	breakpoint();
+	C_breakpoint();
 	return 0.0f;
 }
 
@@ -51,6 +51,6 @@ float TapGestureImplementation::progress() const
 //-----------------------------------------------------------------------------
 Pointable TapGestureImplementation::pointable() const
 {
-	breakpoint();
+	C_breakpoint();
 	return Pointable();
 }

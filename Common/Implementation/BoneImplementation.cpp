@@ -111,7 +111,7 @@ Vector BoneImplementation::nextJoint() const
 //-----------------------------------------------------------------------------
 Vector BoneImplementation::center() const
 {
-	breakpoint();
+	C_breakpoint();
 	return Vector(0, 0, 0);
 }
 
@@ -126,7 +126,7 @@ Vector BoneImplementation::direction() const
 //-----------------------------------------------------------------------------
 float BoneImplementation::length() const
 {
-	breakpoint();
+	C_breakpoint();
 	return 0;
 }
 
@@ -134,7 +134,7 @@ float BoneImplementation::length() const
 //-----------------------------------------------------------------------------
 float BoneImplementation::width() const
 {
-	breakpoint();
+	C_breakpoint();
 	return 0;
 }
 
@@ -149,7 +149,7 @@ Bone::Type BoneImplementation::type() const
 //-----------------------------------------------------------------------------
 Matrix BoneImplementation::basis() const
 {
-	breakpoint();
+	C_breakpoint();
 	return Matrix();
 }
 
@@ -157,6 +157,6 @@ Matrix BoneImplementation::basis() const
 //-----------------------------------------------------------------------------
 const char* BoneImplementation::toCString() const
 {
-	breakpoint();
+	C_breakpoint();
 	return "";
 }

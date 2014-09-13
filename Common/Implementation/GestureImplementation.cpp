@@ -99,7 +99,7 @@ Gesture::Type GestureImplementation::type() const
 //-----------------------------------------------------------------------------
 Gesture::State GestureImplementation::state() const
 {
-	breakpoint();
+	C_breakpoint();
 	return Gesture::State::STATE_INVALID;
 }
 
@@ -121,7 +121,7 @@ float GestureImplementation::durationSeconds() const
 //-----------------------------------------------------------------------------
 Frame GestureImplementation::frame() const
 {
-	breakpoint();
+	C_breakpoint();
 	return Frame::invalid();
 }
 
@@ -129,7 +129,7 @@ Frame GestureImplementation::frame() const
 //-----------------------------------------------------------------------------
 HandList GestureImplementation::hands() const
 {
-	breakpoint();
+	C_breakpoint();
 	return HandList();
 }
 
@@ -137,7 +137,7 @@ HandList GestureImplementation::hands() const
 //-----------------------------------------------------------------------------
 PointableList GestureImplementation::pointables() const
 {
-	breakpoint();
+	C_breakpoint();
 	return PointableList();
 }
 
@@ -145,6 +145,6 @@ PointableList GestureImplementation::pointables() const
 //-----------------------------------------------------------------------------
 const char *GestureImplementation::toCString() const
 {
-	breakpoint();
+	C_breakpoint();
 	return "";
 }

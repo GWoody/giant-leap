@@ -18,9 +18,17 @@
 #include <string>
 #include "GiantLeap.h"
 
+#ifdef _DEBUG
+	#ifndef DBG_NEW
+		#define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
+		#define new DBG_NEW
+	#endif
+#endif
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-#define breakpoint()			__asm { int 3 }
+#define C_breakpoint()				__asm { int 3 }
+#define C_clamp( var, min, max )	( ( (var) < (min) ) ? (min) : ( ( (var) > (max) ) ? (max) : (var) ) )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
