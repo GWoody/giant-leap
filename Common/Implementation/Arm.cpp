@@ -21,7 +21,7 @@ using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Arm::Arm(ArmImplementation *ref) : Interface(ref, this)
+Arm::Arm(ArmImplementation *ref) : Interface(ref, ref)
 {
 
 }

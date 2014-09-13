@@ -23,6 +23,8 @@ using namespace GiantLeap;
 #include <iostream>
 using namespace std;
 
+#include "MemDebugOn.h"
+
 class TestListener : public Listener
 {
 public:
@@ -33,7 +35,7 @@ public:
 		// Clear the console.
 		COORD coord; coord.X = coord.Y = 0;
 		SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), coord );
-		FillConsoleOutputCharacter( GetStdHandle( STD_OUTPUT_HANDLE ), 0, 80 * 24, coord, NULL );
+		FillConsoleOutputCharacter( GetStdHandle( STD_OUTPUT_HANDLE ), 0, 80 * 3, coord, NULL );
 
 		cout << f.id() << endl;
 		cout << "\t" << "Hand Count: " << f.hands().count() << endl;

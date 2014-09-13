@@ -19,7 +19,7 @@ using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Frame::Frame( FrameImplementation *ref ) : Interface( ref, this )
+Frame::Frame( FrameImplementation *ref ) : Interface( ref, ref )
 {
 }
 

@@ -33,9 +33,6 @@
     <ClCompile Include="ListBaseUnit.cpp">
       <Filter>Implementation</Filter>
     </ClCompile>
-    <ClCompile Include="Gesture.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
     <ClCompile Include="ArmUnit.cpp">
       <Filter>Implementation</Filter>
     </ClCompile>
@@ -50,6 +47,12 @@
     </ClCompile>
     <ClCompile Include="UdpSocketUnit.cpp">
       <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="InterfaceUnit.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="GestureUnit.cpp">
+      <Filter>Implementation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

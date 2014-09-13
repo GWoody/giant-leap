@@ -32,7 +32,7 @@ LEAP_EXPORT HandList::HandList() : Interface( (SharedObject *)NULL )
 //-----------------------------------------------------------------------------
 HandList::HandList( const ListBaseImplementation<Hand> &list ) : Interface( (Interface::Implementation *)&list, this )
 {
-	m_object->DecrementRefCount();
+	
 }
 
 //-----------------------------------------------------------------------------

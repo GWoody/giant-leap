@@ -21,10 +21,13 @@ using namespace GiantLeap;
 //-----------------------------------------------------------------------------
 LEAP_EXPORT Interface::Interface( Implementation* reference, void* owner )
 {
-	m_object = new SharedObject( reference );
+	m_object = SharedObject::Create( reference );
 
-	// Set the default reference count to 2. The `Interface` should never own its `Implementation`.
-	m_object->IncrementRefCount();
+	if( reference == owner )
+	{
+		// If we aren't the owner of the object, then we have acquired it.
+		m_object->IncrementRefCount();
+	}
 }
 
 //-----------------------------------------------------------------------------

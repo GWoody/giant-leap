@@ -75,10 +75,10 @@ IMPLEMENT_TEST( perform_simple_self_delete_test )
 {
 	CheckImplementation *check = new CheckImplementation;
 
-	SharedObject shared( check );
+	SharedObject *shared = SharedObject::Create( check );
 	ASSERT( "Checking default state", CheckImplementation::_isDeleted == false );
 
-	shared.DecrementRefCount();
+	shared->DecrementRefCount();
 	ASSERT( "Ensuring object is deleted", CheckImplementation::_isDeleted == true );
 
 	return true;
@@ -90,28 +90,28 @@ IMPLEMENT_TEST( perform_complex_self_delete_test )
 {
 	CheckImplementation *check = new CheckImplementation;
 
-	SharedObject shared( check );
+	SharedObject *shared = SharedObject::Create( check );
 	ASSERT( "Checking default state", CheckImplementation::_isDeleted == false );
 
-	shared.IncrementRefCount();
+	shared->IncrementRefCount();
 	ASSERT( "Ensuring object has not been deleted", CheckImplementation::_isDeleted == false );
 
-	shared.IncrementRefCount();
+	shared->IncrementRefCount();
 	ASSERT( "Ensuring object has not been deleted", CheckImplementation::_isDeleted == false );
 
-	shared.DecrementRefCount();
+	shared->DecrementRefCount();
 	ASSERT( "Ensuring object has not been deleted", CheckImplementation::_isDeleted == false );
 
-	shared.IncrementRefCount();
+	shared->IncrementRefCount();
 	ASSERT( "Ensuring object has not been deleted", CheckImplementation::_isDeleted == false );
 
-	shared.DecrementRefCount();
+	shared->DecrementRefCount();
 	ASSERT( "Ensuring object has not been deleted", CheckImplementation::_isDeleted == false );
 
-	shared.DecrementRefCount();
+	shared->DecrementRefCount();
 	ASSERT( "Ensuring object has not been deleted", CheckImplementation::_isDeleted == false );
 
-	shared.DecrementRefCount();
+	shared->DecrementRefCount();
 	ASSERT( "Ensuring object has been deleted", CheckImplementation::_isDeleted == true );
 
 	return true;

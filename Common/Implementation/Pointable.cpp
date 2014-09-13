@@ -22,21 +22,21 @@ using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Pointable::Pointable( PointableImplementation *ref ) : Interface( ref, this )
+Pointable::Pointable( PointableImplementation *ref ) : Interface( ref, ref )
 {
 	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Pointable::Pointable( FingerImplementation *ref ) : Interface( ref, this )
+Pointable::Pointable( FingerImplementation *ref ) : Interface( ref, ref )
 {
 	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Pointable::Pointable( ToolImplementation *ref ) : Interface( NULL, this )
+Pointable::Pointable( ToolImplementation *ref ) : Interface( NULL, ref )
 {
 	
 }

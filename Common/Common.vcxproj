@@ -66,6 +66,7 @@
     <ClInclude Include="Implementation\TapGestureImplementation.h" />
     <ClInclude Include="Implementation\ListBaseImplementation.h" />
     <ClInclude Include="Implementation\SharedObject.h" />
+    <ClInclude Include="MemDebugOn.h" />
     <ClInclude Include="Network\Buffer.h" />
     <ClInclude Include="Network\Network.h" />
     <ClInclude Include="Network\Socket.h" />
@@ -110,7 +111,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>.\Implementation;$(SolutionDir)\..\LeapSDK\include;.\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CRTDBG_MAP_ALLOC;LEAP_API_IMPLEMENTATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LEAP_API_IMPLEMENTATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

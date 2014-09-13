@@ -75,7 +75,8 @@
     <ClCompile Include="BoneUnit.cpp" />
     <ClCompile Include="ControllerUnit.cpp" />
     <ClCompile Include="FrameUnit.cpp" />
-    <ClCompile Include="Gesture.cpp" />
+    <ClCompile Include="GestureUnit.cpp" />
+    <ClCompile Include="InterfaceUnit.cpp" />
     <ClCompile Include="PointableUnit.cpp" />
     <ClCompile Include="TapGestureUnit.cpp" />
     <ClCompile Include="ListBaseUnit.cpp" />

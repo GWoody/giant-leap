@@ -26,6 +26,8 @@ using namespace GiantLeap;
 #include <iostream>
 using namespace std;
 
+#include "MemDebugOn.h"
+
 //-----------------------------------------------------------------------------
 // Prototypes.
 //-----------------------------------------------------------------------------
@@ -36,6 +38,8 @@ DWORD WINAPI thread_main( LPVOID lpParam );
 //-----------------------------------------------------------------------------
 UdpSocket global_socket( true, GIANT_LEAP_PORT );
 HANDLE global_thread_handle = NULL;
+
+bool global_quit = false;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -48,10 +52,11 @@ LEAP_EXPORT GiantLeap::Init::Init()
 //-----------------------------------------------------------------------------
 LEAP_EXPORT GiantLeap::Init::~Init()
 {
-	// TODO: kill thread.
+	global_quit = true;
+	WaitForSingleObject( global_thread_handle, INFINITE );
 
 	_CrtDumpMemoryLeaks();
-}
+}	
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -60,7 +65,7 @@ DWORD WINAPI thread_main( LPVOID lpParam )
 	void *buf = malloc( 65535 );
 	address_t addr;
 
-	while( true )
+	while( !global_quit )
 	{
 		int len = global_socket.Recv( buf, 65535, &addr );
 
@@ -72,5 +77,6 @@ DWORD WINAPI thread_main( LPVOID lpParam )
 		controller->DispatchFrame();
 	}
 
+	free( buf );
 	return 0;
 }

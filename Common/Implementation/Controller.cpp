@@ -19,7 +19,7 @@ using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Controller::Controller( ControllerImplementation *ref ) : Interface( ref, this )
+Controller::Controller( ControllerImplementation *ref ) : Interface( ref, ref )
 {
 }
 

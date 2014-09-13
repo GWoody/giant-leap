@@ -19,7 +19,7 @@ using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Gesture::Gesture( GestureImplementation *ref ) : Interface( ref, this )
+Gesture::Gesture( GestureImplementation *ref ) : Interface( ref, ref )
 {
 }
 

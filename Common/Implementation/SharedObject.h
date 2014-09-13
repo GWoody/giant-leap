@@ -23,10 +23,9 @@ namespace GiantLeap
 	class SharedObject
 	{
 	public:
-		SharedObject( Interface::Implementation *ptr )
+		static SharedObject *Create( Interface::Implementation *ptr )
 		{
-			_count = 1;
-			_ptr = ptr;
+			return new SharedObject( ptr );
 		}
 
 		void IncrementRefCount()
@@ -46,6 +45,8 @@ namespace GiantLeap
 			{
 				delete _ptr;
 				_ptr = NULL;
+
+				delete this;
 			}
 		}
 
@@ -55,6 +56,22 @@ namespace GiantLeap
 		}
 		
 	private:
+		SharedObject( Interface::Implementation *ptr )
+		{
+			_count = 1;
+			_ptr = ptr;
+		}
+
+		SharedObject( const SharedObject &other )
+		{
+
+		}
+
+		SharedObject &operator=( const SharedObject &other )
+		{
+			return *this;
+		}
+
 		Interface::Implementation *	_ptr;
 		int					_count;
 	};
