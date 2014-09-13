@@ -68,6 +68,7 @@ bool BoneImplementation::Unserialize( BufferRead *buffer )
 {
 	if( buffer->ReadInt() != 'bone' )
 	{
+		std::cout << "Expected 'bone', got junk." << std::endl;
 		return false;
 	}
 

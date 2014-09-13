@@ -41,7 +41,7 @@ public:
 	UdpSocket( bool recv, unsigned short port );
 
 	virtual bool		Send( const void *buf, int len, const char *address );
-	virtual bool		Recv( void *buf, int buflen, address_t *addr );
+	virtual int			Recv( void *buf, int buflen, address_t *addr );
 
 protected:
 	int					_fd;

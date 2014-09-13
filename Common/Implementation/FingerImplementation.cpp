@@ -67,6 +67,7 @@ bool FingerImplementation::Serialize( BufferWrite *buffer )
 
 	buffer->WriteInt( _type );
 
+	buffer->WriteInt( _bones.size() );
 	for( unsigned int i = 0; i < _bones.size(); i++ )
 	{
 		_bones[i].Serialize( buffer );
@@ -79,16 +80,22 @@ bool FingerImplementation::Serialize( BufferWrite *buffer )
 //-----------------------------------------------------------------------------
 bool FingerImplementation::Unserialize( BufferRead *buffer )
 {
+	_bones.clear();
+
 	if( buffer->ReadInt() != 'fngr' )
 	{
+		std::cout << "Expected 'fngr', got junk." << std::endl;
 		return false;
 	}
 
 	_type = (GiantLeap::Finger::Type)buffer->ReadInt();
 
-	for( unsigned int i = 0; i < _bones.size(); i++ )
+	unsigned int bones = buffer->ReadInt();
+	_bones.resize( bones );
+	for( unsigned int i = 0; i < bones; i++ )
 	{
-		_bones[i].Unserialize( buffer );
+		BoneImplementation bi( buffer );
+		_bones[bi.type()] = bi;
 	}
 
 	return PointableImplementation::Unserialize( buffer );

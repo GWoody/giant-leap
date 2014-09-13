@@ -60,6 +60,7 @@ bool GestureImplementation::Unserialize( BufferRead *buffer )
 {
 	if( buffer->ReadInt() != 'gstr' )
 	{
+		std::cout << "Expected 'gstr', got junk." << std::endl;
 		return false;
 	}
 

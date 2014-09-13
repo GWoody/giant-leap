@@ -14,6 +14,11 @@
 
 namespace GiantLeap {
 
+  class LEAP_EXPORT_CLASS Init {
+  public:
+    LEAP_EXPORT Init();
+  };
+
   // Interface for internal use only
   class LEAP_EXPORT_CLASS Interface {
   public:

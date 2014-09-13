@@ -110,14 +110,15 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>.\Implementation;$(SolutionDir)\..\LeapSDK\include;.\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>LEAP_API_IMPLEMENTATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LEAP_API_INTERNAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
       <OutputFile>$(SolutionDir)\Build\$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>$(SolutionDir)\..\LeapSDK\lib\x86\Leapd.lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\..\LeapSDK\lib\x86\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Ws2_32.lib;Leapd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -141,7 +142,8 @@
     </Link>
     <Lib>
       <OutputFile>$(SolutionDir)\Build\$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>$(SolutionDir)\..\LeapSDK\lib\x86\Leap.lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\..\LeapSDK\lib\x86\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Ws2_32.lib;Leap.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>

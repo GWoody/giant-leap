@@ -37,6 +37,13 @@ FrameImplementation::FrameImplementation( const Leap::Frame &frame )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+FrameImplementation::FrameImplementation( BufferRead *buffer )
+{
+	Unserialize( buffer );
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 void FrameImplementation::FromLeap( const Leap::Frame &frame )
 {
 	const Leap::HandList &hands = frame.hands();

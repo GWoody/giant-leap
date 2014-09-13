@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Giant_Leap", "Server\Server.vcxproj", "{8A347516-2F40-40B6-9887-0E76AEC33F99}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GiantLeap", "Server\Server.vcxproj", "{8A347516-2F40-40B6-9887-0E76AEC33F99}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ServerTest", "ServerTest\ServerTest.vcxproj", "{CECB0456-5CBE-4759-9FA6-357E1ED8E217}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8A347516-2F40-40B6-9887-0E76AEC33F99} = {8A347516-2F40-40B6-9887-0E76AEC33F99}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{8A347516-2F40-40B6-9887-0E76AEC33F99}.Debug|Win32.Build.0 = Debug|Win32
 		{8A347516-2F40-40B6-9887-0E76AEC33F99}.Release|Win32.ActiveCfg = Release|Win32
 		{8A347516-2F40-40B6-9887-0E76AEC33F99}.Release|Win32.Build.0 = Release|Win32
+		{CECB0456-5CBE-4759-9FA6-357E1ED8E217}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CECB0456-5CBE-4759-9FA6-357E1ED8E217}.Debug|Win32.Build.0 = Debug|Win32
+		{CECB0456-5CBE-4759-9FA6-357E1ED8E217}.Release|Win32.ActiveCfg = Release|Win32
+		{CECB0456-5CBE-4759-9FA6-357E1ED8E217}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

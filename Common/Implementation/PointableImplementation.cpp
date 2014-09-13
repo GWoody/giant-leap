@@ -75,6 +75,7 @@ bool PointableImplementation::Unserialize( BufferRead *buffer )
 {
 	if( buffer->ReadInt() != 'ptbl' )
 	{
+		std::cout << "Expected 'ptbl', got junk." << std::endl;
 		return false;
 	}
 

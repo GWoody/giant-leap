@@ -55,7 +55,7 @@ bool ArmImplementation::Serialize( BufferWrite *buffer )
 {
 	buffer->WriteInt( 'army' );
 
-	buffer->WriteInt( _width );
+	buffer->WriteFloat( _width );
 	buffer->WriteVector( _elbowPosition );
 	buffer->WriteVector( _wristPosition );
 
@@ -68,6 +68,7 @@ bool ArmImplementation::Unserialize( BufferRead *buffer )
 {
 	if( buffer->ReadInt() != 'army' )
 	{
+		std::cout << "Expected 'army', got junk." << std::endl;
 		return false;
 	}
 

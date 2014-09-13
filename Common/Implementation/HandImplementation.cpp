@@ -85,6 +85,7 @@ bool HandImplementation::Serialize( BufferWrite *buffer )
 	buffer->WriteFloat( _grabStrength );
 	buffer->WriteFloat( _confidence );
 
+	buffer->WriteInt( _fingers.size() );
 	for( unsigned int i = 0; i < _fingers.size(); i++ )
 	{
 		_fingers[i].Serialize( buffer );
@@ -99,8 +100,10 @@ bool HandImplementation::Serialize( BufferWrite *buffer )
 //-----------------------------------------------------------------------------
 bool HandImplementation::Unserialize( BufferRead *buffer )
 {
+	_fingers.clear();
 	if( buffer->ReadInt() != 'hand' )
 	{
+		std::cout << "Expected 'hand', got junk." << std::endl;
 		return false;
 	}
 
@@ -117,9 +120,13 @@ bool HandImplementation::Unserialize( BufferRead *buffer )
 	_grabStrength = buffer->ReadFloat();
 	_confidence = buffer->ReadFloat();
 
-	for( unsigned int i = 0; i < _fingers.size(); i++ )
+	unsigned int fingers = buffer->ReadInt();
+	_fingers.resize( fingers );
+
+	for( unsigned int i = 0; i < fingers; i++ )
 	{
-		_fingers[i].Unserialize( buffer );
+		FingerImplementation fi( buffer );
+		_fingers[fi.type()] = fi;
 	}
 
 	_arm.Unserialize( buffer );

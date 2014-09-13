@@ -64,22 +64,22 @@ bool UdpSocket::Send( const void *buf, int len, const char *address )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-bool UdpSocket::Recv( void *buf, int buflen, address_t *addr )
+int UdpSocket::Recv( void *buf, int buflen, address_t *addr )
 {
 	if( _recv )
 	{
 		sockaddr_in from;
 		int fromlen = sizeof(from);
 
-		int error =  recvfrom( _fd, (char *)buf, buflen, 0, (sockaddr *)&from, &fromlen );
+		int error = recvfrom( _fd, (char *)buf, buflen, 0, (sockaddr *)&from, &fromlen );
 		if( error != SOCKET_ERROR && addr )
 		{
 			strncpy_s( addr->_address, inet_ntoa( from.sin_addr ), sizeof(addr->_address) );
 			addr->_port = ntohs( from.sin_port );
 		}
 
-		return error != SOCKET_ERROR;
+		return error > 0 ? error : 0;
 	}
 
-	return false;
+	return 0;
 }

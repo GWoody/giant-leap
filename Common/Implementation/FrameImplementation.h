@@ -31,6 +31,7 @@ namespace GiantLeap
 	public:
 		FrameImplementation();
 		FrameImplementation( const Leap::Frame &frame );
+		FrameImplementation( BufferRead *buffer );
 
 		// Initialization.
 		void				FromLeap( const Leap::Frame &frame );
