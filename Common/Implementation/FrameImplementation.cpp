@@ -21,6 +21,8 @@
 #include "ListBaseImplementation.h"
 using namespace GiantLeap;
 
+#include "MemDebugOn.h"
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 FrameImplementation::FrameImplementation()

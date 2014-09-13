@@ -23,6 +23,8 @@ using namespace std;
 #include "Implementation/ArmImplementation.h"
 using namespace GiantLeap;
 
+#include "MemDebugOn.h"
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 bool run_arm_test()

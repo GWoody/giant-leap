@@ -23,6 +23,8 @@ using namespace std;
 #include "Network/Socket.h"
 using namespace GiantLeap;
 
+#include "MemDebugOn.h"
+
 //-----------------------------------------------------------------------------
 // Tests.
 //-----------------------------------------------------------------------------

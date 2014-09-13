@@ -18,6 +18,8 @@ using namespace GiantLeap;
 #include <sstream>
 using namespace std;
 
+#include "MemDebugOn.h"
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 Vector string_to_vector( const std::string &str )

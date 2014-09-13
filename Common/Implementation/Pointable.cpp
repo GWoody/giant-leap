@@ -20,6 +20,8 @@
 #include "SharedObject.h"
 using namespace GiantLeap;
 
+#include "MemDebugOn.h"
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 Pointable::Pointable( PointableImplementation *ref ) : Interface( ref, ref )

@@ -18,6 +18,8 @@
 #include "FingerImplementation.h"
 using namespace GiantLeap;
 
+#include "MemDebugOn.h"
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 FingerImplementation::FingerImplementation()

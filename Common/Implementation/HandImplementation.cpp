@@ -18,6 +18,8 @@
 #include "HandImplementation.h"
 using namespace GiantLeap;
 
+#include "MemDebugOn.h"
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 HandImplementation::HandImplementation()

@@ -3,11 +3,11 @@
 
 	Giant Leap
 
-	File	:	CircleGestureImplementation.cpp
+	File	:	SharedObject.cpp
 	Authors	:	Lucas Zadrozny
-	Date	:	10th September 2014
+	Date	:	13th September 2014
 
-	Purpose	:	Implements the actual logic behind the `CircleGesture` class.
+	Purpose	:	Implements the `SharedPointer` object.
 
 ===============================================================================
 */
@@ -15,49 +15,69 @@
 #include "Common.h"
 
 #include "GiantLeap.h"
-#include "CircleGestureImplementation.h"
+#include "SharedObject.h"
 using namespace GiantLeap;
 
 #include "MemDebugOn.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-CircleGestureImplementation::CircleGestureImplementation()
+SharedObject *SharedObject::Create( Interface::Implementation *ptr )
 {
+	return new SharedObject( ptr );
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Vector CircleGestureImplementation::center() const
+void SharedObject::IncrementRefCount()
 {
-	return Vector();
+	_count++;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Vector CircleGestureImplementation::normal() const
+void SharedObject::DecrementRefCount()
 {
-	return Vector();
+	_count--;
+	if( _count < 0 )
+	{
+		_count = 0;
+	}
+
+	if( !_count )
+	{
+		delete _ptr;
+		_ptr = NULL;
+
+		delete this;
+	}
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-float CircleGestureImplementation::progress() const
+Interface::Implementation *SharedObject::Get() const
 {
-	return 0.0f;
+	return _ptr;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-float CircleGestureImplementation::radius() const
+SharedObject::SharedObject( Interface::Implementation *ptr )
 {
-	return 0.0f;
+	_count = 1;
+	_ptr = ptr;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Pointable CircleGestureImplementation::pointable() const
+SharedObject::SharedObject( const SharedObject &other )
 {
-	C_breakpoint();
-	return Pointable();
+
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+SharedObject &SharedObject::operator=( const SharedObject &other )
+{
+	return *this;
 }

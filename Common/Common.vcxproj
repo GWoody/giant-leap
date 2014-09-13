@@ -11,7 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Server\Main.cpp" />
     <ClCompile Include="Implementation\Arm.cpp" />
     <ClCompile Include="Implementation\ArmImplementation.cpp" />
     <ClCompile Include="Implementation\Bone.cpp" />
@@ -37,6 +36,7 @@
     <ClCompile Include="Implementation\Pointable.cpp" />
     <ClCompile Include="Implementation\PointableImplementation.cpp" />
     <ClCompile Include="Implementation\PointableList.cpp" />
+    <ClCompile Include="Implementation\SharedObject.cpp" />
     <ClCompile Include="Implementation\SwipeGesture.cpp" />
     <ClCompile Include="Implementation\SwipeGestureImplementation.cpp" />
     <ClCompile Include="Implementation\TapGestureImplementation.cpp" />

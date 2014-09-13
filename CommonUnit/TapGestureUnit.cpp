@@ -23,6 +23,8 @@ using namespace std;
 #include "Implementation/TapGestureImplementation.h"
 using namespace GiantLeap;
 
+#include "MemDebugOn.h"
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 bool run_tapgesture_test()

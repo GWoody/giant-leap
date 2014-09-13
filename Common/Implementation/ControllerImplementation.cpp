@@ -21,6 +21,8 @@ using namespace GiantLeap;
 #include <iostream>
 using namespace std;
 
+#include "MemDebugOn.h"
+
 ControllerImplementation *ControllerImplementation::_instance = NULL;
 
 //-----------------------------------------------------------------------------

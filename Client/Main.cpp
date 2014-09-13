@@ -22,6 +22,8 @@ using namespace GiantLeap;
 #include <iostream>
 using namespace std;
 
+#include "MemDebugOn.h"
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 class ClientListener : public Leap::Listener

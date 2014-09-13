@@ -56,6 +56,6 @@ int main( int argc, char **argv )
 	Controller c;
 	c.addListener( l );
 
-	while( true );
+	for( int i = 0; i < 1000; i++ );
 	return 0;
 }

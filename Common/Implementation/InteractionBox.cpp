@@ -17,6 +17,8 @@
 #include "GiantLeap.h"
 using namespace GiantLeap;
 
+#include "MemDebugOn.h"
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 LEAP_EXPORT InteractionBox::InteractionBox() : Interface( (SharedObject *) NULL )

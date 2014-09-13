@@ -19,6 +19,8 @@
 #include "SharedObject.h"
 using namespace GiantLeap;
 
+#include "MemDebugOn.h"
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 LEAP_EXPORT SwipeGesture::SwipeGesture()

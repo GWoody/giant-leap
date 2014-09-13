@@ -25,9 +25,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Server\Main.cpp">
-      <Filter>Implementation</Filter>
-    </ClCompile>
     <ClCompile Include="Implementation\Controller.cpp">
       <Filter>Implementation</Filter>
     </ClCompile>
@@ -135,6 +132,9 @@
     </ClCompile>
     <ClCompile Include="Implementation\ToolList.cpp">
       <Filter>Implementation\Unused</Filter>
+    </ClCompile>
+    <ClCompile Include="Implementation\SharedObject.cpp">
+      <Filter>Implementation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -24,6 +24,8 @@ using namespace std;
 #include "Implementation/SharedObject.h"
 using namespace GiantLeap;
 
+#include "MemDebugOn.h"
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 class TestImplementation : public Interface::Implementation

@@ -23,6 +23,8 @@ using namespace std;
 #include "Implementation/ControllerImplementation.h"
 using namespace GiantLeap;
 
+#include "MemDebugOn.h"
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 bool run_frame_test()

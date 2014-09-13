@@ -17,6 +17,8 @@
 
 #include <WinSock2.h>
 
+#include "MemDebugOn.h"
+
 bool global_net_initialized = false;
 
 //-----------------------------------------------------------------------------

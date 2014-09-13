@@ -12,10 +12,14 @@
 ===============================================================================
 */
 
+#include "Common.h"
+
 #include "GiantLeap.h"
 #include "ControllerImplementation.h"
 #include "SharedObject.h"
 using namespace GiantLeap;
+
+#include "MemDebugOn.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

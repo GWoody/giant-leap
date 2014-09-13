@@ -18,6 +18,8 @@
 #include "GestureImplementation.h"
 using namespace GiantLeap;
 
+#include "MemDebugOn.h"
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 GestureImplementation::GestureImplementation()

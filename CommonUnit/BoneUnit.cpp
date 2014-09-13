@@ -23,6 +23,8 @@ using namespace std;
 #include "Implementation/BoneImplementation.h"
 using namespace GiantLeap;
 
+#include "MemDebugOn.h"
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 bool run_bone_test()

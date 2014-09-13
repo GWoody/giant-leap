@@ -18,6 +18,8 @@
 #include "GiantLeap.h"
 using namespace GiantLeap;
 
+#include "MemDebugOn.h"
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 bool BufferWrite::WriteShort( short s )

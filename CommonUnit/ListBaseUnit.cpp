@@ -23,6 +23,8 @@ using namespace std;
 #include "Implementation/ListBaseImplementation.h"
 using namespace GiantLeap;
 
+#include "MemDebugOn.h"
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 bool run_listbase_test()

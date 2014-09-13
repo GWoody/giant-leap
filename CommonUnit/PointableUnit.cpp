@@ -23,6 +23,8 @@ using namespace std;
 #include "Implementation/PointableImplementation.h"
 using namespace GiantLeap;
 
+#include "MemDebugOn.h"
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 bool run_pointable_test()

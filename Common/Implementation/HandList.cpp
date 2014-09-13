@@ -19,6 +19,8 @@
 #include "SharedObject.h"
 using namespace GiantLeap;
 
+#include "MemDebugOn.h"
+
 typedef ListBaseImplementation<Hand> ListType_t;
 
 //-----------------------------------------------------------------------------
