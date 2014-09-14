@@ -24,7 +24,7 @@ using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Bone::Bone(BoneImplementation *ref) : Interface(ref, ref)
+Bone::Bone(BoneImplementation *ref) : Interface(ref, this)
 {
 
 }

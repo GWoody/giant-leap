@@ -19,6 +19,7 @@
 #include "FingerImplementation.h"
 #include "ArmImplementation.h"
 #include <vector>
+#include "Pair.h"
 
 namespace GiantLeap
 {
@@ -87,8 +88,8 @@ namespace GiantLeap
 	private:
 		int32_t				_id;
 
-		std::vector<FingerImplementation>	_fingers;
-		ArmImplementation	_arm;
+		std::vector<FingerPair_t>	_fingers;
+		ArmPair_t			_arm;
 
 		Vector				_palmPosition;
 		Vector				_stabilizedPalmPosition;
@@ -102,6 +103,8 @@ namespace GiantLeap
 		float				_grabStrength;
 		float				_confidence;
 	};
+
+	typedef Pair<Hand, HandImplementation> HandPair_t;
 
 }
 

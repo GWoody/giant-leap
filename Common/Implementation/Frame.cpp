@@ -23,7 +23,7 @@ using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Frame::Frame( FrameImplementation *ref ) : Interface( ref, ref )
+Frame::Frame( FrameImplementation *ref ) : Interface( ref, this )
 {
 }
 

@@ -16,6 +16,7 @@
 #define __BONEIMPLEMENTATION_H__
 
 #include "Network/Buffer.h"
+#include "Pair.h"
 
 namespace GiantLeap
 {
@@ -56,6 +57,8 @@ namespace GiantLeap
 		Vector				_nextJoint;
 		Vector				_prevJoint;
 	};
+
+	typedef Pair<Bone, BoneImplementation> BonePair_t;
 
 }
 

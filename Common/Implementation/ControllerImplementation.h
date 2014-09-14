@@ -28,7 +28,8 @@ namespace GiantLeap
 	class ControllerImplementation : public Interface::Implementation
 	{
 	public:
-		ControllerImplementation();
+		ControllerImplementation( Controller &c );
+		~ControllerImplementation();
 
 		bool				isConnected() const;
 		bool				isServiceConnected() const;
@@ -49,7 +50,9 @@ namespace GiantLeap
 		// TODO: `GenerateDummyFrame()` to test `_gestureState`.
 		void				DispatchFrame();
 
+		// TODO: mutex stuff
 		static ControllerImplementation *	Get()		{ return _instance; }
+		static void			Release()					{  }
 
 		// Frame updating.
 		void				PushFrame( const FrameImplementation &frame );
@@ -61,7 +64,9 @@ namespace GiantLeap
 		std::list<Listener *>	_listeners;
 
 		static ControllerImplementation *_instance;
-		std::deque<FrameImplementation>	_frames;
+		std::deque<FramePair_t>	_frames;
+
+		Controller &_interface;
 	};
 
 }

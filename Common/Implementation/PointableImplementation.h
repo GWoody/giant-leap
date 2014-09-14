@@ -16,6 +16,7 @@
 #define __POINTABLEIMPLEMENTATION_H__
 
 #include "Network/Buffer.h"
+#include "Pair.h"
 
 namespace GiantLeap
 {
@@ -71,6 +72,8 @@ namespace GiantLeap
 		float				_width;
 		float				_length;
 	};
+
+	typedef Pair<Pointable, PointableImplementation> PointablePair_t;
 
 }
 

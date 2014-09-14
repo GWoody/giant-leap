@@ -16,6 +16,7 @@
 #define __ARMIMPLEMENTATION_H__
 
 #include "Network/Buffer.h"
+#include "Pair.h"
 
 namespace GiantLeap
 {
@@ -53,6 +54,8 @@ namespace GiantLeap
 		Vector				_elbowPosition;
 		Vector				_wristPosition;
 	};
+
+	typedef Pair<Arm, ArmImplementation> ArmPair_t;
 
 }
 

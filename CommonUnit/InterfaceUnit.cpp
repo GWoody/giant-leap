@@ -68,13 +68,15 @@ public:
 //-----------------------------------------------------------------------------
 IMPLEMENT_TEST( perform_acquired_test );
 IMPLEMENT_TEST( perform_unacquired_test );
+IMPLEMENT_TEST( perform_return_test );
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 bool run_interface_test()
 {
-	RUN_TEST( "Acquiring object", perform_acquired_test );
-	RUN_TEST( "Not acquiring object", perform_unacquired_test );
+	RUN_TEST( "acquiring object", perform_acquired_test );
+	RUN_TEST( "not acquiring object", perform_unacquired_test );
+	RUN_TEST( "return test", perform_return_test );
 
 	return true;
 }
@@ -108,6 +110,31 @@ IMPLEMENT_TEST( perform_unacquired_test )
 
 	ASSERT( "Ensuring object is deleted", TestImplementation::_isDeleted == false );
 	delete test;
+
+	return true;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+TestOwned make_testowned()
+{
+	TestImplementation *test = new TestImplementation;
+	return TestOwned( test );
+}
+
+TestUnowned make_testunowned()
+{
+	TestImplementation *test = new TestImplementation;
+	return TestUnowned( test );
+}
+
+IMPLEMENT_TEST( perform_return_test )
+{
+	TestOwned owned = make_testowned();
+	ASSERT( "Ensuring test owned object is undeleted", TestImplementation::_isDeleted == false );
+
+	TestUnowned unowned = make_testunowned();
+	ASSERT( "Ensuring test unowned object is undeleted", TestImplementation::_isDeleted == false );
 
 	return true;
 }

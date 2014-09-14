@@ -16,6 +16,7 @@
 #define __GESTUREIMPLEMENTATION_H__
 
 #include "Network/Buffer.h"
+#include "Pair.h"
 
 namespace GiantLeap
 {
@@ -52,6 +53,8 @@ namespace GiantLeap
 		
 		const char *		toCString() const;
 	};
+
+	typedef Pair<Gesture, GestureImplementation> GesturePair_t;
 
 }
 

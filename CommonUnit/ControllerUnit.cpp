@@ -36,7 +36,8 @@ IMPLEMENT_TEST_OBJECT( perform_listener_test, ControllerImplementation, controll
 //-----------------------------------------------------------------------------
 bool run_controller_test()
 {
-	ControllerImplementation *controller = new ControllerImplementation;
+	Controller c;
+	ControllerImplementation *controller = new ControllerImplementation( c );
 
 	TEST_OBJECT( "policy Flags", perform_policy_flag_test, controller );
 	TEST_OBJECT( "gesture State", perform_gesture_enable_test, controller );

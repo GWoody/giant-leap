@@ -27,7 +27,8 @@ ControllerImplementation *ControllerImplementation::_instance = NULL;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-ControllerImplementation::ControllerImplementation()
+ControllerImplementation::ControllerImplementation( Controller &c ) :
+	_interface( c )
 {
 	if( _instance )
 	{
@@ -37,6 +38,14 @@ ControllerImplementation::ControllerImplementation()
 
 	_policyFlags = Controller::POLICY_DEFAULT;
 	_gestureState = 0;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+ControllerImplementation::~ControllerImplementation()
+{
+	// TODO: wait for mutex
+	_instance = NULL;
 }
 
 //-----------------------------------------------------------------------------
@@ -84,8 +93,7 @@ bool ControllerImplementation::addListener( Listener &listener )
 	_listeners.push_back( &listener );
 
 	// Notify the instance of the connection.
-	Controller c( this );
-	listener.onInit( c );
+	listener.onInit( _interface );
 
 	return true;
 }
@@ -95,8 +103,7 @@ bool ControllerImplementation::addListener( Listener &listener )
 bool ControllerImplementation::removeListener( Listener &listener )
 {
 	// Notify the instance of the disconnection.
-	Controller c( this );
-	listener.onExit( c );
+	listener.onExit( _interface );
 
 	_listeners.remove( &listener );
 	return true;
@@ -107,7 +114,7 @@ bool ControllerImplementation::removeListener( Listener &listener )
 Frame ControllerImplementation::frame( int history )
 {
 	history = C_clamp( history, 0, 60 );
-	return Frame( &_frames[history] );
+	return _frames[history].GetInterface();
 }
 
 //-----------------------------------------------------------------------------
@@ -143,11 +150,9 @@ bool ControllerImplementation::isGestureEnabled( Gesture::Type type )
 //-----------------------------------------------------------------------------
 void ControllerImplementation::DispatchFrame()
 {
-	Controller c( this );
-	
 	for each( Listener *listener in _listeners )
 	{
-		listener->onFrame( c );
+		listener->onFrame( _interface );
 	}
 }
 
@@ -160,5 +165,8 @@ void ControllerImplementation::PushFrame( const FrameImplementation &frame )
 		_frames.pop_back();
 	}
 
-	_frames.push_front( frame );
+	FrameImplementation *fi = new FrameImplementation( frame );
+	Frame f( fi );
+
+	_frames.push_front( FramePair_t( f, fi ) );
 }

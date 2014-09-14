@@ -62,8 +62,10 @@ void FrameImplementation::FromLeap( const Leap::Frame &frame )
 	//
 	for( int i = 0; i < hands.count(); i++ )
 	{
-		HandImplementation hi( hands[i] );
-		_hands.push_back( hi );
+		HandImplementation *hi = new HandImplementation( hands[i] );
+		Hand h( hi );
+
+		_hands.push_back( HandPair_t( h, hi ) );
 	}
 
 	//
@@ -71,8 +73,10 @@ void FrameImplementation::FromLeap( const Leap::Frame &frame )
 	//
 	for( int i = 0; i < gestures.count(); i++ )
 	{
-		GestureImplementation gi( gestures[i] );
-		_gestures.push_back( gi );
+		GestureImplementation *gi = new GestureImplementation( gestures[i] );
+		Gesture g( gi );
+
+		_gestures.push_back( GesturePair_t( g, gi ) );
 	}
 }
 
@@ -94,7 +98,7 @@ BufferWrite FrameImplementation::Serialize()
 	buf.WriteShort( _hands.size() );
 	for( unsigned int i = 0; i < _hands.size(); i++ )
 	{
-		_hands[i].Serialize( &buf );
+		_hands[i].GetImplementation()->Serialize( &buf );
 	}
 
 	//
@@ -103,7 +107,7 @@ BufferWrite FrameImplementation::Serialize()
 	buf.WriteShort( _gestures.size() );
 	for( unsigned int i = 0; i < _gestures.size(); i++ )
 	{
-		_gestures[i].Serialize( &buf );
+		_gestures[i].GetImplementation()->Serialize( &buf );
 	}
 
 	return buf;
@@ -128,14 +132,17 @@ void FrameImplementation::Unserialize( BufferRead *buffer )
 	short handCount = buffer->ReadShort();
 	while( handCount )
 	{
-		HandImplementation hi;
-		if( !hi.Unserialize( buffer ) )
+		HandImplementation *hi = new HandImplementation();
+		if( !hi->Unserialize( buffer ) )
 		{
 			std::cerr << "FrameImplementation::Unserialize - failed to read hand" << std::endl;
+			delete hi;
 			return;
 		}
 
-		_hands.push_back( hi );
+		Hand h( hi );
+		_hands.push_back( HandPair_t( h, hi ) );
+
 		--handCount;
 	}
 
@@ -145,14 +152,16 @@ void FrameImplementation::Unserialize( BufferRead *buffer )
 	short gestureCount = buffer->ReadShort();
 	while( gestureCount )
 	{
-		GestureImplementation gi;
-		if( !gi.Unserialize( buffer ) )
+		GestureImplementation *gi = new GestureImplementation();
+		if( !gi->Unserialize( buffer ) )
 		{
 			std::cerr << "FrameImplementation::Unserialize - failed to read gesture" << std::endl;
+			delete gi;
 			return;
 		}
 
-		_gestures.push_back( gi );
+		Gesture g( gi );
+		_gestures.push_back( GesturePair_t( g, gi ) );
 		--gestureCount;
 	}
 }
@@ -163,12 +172,12 @@ void FrameImplementation::Translate( const Vector &v )
 {
 	for( unsigned int i = 0; i < _hands.size(); i++ )
 	{
-		_hands[i].Translate( v );
+		_hands[i].GetImplementation()->Translate( v );
 	}
 
 	for( unsigned int i = 0; i < _gestures.size(); i++ )
 	{
-		_gestures[i].Translate( v );
+		_gestures[i].GetImplementation()->Translate( v );
 	}
 }
 
@@ -178,12 +187,12 @@ void FrameImplementation::Rotate( const Vector &v )
 {
 	for( unsigned int i = 0; i < _hands.size(); i++ )
 	{
-		_hands[i].Rotate( v );
+		_hands[i].GetImplementation()->Rotate( v );
 	}
 
 	for( unsigned int i = 0; i < _gestures.size(); i++ )
 	{
-		_gestures[i].Rotate( v );
+		_gestures[i].GetImplementation()->Rotate( v );
 	}
 }
 
@@ -232,9 +241,7 @@ HandList FrameImplementation::hands() const
 
 	for( unsigned int i = 0; i < _hands.size(); i++ )
 	{
-		HandImplementation *hi = (HandImplementation *)&_hands[i];
-		Hand h( hi );
-		list->push_back( h );
+		list->push_back( _hands[i].GetInterface() );
 	}
 
 	return HandList( *list );
@@ -268,16 +275,14 @@ ToolList FrameImplementation::tools() const
 //-----------------------------------------------------------------------------
 GestureList FrameImplementation::gestures() const
 {
-	ListBaseImplementation<Gesture> list;
+	ListBaseImplementation<Gesture> *list = new ListBaseImplementation<Gesture>; 
 
 	for( unsigned int i = 0; i < _gestures.size(); i++ )
 	{
-		GestureImplementation *gi = (GestureImplementation *)&_gestures[i];
-		Gesture g( gi );
-		list.push_back( g );
+		list->push_back( _gestures[i].GetInterface() );
 	}
 
-	return GestureList( list );
+	return GestureList( *list );
 }
 
 //-----------------------------------------------------------------------------

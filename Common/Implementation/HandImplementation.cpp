@@ -16,27 +16,31 @@
 
 #include "GiantLeap.h"
 #include "HandImplementation.h"
+#include "ListBaseImplementation.h"
 using namespace GiantLeap;
 
 #include "MemDebugOn.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-HandImplementation::HandImplementation()
+HandImplementation::HandImplementation() :
+	_arm( Arm(), NULL )
 {
 
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-HandImplementation::HandImplementation( const Leap::Hand &hand )
+HandImplementation::HandImplementation( const Leap::Hand &hand ) :
+	_arm( Arm(), NULL )
 {
 	FromLeap( hand );
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-HandImplementation::HandImplementation( BufferRead *buffer )
+HandImplementation::HandImplementation( BufferRead *buffer ) :
+	_arm( Arm(), NULL )
 {
 	Unserialize( buffer );
 }
@@ -45,6 +49,9 @@ HandImplementation::HandImplementation( BufferRead *buffer )
 //-----------------------------------------------------------------------------
 void HandImplementation::FromLeap( const Leap::Hand &hand )
 {
+	//
+	// Read misc.
+	//
 	_id = hand.id();
 	_palmPosition = hand.palmPosition();
 	_stabilizedPalmPosition = hand.stabilizedPalmPosition();
@@ -58,14 +65,24 @@ void HandImplementation::FromLeap( const Leap::Hand &hand )
 	_grabStrength = hand.grabStrength();
 	_confidence = hand.confidence();
 
+	//
+	// Read fingers.
+	//
 	const Leap::FingerList &fingers = hand.fingers();
 	for( int i = 0; i < fingers.count(); i++ )
 	{
-		FingerImplementation fi( fingers[i] );
-		_fingers.push_back( fi );
+		FingerImplementation *fi = new FingerImplementation( fingers[i] );
+		Finger f( fi );
+
+		_fingers.push_back( FingerPair_t( f, fi ) );
 	}
 
-	_arm.FromLeap( hand.arm() );
+	//
+	// Read arm.
+	//
+	ArmImplementation *ai = new ArmImplementation( hand.arm() );
+	Arm a( ai );
+	_arm = ArmPair_t( a, ai );
 }
 
 //-----------------------------------------------------------------------------
@@ -74,6 +91,9 @@ bool HandImplementation::Serialize( BufferWrite *buffer )
 {
 	buffer->WriteInt( 'hand' );
 
+	//
+	// Write misc.
+	//
 	buffer->WriteInt( _id );
 	buffer->WriteVector( _palmPosition );
 	buffer->WriteVector( _stabilizedPalmPosition );
@@ -87,13 +107,19 @@ bool HandImplementation::Serialize( BufferWrite *buffer )
 	buffer->WriteFloat( _grabStrength );
 	buffer->WriteFloat( _confidence );
 
+	//
+	// Write fingers.
+	//
 	buffer->WriteInt( _fingers.size() );
 	for( unsigned int i = 0; i < _fingers.size(); i++ )
 	{
-		_fingers[i].Serialize( buffer );
+		_fingers[i].GetImplementation()->Serialize( buffer );
 	}
 
-	_arm.Serialize( buffer );
+	//
+	// Write arm.
+	//
+	_arm.GetImplementation()->Serialize( buffer );
 
 	return true;
 }
@@ -109,6 +135,9 @@ bool HandImplementation::Unserialize( BufferRead *buffer )
 		return false;
 	}
 
+	//
+	// Read misc.
+	//
 	_id = buffer->ReadInt();
 	_palmPosition = buffer->ReadVector();
 	_stabilizedPalmPosition = buffer->ReadVector();
@@ -122,16 +151,35 @@ bool HandImplementation::Unserialize( BufferRead *buffer )
 	_grabStrength = buffer->ReadFloat();
 	_confidence = buffer->ReadFloat();
 
+	//
+	// Read fingers.
+	//
 	unsigned int fingers = buffer->ReadInt();
-	_fingers.resize( fingers );
-
 	for( unsigned int i = 0; i < fingers; i++ )
 	{
-		FingerImplementation fi( buffer );
-		_fingers[fi.type()] = fi;
+		FingerImplementation *fi = new FingerImplementation();
+		if( !fi->Unserialize( buffer ) )
+		{
+			std::cerr << "HandImplementation::Unserialize - failed to read finger" << std::endl;
+			delete fi;
+			return false;
+		}
+
+		Finger f( fi );
+		_fingers.push_back( FingerPair_t( f, fi ) );
 	}
 
-	_arm.Unserialize( buffer );
+	//
+	// Read arm.
+	//
+	ArmImplementation *ai = new ArmImplementation();
+	if( !ai->Unserialize( buffer ) )
+	{
+		return false;
+	}
+
+	Arm a( ai );
+	_arm = ArmPair_t( a, ai );
 
 	return true;
 }
@@ -235,7 +283,7 @@ Matrix HandImplementation::basis() const
 //-----------------------------------------------------------------------------
 Arm HandImplementation::arm() const
 {
-	return Arm( (ArmImplementation *)&_arm );
+	return _arm.GetInterface();
 }
 
 //-----------------------------------------------------------------------------
@@ -325,7 +373,14 @@ Pointable HandImplementation::pointable( int32_t id ) const
 //-----------------------------------------------------------------------------
 FingerList HandImplementation::fingers() const
 {
-	return FingerList();
+	ListBaseImplementation<Finger> *list = new ListBaseImplementation<Finger>;
+
+	for( unsigned int i = 0; i < _fingers.size(); i++ )
+	{
+		list->push_back( _fingers[i].GetInterface() );
+	}
+
+	return FingerList( *list );
 }
 
 //-----------------------------------------------------------------------------

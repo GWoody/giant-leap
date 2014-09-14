@@ -16,6 +16,7 @@
 #include "Common.h"
 #include "Network/Socket.h"
 #include "Network/Buffer.h"
+#include "Network/Network.h"
 #include "Implementation/FrameImplementation.h"
 #include "Implementation/ControllerImplementation.h"
 using namespace GiantLeap;
@@ -46,6 +47,7 @@ bool global_quit = false;
 LEAP_EXPORT GiantLeap::Init::Init()
 {
 	global_thread_handle = CreateThread( NULL, 0, thread_main, NULL, 0, NULL );
+	_CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
 }
 
 //-----------------------------------------------------------------------------
@@ -54,8 +56,12 @@ LEAP_EXPORT GiantLeap::Init::~Init()
 {
 	global_quit = true;
 	WaitForSingleObject( global_thread_handle, INFINITE );
+	CloseHandle( global_thread_handle );
 
-	_CrtDumpMemoryLeaks();
+	if( global_net_initialized )
+	{
+		network_shutdown();
+	}
 }	
 
 //-----------------------------------------------------------------------------
@@ -73,8 +79,12 @@ DWORD WINAPI thread_main( LPVOID lpParam )
 		FrameImplementation frame( &rb );
 
 		ControllerImplementation *controller = ControllerImplementation::Get();
-		controller->PushFrame( frame );
-		controller->DispatchFrame();
+		if( controller )
+		{
+			controller->PushFrame( frame );
+			controller->DispatchFrame();
+		}
+		ControllerImplementation::Release();
 	}
 
 	free( buf );

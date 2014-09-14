@@ -29,7 +29,7 @@ Controller::Controller( ControllerImplementation *ref ) : Interface( ref, ref )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-LEAP_EXPORT Controller::Controller() : Interface( new ControllerImplementation(), this )
+LEAP_EXPORT Controller::Controller() : Interface( new ControllerImplementation(*this), this )
 {
 }
 

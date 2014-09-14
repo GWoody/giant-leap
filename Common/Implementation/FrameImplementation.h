@@ -18,6 +18,7 @@
 #include "Network/Buffer.h"
 #include "HandImplementation.h"
 #include "GestureImplementation.h"
+#include "Pair.h"
 #include <vector>
 
 namespace GiantLeap
@@ -74,9 +75,11 @@ namespace GiantLeap
 	private:
 		int64_t				_id, _timestamp;
 
-		std::vector<HandImplementation>	_hands;
-		std::vector<GestureImplementation>	_gestures;
+		std::vector<HandPair_t>	_hands;
+		std::vector<GesturePair_t>	_gestures;
 	};
+
+	typedef Pair<Frame, FrameImplementation> FramePair_t;
 
 }
 

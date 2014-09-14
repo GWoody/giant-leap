@@ -38,7 +38,10 @@ LEAP_EXPORT Interface::Interface( Implementation* reference, void* owner )
 LEAP_EXPORT Interface::Interface( const Interface &rhs )
 {
 	m_object = rhs.m_object;
-	m_object->IncrementRefCount();
+	if( m_object )
+	{
+		m_object->IncrementRefCount();
+	}
 }
 
 //-----------------------------------------------------------------------------
@@ -57,11 +60,17 @@ Interface::Interface( SharedObject *object )
 LEAP_EXPORT Interface &Interface::operator=( const Interface &rhs )
 {
 	// Signal that we are releasing the old pointer.
-	m_object->DecrementRefCount();
+	if( m_object )
+	{
+		m_object->DecrementRefCount();
+	}
 
 	// Attach to the new pointer.
 	m_object = rhs.m_object;
-	m_object->IncrementRefCount();
+	if( m_object )
+	{
+		m_object->IncrementRefCount();
+	}
 
 	return *this;
 }
@@ -70,14 +79,17 @@ LEAP_EXPORT Interface &Interface::operator=( const Interface &rhs )
 //-----------------------------------------------------------------------------
 LEAP_EXPORT Interface::~Interface()
 {
-	m_object->DecrementRefCount();
+	if( m_object )
+	{
+		m_object->DecrementRefCount();
+	}
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 LEAP_EXPORT Interface::Implementation *Interface::reference() const
 {
-	return m_object->Get();
+	return m_object ? m_object->Get() : NULL;
 }
 
 //-----------------------------------------------------------------------------

@@ -70,6 +70,7 @@
     <ClInclude Include="Network\Buffer.h" />
     <ClInclude Include="Network\Network.h" />
     <ClInclude Include="Network\Socket.h" />
+    <ClInclude Include="Pair.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2EEFD2E1-F141-4133-BBEC-AABD749D505F}</ProjectGuid>

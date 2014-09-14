@@ -27,7 +27,7 @@ LEAP_EXPORT Hand::Hand() : Interface( (SharedObject *) NULL )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-Hand::Hand( HandImplementation *ref ) : Interface( ref, ref )
+Hand::Hand( HandImplementation *ref ) : Interface( ref, this )
 {
 
 }

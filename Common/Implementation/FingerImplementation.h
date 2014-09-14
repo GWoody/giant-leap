@@ -18,6 +18,7 @@
 #include "PointableImplementation.h"
 #include "BoneImplementation.h"
 #include "Network/Buffer.h"
+#include "Pair.h"
 
 namespace GiantLeap
 {
@@ -51,8 +52,10 @@ namespace GiantLeap
 
 	private:
 		Finger::Type		_type;
-		std::vector<BoneImplementation>	_bones;
+		std::vector<BonePair_t>	_bones;
 	};
+
+	typedef Pair<Finger, FingerImplementation> FingerPair_t;
 
 }
 

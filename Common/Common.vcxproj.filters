@@ -198,5 +198,8 @@
     <ClInclude Include="MemDebugOn.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Pair.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
