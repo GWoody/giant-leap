@@ -16,9 +16,78 @@
 
 #include "GiantLeap.h"
 #include "GestureImplementation.h"
+#include "CircleGestureImplementation.h"
+#include "SwipeGestureImplementation.h"
+#include "TapGestureImplementation.h"
 using namespace GiantLeap;
 
 #include "MemDebugOn.h"
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+GestureImplementation *GestureImplementation::Create( const Leap::Gesture &gesture )
+{
+	switch( gesture.type() )
+	{
+		case Gesture::Type::TYPE_SWIPE:
+		{
+			Leap::SwipeGesture ls( gesture );
+			return new SwipeGestureImplementation( ls );
+		}
+
+		case Gesture::Type::TYPE_CIRCLE:
+		{
+			Leap::CircleGesture lc( gesture );
+			return new CircleGestureImplementation( lc );
+		}
+
+		case Gesture::Type::TYPE_SCREEN_TAP:
+		{
+			Leap::ScreenTapGesture ls( gesture );
+			return new TapGestureImplementation( ls );
+		}
+
+		case Gesture::Type::TYPE_KEY_TAP:
+		{
+			Leap::KeyTapGesture lk( gesture );
+			return new TapGestureImplementation( lk );
+		}
+	}
+
+	C_breakpoint();
+	return NULL;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+GestureImplementation *GestureImplementation::Create( Gesture::Type type )
+{
+	switch( type )
+	{
+		case Gesture::Type::TYPE_SWIPE:
+		{
+			return new SwipeGestureImplementation();
+		}
+
+		case Gesture::Type::TYPE_CIRCLE:
+		{
+			return new CircleGestureImplementation();
+		}
+
+		case Gesture::Type::TYPE_SCREEN_TAP:
+		{
+			return new TapGestureImplementation();
+		}
+
+		case Gesture::Type::TYPE_KEY_TAP:
+		{
+			return new TapGestureImplementation();
+		}
+	}
+
+	C_breakpoint();
+	return NULL;
+}
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -44,7 +113,10 @@ GestureImplementation::GestureImplementation( BufferRead *buffer )
 //-----------------------------------------------------------------------------
 void GestureImplementation::FromLeap( const Leap::Gesture &gesture )
 {
-	
+	_id = gesture.id();
+	_type = (Gesture::Type)gesture.type();
+	_duration = gesture.duration();
+	_durationSeconds = gesture.durationSeconds();
 }
 
 //-----------------------------------------------------------------------------
@@ -52,6 +124,11 @@ void GestureImplementation::FromLeap( const Leap::Gesture &gesture )
 bool GestureImplementation::Serialize( BufferWrite *buffer )
 {
 	buffer->WriteInt( 'gstr' );
+
+	buffer->WriteInt( _id );
+	buffer->WriteInt( _type );
+	buffer->WriteLongLong( _duration );
+	buffer->WriteFloat( _durationSeconds );
 
 	return true;
 }
@@ -65,6 +142,11 @@ bool GestureImplementation::Unserialize( BufferRead *buffer )
 		std::cout << "Expected 'gstr', got junk." << std::endl;
 		return false;
 	}
+
+	_id = buffer->ReadInt();
+	_type = (Gesture::Type)buffer->ReadInt();
+	_duration = buffer->ReadLongLong();
+	_durationSeconds = buffer->ReadFloat();
 
 	return true;
 }
@@ -87,14 +169,14 @@ void GestureImplementation::Rotate( const Vector &v )
 //-----------------------------------------------------------------------------
 int32_t GestureImplementation::id() const
 {
-	return 0;
+	return _id;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 Gesture::Type GestureImplementation::type() const
 {
-	return Gesture::Type::TYPE_INVALID;
+	return _type;
 }
 
 //-----------------------------------------------------------------------------
@@ -109,14 +191,14 @@ Gesture::State GestureImplementation::state() const
 //-----------------------------------------------------------------------------
 int64_t GestureImplementation::duration() const
 {
-	return 0;
+	return _duration;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 float GestureImplementation::durationSeconds() const
 {
-	return 0.0f;
+	return _durationSeconds;
 }
 
 //-----------------------------------------------------------------------------

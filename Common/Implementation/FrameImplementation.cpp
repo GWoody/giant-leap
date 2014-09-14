@@ -73,7 +73,7 @@ void FrameImplementation::FromLeap( const Leap::Frame &frame )
 	//
 	for( int i = 0; i < gestures.count(); i++ )
 	{
-		GestureImplementation *gi = new GestureImplementation( gestures[i] );
+		GestureImplementation *gi = GestureImplementation::Create( gestures[i] );
 		Gesture g( gi );
 
 		_gestures.push_back( GesturePair_t( g, gi ) );
@@ -107,7 +107,13 @@ BufferWrite FrameImplementation::Serialize()
 	buf.WriteShort( _gestures.size() );
 	for( unsigned int i = 0; i < _gestures.size(); i++ )
 	{
-		_gestures[i].GetImplementation()->Serialize( &buf );
+		int type = _gestures[i].GetImplementation()->type();
+
+		if( type != Gesture::TYPE_INVALID )
+		{
+			buf.WriteShort( type );
+			_gestures[i].GetImplementation()->Serialize( &buf );
+		}
 	}
 
 	return buf;
@@ -152,7 +158,8 @@ void FrameImplementation::Unserialize( BufferRead *buffer )
 	short gestureCount = buffer->ReadShort();
 	while( gestureCount )
 	{
-		GestureImplementation *gi = new GestureImplementation();
+		Gesture::Type type = (Gesture::Type)buffer->ReadShort();
+		GestureImplementation *gi = GestureImplementation::Create( type );
 		if( !gi->Unserialize( buffer ) )
 		{
 			std::cerr << "FrameImplementation::Unserialize - failed to read gesture" << std::endl;

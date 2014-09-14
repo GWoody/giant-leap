@@ -27,9 +27,12 @@ namespace GiantLeap
 	class GestureImplementation : public Interface::Implementation
 	{
 	public:
+		static GestureImplementation *	Create( const Leap::Gesture &gesture );
+		static GestureImplementation *	Create( Gesture::Type type );
+
 		GestureImplementation();
-		GestureImplementation( const Leap::Gesture &gesture );
 		GestureImplementation( BufferRead *buffer );
+		GestureImplementation( const Leap::Gesture &gesture );
 
 		// Initialization.
 		void				FromLeap( const Leap::Gesture &gesture );
@@ -52,6 +55,12 @@ namespace GiantLeap
 		PointableList		pointables() const;
 		
 		const char *		toCString() const;
+
+	private:
+		int32_t				_id;
+		Gesture::Type		_type;
+		int64_t				_duration;
+		float				_durationSeconds;
 	};
 
 	typedef Pair<Gesture, GestureImplementation> GesturePair_t;

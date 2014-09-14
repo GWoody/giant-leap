@@ -27,12 +27,30 @@ namespace GiantLeap
 	{
 	public:
 		SwipeGestureImplementation();
+		SwipeGestureImplementation( const Leap::SwipeGesture &swipe );
+
+		// Initialization.
+		void				FromLeap( const Leap::SwipeGesture &swipe );
+
+		// Networking.
+		bool				Serialize( BufferWrite *buffer );
+		bool				Unserialize( BufferRead *buffer );
+
+		// Manipulations.
+		void				Translate( const Vector &v );
+		void				Rotate( const Vector &v );
 
 		Vector				startPosition() const;
 		Vector				position() const;
 		Vector				direction() const;
 		float				speed() const;
 		Pointable			pointable() const;
+
+	private:
+		Vector				_startPosition;
+		Vector				_position;
+		Vector				_direction;
+		float				_speed;
 	};
 
 }
