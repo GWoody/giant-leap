@@ -24,6 +24,7 @@ using namespace std;
 #include "MemDebugOn.h"
 
 ControllerImplementation *ControllerImplementation::_instance = NULL;
+HANDLE ControllerImplementation::_singletonMutex = NULL;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -38,14 +39,23 @@ ControllerImplementation::ControllerImplementation( Controller &c ) :
 
 	_policyFlags = Controller::POLICY_DEFAULT;
 	_gestureState = 0;
+
+	_singletonMutex = CreateMutex( NULL, false, NULL );
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 ControllerImplementation::~ControllerImplementation()
 {
-	// TODO: wait for mutex
+	WaitForSingleObject( _singletonMutex, INFINITE );
+
+	_singletonMutex = NULL;
 	_instance = NULL;
+
+	// Unblock everything waiting.
+	// Don't worry about calling `CloseHandle`. Windows will free the mutex
+	// when the application is closed.
+	ReleaseMutex( _singletonMutex );
 }
 
 //-----------------------------------------------------------------------------

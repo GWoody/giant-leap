@@ -19,6 +19,9 @@
 #include <deque>
 #include "FrameImplementation.h"
 
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
+
 namespace GiantLeap
 {
 
@@ -51,8 +54,8 @@ namespace GiantLeap
 		void				DispatchFrame();
 
 		// TODO: mutex stuff
-		static ControllerImplementation *	Get()		{ return _instance; }
-		static void			Release()					{  }
+		static ControllerImplementation *	Get()		{ WaitForSingleObject( _singletonMutex, INFINITE ); return _instance; }
+		static void			Release()					{ ReleaseMutex( _singletonMutex ); }
 
 		// Frame updating.
 		void				PushFrame( const FrameImplementation &frame );
@@ -64,9 +67,11 @@ namespace GiantLeap
 		std::list<Listener *>	_listeners;
 
 		static ControllerImplementation *_instance;
+		static HANDLE		_singletonMutex;
+
 		std::deque<FramePair_t>	_frames;
 
-		Controller &_interface;
+		Controller &		_interface;
 	};
 
 }
