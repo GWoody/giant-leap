@@ -35,16 +35,32 @@ public:
 		// Clear the console.
 		COORD coord; coord.X = coord.Y = 0;
 		SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), coord );
-		FillConsoleOutputCharacter( GetStdHandle( STD_OUTPUT_HANDLE ), 0, 80 * 6, coord, NULL );
 
-		cout << f.id() << endl;
-		cout << "\t" << "Hand Count: " << f.hands().count() << endl;
+		cout << endl;
+
+		FillConsoleOutputCharacter( GetStdHandle( STD_OUTPUT_HANDLE ), 0, 80, coord, NULL );
+		cout << "\t" << "Frame ID: " << f.id() << "\t\t" << "Hand Count: " << f.hands().count() << endl;
+
+		if( !f.hands().count() )
+		{
+			for( int i = 0; i < 6; i++ )
+				cout << "                                                                             " << endl;
+		}
+
 		for( int i = 0; i < f.hands().count(); i++ )
 		{
 			Vector palmPosition = f.hands()[i].palmPosition();
+
+			FillConsoleOutputCharacter( GetStdHandle( STD_OUTPUT_HANDLE ), 0, 80, coord, NULL );
 			cout << "\t\t" << "Palm Position: " << palmPosition.x << ", " << palmPosition.y << ", " << palmPosition.z << endl;
+
+			FillConsoleOutputCharacter( GetStdHandle( STD_OUTPUT_HANDLE ), 0, 80, coord, NULL );
 			cout << "\t\t" << "Finger Count: " << f.hands()[i].fingers().count() << endl;
-			cout << "\t\t" << "Arm Direction: " << f.hands()[i].arm().direction().x << f.hands()[i].arm().direction().y << f.hands()[i].arm().direction().z << endl;
+
+			FillConsoleOutputCharacter( GetStdHandle( STD_OUTPUT_HANDLE ), 0, 80, coord, NULL );
+			cout << "\t\t" << "Arm Direction: " << f.hands()[i].arm().direction().x << "\t" << f.hands()[i].arm().direction().y << "\t" << f.hands()[i].arm().direction().z << endl;
+
+			FillConsoleOutputCharacter( GetStdHandle( STD_OUTPUT_HANDLE ), 0, 80, coord, NULL );
 			cout << "\t\t" << "Gesture Count: " << f.gestures().count() << endl;
 		}
 	}
