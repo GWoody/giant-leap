@@ -16,20 +16,22 @@
 
 #include "GiantLeap.h"
 #include "CircleGestureImplementation.h"
+#include "FrameImplementation.h"
 using namespace GiantLeap;
 
 #include "MemDebugOn.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-CircleGestureImplementation::CircleGestureImplementation()
+CircleGestureImplementation::CircleGestureImplementation( FrameImplementation &frame ) :
+	GestureImplementation( frame )
 {
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-CircleGestureImplementation::CircleGestureImplementation( const Leap::CircleGesture &circle ) :
-	GestureImplementation( circle )
+CircleGestureImplementation::CircleGestureImplementation( FrameImplementation &frame, const Leap::CircleGesture &circle ) :
+	GestureImplementation( frame, circle )
 {
 	FromLeap( circle );
 }
@@ -38,6 +40,7 @@ CircleGestureImplementation::CircleGestureImplementation( const Leap::CircleGest
 //-----------------------------------------------------------------------------
 void CircleGestureImplementation::FromLeap( const Leap::CircleGesture &circle )
 {
+	_pointableId = circle.pointable().id();
 	_center = circle.center();
 	_normal = circle.normal();
 	_progress = circle.progress();
@@ -52,6 +55,7 @@ bool CircleGestureImplementation::Serialize( BufferWrite *buffer )
 {
 	buffer->WriteInt( 'crcl' );
 
+	buffer->WriteInt( _pointableId );
 	buffer->WriteVector( _center );
 	buffer->WriteVector( _normal );
 	buffer->WriteFloat( _progress );
@@ -70,6 +74,7 @@ bool CircleGestureImplementation::Unserialize( BufferRead *buffer )
 		return false;
 	}
 
+	_pointableId = buffer->ReadInt();
 	_center = buffer->ReadVector();
 	_normal = buffer->ReadVector();
 	_progress = buffer->ReadFloat();
@@ -124,6 +129,5 @@ float CircleGestureImplementation::radius() const
 //-----------------------------------------------------------------------------
 Pointable CircleGestureImplementation::pointable() const
 {
-	C_breakpoint();
-	return Pointable();
+	return _frame.pointable( _pointableId );
 }

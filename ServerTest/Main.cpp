@@ -69,7 +69,7 @@ static void wait_for_exit()
 
 	do
 	{
-		cout << "Type \"quit\" to exit the application: ";
+		//cout << "Type \"quit\" to exit the application: ";
 		getline( cin, str );
 	} while( str != "quit" );
 }

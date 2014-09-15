@@ -19,7 +19,7 @@
 #include "FingerImplementation.h"
 #include "ArmImplementation.h"
 #include <vector>
-#include "Pair.h"
+
 
 namespace GiantLeap
 {
@@ -35,15 +35,15 @@ namespace GiantLeap
 		HandImplementation( BufferRead *buffer );
 
 		// Initialization.
-		void				FromLeap( const Leap::Hand &hand );
+		virtual void		FromLeap( const Leap::Hand &hand );
 
 		// Networking.
-		bool				Serialize( BufferWrite *buffer );
-		bool				Unserialize( BufferRead *buffer );
+		virtual bool		Serialize( BufferWrite *buffer );
+		virtual bool		Unserialize( BufferRead *buffer );
 
 		// Manipulations.
-		void				Translate( const Vector &v );
-		void				Rotate( const Vector &v );
+		virtual void		Translate( const Vector &v );
+		virtual void		Rotate( const Vector &v );
 
 		// Leap interface.
 		int32_t				id() const;
@@ -103,8 +103,6 @@ namespace GiantLeap
 		float				_grabStrength;
 		float				_confidence;
 	};
-
-	typedef Pair<Hand, HandImplementation> HandPair_t;
 
 }
 

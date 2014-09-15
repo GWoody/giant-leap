@@ -35,15 +35,16 @@ namespace GiantLeap
 		FrameImplementation( BufferRead *buffer );
 
 		// Initialization.
-		void				FromLeap( const Leap::Frame &frame );
+		virtual void		FromLeap( const Leap::Frame &frame );
+		void				SetController( ControllerImplementation *controller )	{ _controller = controller; }
 
 		// Networking.
 		BufferWrite			Serialize();
 		void				Unserialize( BufferRead *buffer );
 
 		// Manipulations.
-		void				Translate( const Vector &v );
-		void				Rotate( const Vector &v );
+		virtual void		Translate( const Vector &v );
+		virtual void		Rotate( const Vector &v );
 
 		// Leap interface.
 		int64_t				id() const;
@@ -77,9 +78,9 @@ namespace GiantLeap
 
 		std::vector<HandPair_t>	_hands;
 		std::vector<GesturePair_t>	_gestures;
-	};
 
-	typedef Pair<Frame, FrameImplementation> FramePair_t;
+		ControllerImplementation *	_controller;
+	};
 
 }
 

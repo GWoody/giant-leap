@@ -26,19 +26,19 @@ namespace GiantLeap
 	class CircleGestureImplementation : public GestureImplementation
 	{
 	public:
-		CircleGestureImplementation();
-		CircleGestureImplementation( const Leap::CircleGesture &circle );
+		CircleGestureImplementation( FrameImplementation &frame );
+		CircleGestureImplementation( FrameImplementation &frame, const Leap::CircleGesture &circle );
 
 		// Initialization.
-		void				FromLeap( const Leap::CircleGesture &circle );
+		virtual void		FromLeap( const Leap::CircleGesture &circle );
 
 		// Networking.
-		bool				Serialize( BufferWrite *buffer );
-		bool				Unserialize( BufferRead *buffer );
+		virtual bool		Serialize( BufferWrite *buffer );
+		virtual bool		Unserialize( BufferRead *buffer );
 
 		// Manipulations.
-		void				Translate( const Vector &v );
-		void				Rotate( const Vector &v );
+		virtual void		Translate( const Vector &v );
+		virtual void		Rotate( const Vector &v );
 
 		Vector				center() const;
 		Vector				normal() const;
@@ -47,6 +47,7 @@ namespace GiantLeap
 		Pointable			pointable() const;
 
 	private:
+		int32_t				_pointableId;
 		Vector				_center;
 		Vector				_normal;
 		float				_progress;

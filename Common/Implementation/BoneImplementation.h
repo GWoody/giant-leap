@@ -31,15 +31,15 @@ namespace GiantLeap
 		BoneImplementation( BufferRead *buffer );
 
 		// Initialization.
-		void				FromLeap( const Leap::Bone &bone );
+		virtual void		FromLeap( const Leap::Bone &bone );
 
 		// Networking.
-		bool				Serialize( BufferWrite *buffer );
-		bool				Unserialize( BufferRead *buffer );
+		virtual bool		Serialize( BufferWrite *buffer );
+		virtual bool		Unserialize( BufferRead *buffer );
 
 		// Manipulations.
-		void				Translate( const Vector &v );
-		void				Rotate( const Vector &v );
+		virtual void		Translate( const Vector &v );
+		virtual void		Rotate( const Vector &v );
 
 		// Leap interface.
 		Vector				prevJoint() const;
@@ -57,8 +57,6 @@ namespace GiantLeap
 		Vector				_nextJoint;
 		Vector				_prevJoint;
 	};
-
-	typedef Pair<Bone, BoneImplementation> BonePair_t;
 
 }
 

@@ -30,15 +30,15 @@ namespace GiantLeap
 		ArmImplementation( BufferRead *buffer );
 
 		// Initialization.
-		void				FromLeap( const Leap::Arm &arm );
+		virtual void		FromLeap( const Leap::Arm &arm );
 
 		// Networking.
-		bool				Serialize( BufferWrite *buffer );
-		bool				Unserialize( BufferRead *buffer );
+		virtual bool		Serialize( BufferWrite *buffer );
+		virtual bool		Unserialize( BufferRead *buffer );
 
 		// Manipulations.
-		void				Translate( const Vector &v );
-		void				Rotate( const Vector &v );
+		virtual void		Translate( const Vector &v );
+		virtual void		Rotate( const Vector &v );
 
 		// Leap interface.
 
@@ -54,8 +54,6 @@ namespace GiantLeap
 		Vector				_elbowPosition;
 		Vector				_wristPosition;
 	};
-
-	typedef Pair<Arm, ArmImplementation> ArmPair_t;
 
 }
 

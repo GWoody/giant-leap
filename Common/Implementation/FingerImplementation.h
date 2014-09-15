@@ -34,15 +34,15 @@ namespace GiantLeap
 		FingerImplementation( BufferRead *buffer );
 
 		// Initialization.
-		void				FromLeap( const Leap::Finger &finger );
+		virtual void		FromLeap( const Leap::Finger &finger );
 
 		// Networking.
-		bool				Serialize( BufferWrite *buffer );
-		bool				Unserialize( BufferRead *buffer );
+		virtual bool		Serialize( BufferWrite *buffer );
+		virtual bool		Unserialize( BufferRead *buffer );
 
 		// Manipulations.
-		void				Translate( const Vector &v );
-		void				Rotate( const Vector &v );
+		virtual void		Translate( const Vector &v );
+		virtual void		Rotate( const Vector &v );
 
 		// Leap interface.
 		Bone				bone( Bone::Type idx ) const;
@@ -52,10 +52,9 @@ namespace GiantLeap
 
 	private:
 		Finger::Type		_type;
+
 		std::vector<BonePair_t>	_bones;
 	};
-
-	typedef Pair<Finger, FingerImplementation> FingerPair_t;
 
 }
 

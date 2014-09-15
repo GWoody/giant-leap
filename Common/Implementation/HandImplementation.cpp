@@ -365,8 +365,15 @@ PointableList HandImplementation::pointables() const
 //-----------------------------------------------------------------------------
 Pointable HandImplementation::pointable( int32_t id ) const
 {
-	C_breakpoint();
-	return Pointable();
+	for( unsigned int i = 0; i < _fingers.size(); i++ )
+	{
+		if( _fingers[i].GetImplementation()->id() == id )
+		{
+			return _fingers[i].GetInterface();
+		}
+	}
+
+	return Pointable::invalid();
 }
 
 //-----------------------------------------------------------------------------

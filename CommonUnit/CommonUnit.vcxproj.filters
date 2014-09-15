@@ -54,6 +54,9 @@
     <ClCompile Include="GestureUnit.cpp">
       <Filter>Implementation</Filter>
     </ClCompile>
+    <ClCompile Include="TimerUnit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonUnit.h">

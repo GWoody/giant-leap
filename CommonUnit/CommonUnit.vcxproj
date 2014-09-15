@@ -82,6 +82,7 @@
     <ClCompile Include="ListBaseUnit.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="SharedObjectUnit.cpp" />
+    <ClCompile Include="TimerUnit.cpp" />
     <ClCompile Include="UdpSocketUnit.cpp" />
   </ItemGroup>
   <ItemGroup>

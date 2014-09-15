@@ -38,10 +38,10 @@ public:
 class UdpSocket
 {
 public:
-	UdpSocket( bool recv, unsigned short port );
+	LEAP_EXPORT UdpSocket( bool recv, unsigned short port );
 
-	virtual bool		Send( const void *buf, int len, const char *address );
-	virtual int			Recv( void *buf, int buflen, address_t *addr );
+	LEAP_EXPORT virtual bool		Send( const void *buf, int len, const char *address );
+	LEAP_EXPORT virtual int			Recv( void *buf, int buflen, address_t *addr );
 
 protected:
 	int					_fd;

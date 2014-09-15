@@ -33,6 +33,7 @@ bool run_gesture_test();
 bool run_tapgesture_test();
 bool run_interface_test();
 bool run_udpsocket_test();
+bool run_timer_test();
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -49,6 +50,7 @@ int main( int argc, char **argv )
 	RUN_TEST( "Pointable", run_pointable_test );
 	RUN_TEST( "Interface", run_interface_test );
 	RUN_TEST( "UDP ", run_udpsocket_test );
+	RUN_TEST( "Timer ", run_timer_test );
 
 	system( "pause" );
 	return EXIT_SUCCESS;

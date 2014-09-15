@@ -32,15 +32,15 @@ namespace GiantLeap
 		PointableImplementation( BufferRead *buffer );
 
 		// Initialization.
-		void				FromLeap( const Leap::Pointable &pointable );
+		virtual void		FromLeap( const Leap::Pointable &pointable );
 
 		// Networking.
-		bool				Serialize( BufferWrite *buffer );
-		bool				Unserialize( BufferRead *buffer );
+		virtual bool		Serialize( BufferWrite *buffer );
+		virtual bool		Unserialize( BufferRead *buffer );
 
 		// Manipulations.
-		void				Translate( const Vector &v );
-		void				Rotate( const Vector &v );
+		virtual void		Translate( const Vector &v );
+		virtual void		Rotate( const Vector &v );
 
 		// Leap interface.
 		int32_t				id() const;
@@ -72,8 +72,6 @@ namespace GiantLeap
 		float				_width;
 		float				_length;
 	};
-
-	typedef Pair<Pointable, PointableImplementation> PointablePair_t;
 
 }
 

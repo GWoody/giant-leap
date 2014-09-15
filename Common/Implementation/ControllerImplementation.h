@@ -45,6 +45,7 @@ namespace GiantLeap
 		bool				removeListener( Listener &listener );
 
 		Frame				frame( int history );
+		Frame				frameById( int32_t id );
 
 		void				enableGesture( Gesture::Type type, bool enable );
 		bool				isGestureEnabled( Gesture::Type type );

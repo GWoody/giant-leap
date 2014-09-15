@@ -136,6 +136,9 @@
     <ClCompile Include="Implementation\SharedObject.cpp">
       <Filter>Implementation</Filter>
     </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Implementation\ControllerImplementation.h">
@@ -199,6 +202,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Pair.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

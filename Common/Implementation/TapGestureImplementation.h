@@ -26,21 +26,21 @@ namespace GiantLeap
 	class TapGestureImplementation : public GestureImplementation
 	{
 	public:
-		TapGestureImplementation();
-		TapGestureImplementation( const Leap::KeyTapGesture &tap );
-		TapGestureImplementation( const Leap::ScreenTapGesture &tap );
+		TapGestureImplementation( FrameImplementation &frame );
+		TapGestureImplementation( FrameImplementation &frame, const Leap::KeyTapGesture &tap );
+		TapGestureImplementation( FrameImplementation &frame, const Leap::ScreenTapGesture &tap );
 
 		// Initialization.
-		void				FromLeap( const Leap::KeyTapGesture &tap );
-		void				FromLeap( const Leap::ScreenTapGesture &tap );
+		virtual void		FromLeap( const Leap::KeyTapGesture &tap );
+		virtual void		FromLeap( const Leap::ScreenTapGesture &tap );
 
 		// Networking.
-		bool				Serialize( BufferWrite *buffer );
-		bool				Unserialize( BufferRead *buffer );
+		virtual bool		Serialize( BufferWrite *buffer );
+		virtual bool		Unserialize( BufferRead *buffer );
 
 		// Manipulations.
-		void				Translate( const Vector &v );
-		void				Rotate( const Vector &v );
+		virtual void		Translate( const Vector &v );
+		virtual void		Rotate( const Vector &v );
 
 		Vector				position() const;
 		Vector				direction() const;

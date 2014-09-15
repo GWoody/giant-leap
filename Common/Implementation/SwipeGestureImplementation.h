@@ -12,8 +12,8 @@
 ===============================================================================
 */
 
-#ifndef __POINTABLEIMPLEMENTATION_H__
-#define __POINTABLEIMPLEMENTATION_H__
+#ifndef __SWIPEGESTUREIMPLEMENTATION_H__
+#define __SWIPEGESTUREIMPLEMENTATION_H__
 
 #include "GestureImplementation.h"
 
@@ -26,19 +26,19 @@ namespace GiantLeap
 	class SwipeGestureImplementation : public GestureImplementation
 	{
 	public:
-		SwipeGestureImplementation();
-		SwipeGestureImplementation( const Leap::SwipeGesture &swipe );
+		SwipeGestureImplementation( FrameImplementation &frame );
+		SwipeGestureImplementation( FrameImplementation &frame, const Leap::SwipeGesture &swipe );
 
 		// Initialization.
-		void				FromLeap( const Leap::SwipeGesture &swipe );
+		virtual void		FromLeap( const Leap::SwipeGesture &swipe );
 
 		// Networking.
-		bool				Serialize( BufferWrite *buffer );
-		bool				Unserialize( BufferRead *buffer );
+		virtual bool		Serialize( BufferWrite *buffer );
+		virtual bool		Unserialize( BufferRead *buffer );
 
 		// Manipulations.
-		void				Translate( const Vector &v );
-		void				Rotate( const Vector &v );
+		virtual void		Translate( const Vector &v );
+		virtual void		Rotate( const Vector &v );
 
 		Vector				startPosition() const;
 		Vector				position() const;
@@ -55,4 +55,4 @@ namespace GiantLeap
 
 }
 
-#endif // __POINTABLEIMPLEMENTATION_H__
+#endif // __SWIPEGESTUREIMPLEMENTATION_H__

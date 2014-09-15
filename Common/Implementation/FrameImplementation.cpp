@@ -19,6 +19,8 @@
 #include "HandImplementation.h"
 #include "GestureImplementation.h"
 #include "ListBaseImplementation.h"
+#include "SharedObject.h"
+#include "ControllerImplementation.h"
 using namespace GiantLeap;
 
 #include "MemDebugOn.h"
@@ -73,7 +75,7 @@ void FrameImplementation::FromLeap( const Leap::Frame &frame )
 	//
 	for( int i = 0; i < gestures.count(); i++ )
 	{
-		GestureImplementation *gi = GestureImplementation::Create( gestures[i] );
+		GestureImplementation *gi = GestureImplementation::Create( *this, gestures[i] );
 		Gesture g( gi );
 
 		_gestures.push_back( GesturePair_t( g, gi ) );
@@ -85,6 +87,8 @@ void FrameImplementation::FromLeap( const Leap::Frame &frame )
 BufferWrite FrameImplementation::Serialize()
 {
 	BufferWrite buf;
+
+	buf.WriteInt( 'frmh' );
 
 	//
 	// Write frame info.
@@ -116,6 +120,8 @@ BufferWrite FrameImplementation::Serialize()
 		}
 	}
 
+	buf.WriteInt( 'frmt' );
+
 	return buf;
 }
 
@@ -125,6 +131,12 @@ void FrameImplementation::Unserialize( BufferRead *buffer )
 {
 	_hands.clear();
 	_gestures.clear();
+
+	if( buffer->ReadInt() != 'frmh' )
+	{
+		std::cerr << "FrameImplementation::Unserialize - failed to frame head" << std::endl;
+		return;
+	}
 
 	//
 	// Read frame info.
@@ -159,7 +171,7 @@ void FrameImplementation::Unserialize( BufferRead *buffer )
 	while( gestureCount )
 	{
 		Gesture::Type type = (Gesture::Type)buffer->ReadShort();
-		GestureImplementation *gi = GestureImplementation::Create( type );
+		GestureImplementation *gi = GestureImplementation::Create( *this, type );
 		if( !gi->Unserialize( buffer ) )
 		{
 			std::cerr << "FrameImplementation::Unserialize - failed to read gesture" << std::endl;
@@ -170,6 +182,12 @@ void FrameImplementation::Unserialize( BufferRead *buffer )
 		Gesture g( gi );
 		_gestures.push_back( GesturePair_t( g, gi ) );
 		--gestureCount;
+	}
+
+	if( buffer->ReadInt() != 'frmt' )
+	{
+		std::cerr << "FrameImplementation::Unserialize - failed to frame tail" << std::endl;
+		return;
 	}
 }
 
@@ -296,15 +314,31 @@ GestureList FrameImplementation::gestures() const
 //-----------------------------------------------------------------------------
 Hand FrameImplementation::hand( int32_t id ) const
 {
-	return Hand();
+	for( unsigned int i = 0; i < _hands.size(); i++ )
+	{
+		if( _hands[i].GetImplementation()->id() == id )
+		{
+			return _hands[i].GetInterface();
+		}
+	}
+
+	return Hand::invalid();
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 Pointable FrameImplementation::pointable( int32_t id )
 {
-	C_breakpoint();
-	return Pointable();
+	for( unsigned int i = 0; i < _hands.size(); i++ )
+	{
+		Pointable p = _hands[i].GetImplementation()->pointable( id );
+		if( p != Pointable::invalid() )
+		{
+			return p;
+		}
+	}
+
+	return Pointable::invalid();
 }
 
 //-----------------------------------------------------------------------------

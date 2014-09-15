@@ -23,20 +23,23 @@ using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-TapGestureImplementation::TapGestureImplementation()
+TapGestureImplementation::TapGestureImplementation( FrameImplementation &frame ) :
+	GestureImplementation( frame )
 {
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-TapGestureImplementation::TapGestureImplementation( const Leap::KeyTapGesture &tap )
+TapGestureImplementation::TapGestureImplementation( FrameImplementation &frame, const Leap::KeyTapGesture &tap ) :
+	GestureImplementation( frame )
 {
 	FromLeap( tap );
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-TapGestureImplementation::TapGestureImplementation( const Leap::ScreenTapGesture &tap )
+TapGestureImplementation::TapGestureImplementation( FrameImplementation &frame, const Leap::ScreenTapGesture &tap ) :
+	GestureImplementation( frame )
 {
 	FromLeap( tap );
 }

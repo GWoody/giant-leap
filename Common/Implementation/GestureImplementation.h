@@ -27,23 +27,22 @@ namespace GiantLeap
 	class GestureImplementation : public Interface::Implementation
 	{
 	public:
-		static GestureImplementation *	Create( const Leap::Gesture &gesture );
-		static GestureImplementation *	Create( Gesture::Type type );
+		static GestureImplementation *	Create( FrameImplementation &frame, const Leap::Gesture &gesture );
+		static GestureImplementation *	Create( FrameImplementation &frame, Gesture::Type type );
 
-		GestureImplementation();
-		GestureImplementation( BufferRead *buffer );
-		GestureImplementation( const Leap::Gesture &gesture );
+		GestureImplementation( FrameImplementation &frame );
+		GestureImplementation( FrameImplementation &frame, const Leap::Gesture &gesture );
 
 		// Initialization.
-		void				FromLeap( const Leap::Gesture &gesture );
+		virtual void		FromLeap( const Leap::Gesture &gesture );
 
 		// Networking.
-		bool				Serialize( BufferWrite *buffer );
-		bool				Unserialize( BufferRead *buffer );
+		virtual bool		Serialize( BufferWrite *buffer );
+		virtual bool		Unserialize( BufferRead *buffer );
 
 		// Manipulations.
-		void				Translate( const Vector &v );
-		void				Rotate( const Vector &v );
+		virtual void		Translate( const Vector &v );
+		virtual void		Rotate( const Vector &v );
 
 		int32_t				id() const;
 		Gesture::Type		type() const;
@@ -56,14 +55,17 @@ namespace GiantLeap
 		
 		const char *		toCString() const;
 
+	protected:
+		FrameImplementation &	_frame;
+
 	private:
 		int32_t				_id;
 		Gesture::Type		_type;
 		int64_t				_duration;
 		float				_durationSeconds;
-	};
 
-	typedef Pair<Gesture, GestureImplementation> GesturePair_t;
+		std::vector<int32_t>	_handIds;
+	};
 
 }
 

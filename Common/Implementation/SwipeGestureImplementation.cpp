@@ -23,15 +23,16 @@ using namespace GiantLeap;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-SwipeGestureImplementation::SwipeGestureImplementation()
+SwipeGestureImplementation::SwipeGestureImplementation( FrameImplementation &frame ) :
+	GestureImplementation( frame )
 {
 	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-SwipeGestureImplementation::SwipeGestureImplementation( const Leap::SwipeGesture &swipe ) :
-	GestureImplementation( swipe )
+SwipeGestureImplementation::SwipeGestureImplementation( FrameImplementation &frame, const Leap::SwipeGesture &swipe ) :
+	GestureImplementation( frame, swipe )
 {
 	FromLeap( swipe );
 }

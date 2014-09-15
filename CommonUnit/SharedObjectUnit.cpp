@@ -12,6 +12,7 @@
 ===============================================================================
 */
 
+#include "Common.h"
 #include "CommonUnit.h"
 
 #include <iostream>

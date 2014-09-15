@@ -19,38 +19,40 @@
 #include "CircleGestureImplementation.h"
 #include "SwipeGestureImplementation.h"
 #include "TapGestureImplementation.h"
+#include "FrameImplementation.h"
+#include "ListBaseImplementation.h"
 using namespace GiantLeap;
 
 #include "MemDebugOn.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-GestureImplementation *GestureImplementation::Create( const Leap::Gesture &gesture )
+GestureImplementation *GestureImplementation::Create( FrameImplementation &frame,const Leap::Gesture &gesture )
 {
 	switch( gesture.type() )
 	{
 		case Gesture::Type::TYPE_SWIPE:
 		{
 			Leap::SwipeGesture ls( gesture );
-			return new SwipeGestureImplementation( ls );
+			return new SwipeGestureImplementation( frame, ls );
 		}
 
 		case Gesture::Type::TYPE_CIRCLE:
 		{
 			Leap::CircleGesture lc( gesture );
-			return new CircleGestureImplementation( lc );
+			return new CircleGestureImplementation( frame, lc );
 		}
 
 		case Gesture::Type::TYPE_SCREEN_TAP:
 		{
 			Leap::ScreenTapGesture ls( gesture );
-			return new TapGestureImplementation( ls );
+			return new TapGestureImplementation( frame, ls );
 		}
 
 		case Gesture::Type::TYPE_KEY_TAP:
 		{
 			Leap::KeyTapGesture lk( gesture );
-			return new TapGestureImplementation( lk );
+			return new TapGestureImplementation( frame, lk );
 		}
 	}
 
@@ -60,28 +62,28 @@ GestureImplementation *GestureImplementation::Create( const Leap::Gesture &gestu
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-GestureImplementation *GestureImplementation::Create( Gesture::Type type )
+GestureImplementation *GestureImplementation::Create( FrameImplementation &frame, Gesture::Type type )
 {
 	switch( type )
 	{
 		case Gesture::Type::TYPE_SWIPE:
 		{
-			return new SwipeGestureImplementation();
+			return new SwipeGestureImplementation( frame );
 		}
 
 		case Gesture::Type::TYPE_CIRCLE:
 		{
-			return new CircleGestureImplementation();
+			return new CircleGestureImplementation( frame );
 		}
 
 		case Gesture::Type::TYPE_SCREEN_TAP:
 		{
-			return new TapGestureImplementation();
+			return new TapGestureImplementation( frame );
 		}
 
 		case Gesture::Type::TYPE_KEY_TAP:
 		{
-			return new TapGestureImplementation();
+			return new TapGestureImplementation( frame );
 		}
 	}
 
@@ -91,22 +93,18 @@ GestureImplementation *GestureImplementation::Create( Gesture::Type type )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-GestureImplementation::GestureImplementation()
+GestureImplementation::GestureImplementation( FrameImplementation &frame ) :
+	_frame( frame )
 {
+	
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-GestureImplementation::GestureImplementation( const Leap::Gesture &gesture )
+GestureImplementation::GestureImplementation( FrameImplementation &frame, const Leap::Gesture &gesture ) :
+	_frame( frame )
 {
 	FromLeap( gesture );
-}
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-GestureImplementation::GestureImplementation( BufferRead *buffer )
-{
-	Unserialize( buffer );
 }
 
 //-----------------------------------------------------------------------------
@@ -117,6 +115,12 @@ void GestureImplementation::FromLeap( const Leap::Gesture &gesture )
 	_type = (Gesture::Type)gesture.type();
 	_duration = gesture.duration();
 	_durationSeconds = gesture.durationSeconds();
+
+	Leap::HandList hands = gesture.hands();
+	for( int i = 0; i < hands.count(); i++ )
+	{
+		_handIds.push_back( hands[i].id() );
+	}
 }
 
 //-----------------------------------------------------------------------------
@@ -130,6 +134,12 @@ bool GestureImplementation::Serialize( BufferWrite *buffer )
 	buffer->WriteLongLong( _duration );
 	buffer->WriteFloat( _durationSeconds );
 
+	buffer->WriteInt( _handIds.size() );
+	for( unsigned int i = 0; i < _handIds.size(); i++ )
+	{
+		buffer->WriteInt( _handIds[i] );
+	}
+	
 	return true;
 }
 
@@ -147,6 +157,13 @@ bool GestureImplementation::Unserialize( BufferRead *buffer )
 	_type = (Gesture::Type)buffer->ReadInt();
 	_duration = buffer->ReadLongLong();
 	_durationSeconds = buffer->ReadFloat();
+
+	int handCount = buffer->ReadInt();
+	for( int i = 0; i < handCount; i++ )
+	{
+		int32_t id = buffer->ReadInt();
+		_handIds.push_back( id );
+	}
 
 	return true;
 }
@@ -213,8 +230,15 @@ Frame GestureImplementation::frame() const
 //-----------------------------------------------------------------------------
 HandList GestureImplementation::hands() const
 {
-	C_breakpoint();
-	return HandList();
+	ListBaseImplementation<Hand> *list = new ListBaseImplementation<Hand>;
+
+	for( unsigned int i = 0; i < _handIds.size(); i++ )
+	{
+		Hand h = _frame.hand( _handIds[i] );
+		list->push_back( h );
+	}
+
+	return HandList( *list );
 }
 
 //-----------------------------------------------------------------------------

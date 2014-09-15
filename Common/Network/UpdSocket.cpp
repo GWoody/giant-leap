@@ -22,7 +22,7 @@
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-UdpSocket::UdpSocket( bool recv, unsigned short port )
+LEAP_EXPORT UdpSocket::UdpSocket( bool recv, unsigned short port )
 {
 	_recv = recv;
 	_port = port;
@@ -48,7 +48,7 @@ UdpSocket::UdpSocket( bool recv, unsigned short port )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-bool UdpSocket::Send( const void *buf, int len, const char *address )
+LEAP_EXPORT bool UdpSocket::Send( const void *buf, int len, const char *address )
 {
 	if( !_recv )
 	{
@@ -66,7 +66,7 @@ bool UdpSocket::Send( const void *buf, int len, const char *address )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-int UdpSocket::Recv( void *buf, int buflen, address_t *addr )
+LEAP_EXPORT int UdpSocket::Recv( void *buf, int buflen, address_t *addr )
 {
 	if( _recv )
 	{

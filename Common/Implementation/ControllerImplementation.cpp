@@ -129,6 +129,21 @@ Frame ControllerImplementation::frame( int history )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+Frame ControllerImplementation::frameById( int32_t id )
+{
+	for( int i = 0; i < _frames.size(); i++ )
+	{
+		if( _frames[i].GetImplementation()->id() == id )
+		{
+			return _frames[i].GetInterface();
+		}
+	}
+
+	return Frame::invalid();
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 void ControllerImplementation::enableGesture( Gesture::Type type, bool enable )
 {
 	if( type != Gesture::TYPE_INVALID )
@@ -176,6 +191,7 @@ void ControllerImplementation::PushFrame( const FrameImplementation &frame )
 	}
 
 	FrameImplementation *fi = new FrameImplementation( frame );
+	fi->SetController( this );
 	Frame f( fi );
 
 	_frames.push_front( FramePair_t( f, fi ) );
