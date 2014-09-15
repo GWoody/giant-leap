@@ -36,7 +36,6 @@ namespace GiantLeap
 
 		// Initialization.
 		virtual void		FromLeap( const Leap::Frame &frame );
-		void				SetController( ControllerImplementation *controller )	{ _controller = controller; }
 
 		// Networking.
 		BufferWrite			Serialize();
@@ -78,8 +77,6 @@ namespace GiantLeap
 
 		std::vector<HandPair_t>	_hands;
 		std::vector<GesturePair_t>	_gestures;
-
-		ControllerImplementation *	_controller;
 	};
 
 }
