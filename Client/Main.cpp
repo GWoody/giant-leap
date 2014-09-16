@@ -139,8 +139,8 @@ void ClientListener::onFrame( const Leap::Controller &controller )
 	FrameImplementation frame( controller.frame() );
 
 	// Transform the data for the server.
-	frame.Rotate( global_device_rotation );
-	frame.Translate( global_device_translation );
+	frame.Rotate( -global_device_rotation );
+	frame.Translate( -global_device_translation );
 
 	// Write the frame into a contiguous block of memory.
 	BufferWrite buf = frame.Serialize();

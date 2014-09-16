@@ -96,7 +96,8 @@ bool PointableImplementation::Unserialize( BufferRead *buffer )
 //-----------------------------------------------------------------------------
 void PointableImplementation::Translate( const Vector &v )
 {
-
+	_tipPosition += v;
+	_stabilizedTipPosition += v;
 }
 
 //-----------------------------------------------------------------------------

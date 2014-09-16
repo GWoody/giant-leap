@@ -85,7 +85,8 @@ bool ArmImplementation::Unserialize( BufferRead *buffer )
 //-----------------------------------------------------------------------------
 void ArmImplementation::Translate( const Vector &v )
 {
-
+	_elbowPosition += v;
+	_wristPosition += v;
 }
 
 //-----------------------------------------------------------------------------

@@ -85,7 +85,8 @@ bool BoneImplementation::Unserialize( BufferRead *buffer )
 //-----------------------------------------------------------------------------
 void BoneImplementation::Translate( const Vector &v )
 {
-
+	_nextJoint += v;
+	_prevJoint += v;
 }
 
 //-----------------------------------------------------------------------------
