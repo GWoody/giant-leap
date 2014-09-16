@@ -101,9 +101,12 @@ void PointableImplementation::Translate( const Vector &v )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void PointableImplementation::Rotate( const Vector &v )
+void PointableImplementation::Rotate( const Matrix &pry )
 {
-
+	_tipPosition = pry.transformDirection( _tipPosition );
+	_stabilizedTipPosition = pry.transformDirection( _stabilizedTipPosition );
+	_tipVelocity = pry.transformDirection( _tipVelocity );
+	_direction = pry.transformDirection( _direction );
 }
 
 //-----------------------------------------------------------------------------

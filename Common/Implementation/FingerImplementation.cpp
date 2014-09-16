@@ -125,14 +125,14 @@ void FingerImplementation::Translate( const Vector &v )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void FingerImplementation::Rotate( const Vector &v )
+void FingerImplementation::Rotate( const Matrix &pry )
 {
 	for( unsigned int i = 0; i < _bones.size(); i++ )
 	{
-		_bones[i].GetImplementation()->Rotate( v );
+		_bones[i].GetImplementation()->Rotate( pry );
 	}
 
-	PointableImplementation::Rotate( v );
+	PointableImplementation::Rotate( pry );
 }
 
 //-----------------------------------------------------------------------------

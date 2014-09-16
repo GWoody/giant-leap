@@ -90,9 +90,10 @@ void BoneImplementation::Translate( const Vector &v )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void BoneImplementation::Rotate( const Vector &v )
+void BoneImplementation::Rotate( const Matrix &pry )
 {
-
+	_nextJoint = pry.transformDirection( _nextJoint );
+	_prevJoint = pry.transformDirection( _prevJoint );
 }
 
 //-----------------------------------------------------------------------------

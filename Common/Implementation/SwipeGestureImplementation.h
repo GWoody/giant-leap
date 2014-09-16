@@ -38,7 +38,7 @@ namespace GiantLeap
 
 		// Manipulations.
 		virtual void		Translate( const Vector &v );
-		virtual void		Rotate( const Vector &v );
+		virtual void		Rotate( const Matrix &pry );
 
 		Vector				startPosition() const;
 		Vector				position() const;

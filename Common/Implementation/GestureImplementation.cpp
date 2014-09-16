@@ -177,7 +177,7 @@ void GestureImplementation::Translate( const Vector &v )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void GestureImplementation::Rotate( const Vector &v )
+void GestureImplementation::Rotate( const Matrix &pry )
 {
 
 }

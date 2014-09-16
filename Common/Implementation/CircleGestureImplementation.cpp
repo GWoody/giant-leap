@@ -87,14 +87,19 @@ bool CircleGestureImplementation::Unserialize( BufferRead *buffer )
 //-----------------------------------------------------------------------------
 void CircleGestureImplementation::Translate( const Vector &v )
 {
+	_center += v;
+
 	GestureImplementation::Translate( v );
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void CircleGestureImplementation::Rotate( const Vector &v )
+void CircleGestureImplementation::Rotate( const Matrix &pry )
 {
-	GestureImplementation::Rotate( v );
+	_center = pry.transformDirection( _center );
+	_normal = pry.transformDirection( _normal );
+
+	GestureImplementation::Rotate( pry );
 }
 
 //-----------------------------------------------------------------------------

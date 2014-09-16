@@ -85,14 +85,21 @@ bool SwipeGestureImplementation::Unserialize( BufferRead *buffer )
 //-----------------------------------------------------------------------------
 void SwipeGestureImplementation::Translate( const Vector &v )
 {
+	_startPosition += v;
+	_position += v;
+
 	GestureImplementation::Translate( v );
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void SwipeGestureImplementation::Rotate( const Vector &v )
+void SwipeGestureImplementation::Rotate( const Matrix &pry )
 {
-	GestureImplementation::Rotate( v );
+	_startPosition = pry.transformDirection( _startPosition );
+	_position = pry.transformDirection( _position );
+	_direction = pry.transformDirection( _direction );
+
+	GestureImplementation::Rotate( pry );
 }
 
 //-----------------------------------------------------------------------------

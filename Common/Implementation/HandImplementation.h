@@ -43,7 +43,7 @@ namespace GiantLeap
 
 		// Manipulations.
 		virtual void		Translate( const Vector &v );
-		virtual void		Rotate( const Vector &v );
+		virtual void		Rotate( const Matrix &pry );
 
 		// Leap interface.
 		int32_t				id() const;

@@ -100,14 +100,19 @@ bool TapGestureImplementation::Unserialize( BufferRead *buffer )
 //-----------------------------------------------------------------------------
 void TapGestureImplementation::Translate( const Vector &v )
 {
+	_position += v;
+
 	GestureImplementation::Translate( v );
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void TapGestureImplementation::Rotate( const Vector &v )
+void TapGestureImplementation::Rotate( const Matrix &pry )
 {
-	GestureImplementation::Rotate( v );
+	_position = pry.transformDirection( _position );
+	_direction = pry.transformDirection( _direction );
+
+	GestureImplementation::Rotate( pry );
 }
 
 //-----------------------------------------------------------------------------

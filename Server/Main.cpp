@@ -25,14 +25,21 @@ using namespace GiantLeap;
 #include <Subauth.h>
 
 #include <iostream>
+#include <map>
 using namespace std;
 
 #include "MemDebugOn.h"
 
 //-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+typedef map<string, FrameImplementation> FrameMap_t;
+
+//-----------------------------------------------------------------------------
 // Prototypes.
 //-----------------------------------------------------------------------------
-DWORD WINAPI thread_main( LPVOID lpParam );
+DWORD WINAPI		thread_main( LPVOID lpParam );
+void				dispatch_frame( const FrameMap_t &frames );
+FrameImplementation	create_final_frame( const FrameMap_t &frames );
 
 //-----------------------------------------------------------------------------
 // Global variables.
@@ -65,28 +72,57 @@ LEAP_EXPORT GiantLeap::Init::~Init()
 }	
 
 //-----------------------------------------------------------------------------
+// Receives messages from all client applications.
+//
+// Stores the address of the first received message. This address is used to
+// dispatch frames to the host application.
 //-----------------------------------------------------------------------------
 DWORD WINAPI thread_main( LPVOID lpParam )
 {
 	void *buf = malloc( 65535 );
 	address_t addr;
 
+	FrameMap_t frames;
+
+	int len = global_socket.Recv( buf, 65535, &addr );
+	string masterAddress = addr._address;
+
 	while( !global_quit )
 	{
-		int len = global_socket.Recv( buf, 65535, &addr );
-
 		BufferRead rb( buf, len );
-		FrameImplementation frame( &rb );
+		frames[addr._address] = FrameImplementation( &rb );
 
-		ControllerImplementation *controller = ControllerImplementation::Get();
-		if( controller )
+		if( addr._address == masterAddress )
 		{
-			controller->PushFrame( frame );
-			controller->DispatchFrame();
+			dispatch_frame( frames );
+			frames.clear();
 		}
-		ControllerImplementation::Release();
+
+		len = global_socket.Recv( buf, 65535, &addr );
 	}
 
 	free( buf );
 	return 0;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void dispatch_frame( const FrameMap_t &frames )
+{
+	FrameImplementation frame = create_final_frame( frames );
+
+	ControllerImplementation *controller = ControllerImplementation::Get();
+	if( controller )
+	{
+		controller->PushFrame( frame );
+		controller->DispatchFrame();
+	}
+	ControllerImplementation::Release();
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+FrameImplementation	create_final_frame( const FrameMap_t &frames )
+{
+	return frames.begin()->second;
 }

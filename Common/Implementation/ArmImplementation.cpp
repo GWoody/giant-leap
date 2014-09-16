@@ -90,9 +90,10 @@ void ArmImplementation::Translate( const Vector &v )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void ArmImplementation::Rotate( const Vector &v )
+void ArmImplementation::Rotate( const Matrix &pry )
 {
-
+	_elbowPosition = pry.transformDirection( _elbowPosition );
+	_wristPosition = pry.transformDirection( _wristPosition );
 }
 
 //-----------------------------------------------------------------------------

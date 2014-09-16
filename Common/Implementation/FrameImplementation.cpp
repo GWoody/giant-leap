@@ -210,14 +210,19 @@ void FrameImplementation::Translate( const Vector &v )
 //-----------------------------------------------------------------------------
 void FrameImplementation::Rotate( const Vector &v )
 {
+	Matrix pitch( Vector::right(), v.x );
+	Matrix roll( Vector::backward(), v.y );
+	Matrix yaw( Vector::up(), v.z );
+	Matrix pry = pitch * roll * yaw;
+
 	for( unsigned int i = 0; i < _hands.size(); i++ )
 	{
-		_hands[i].GetImplementation()->Rotate( v );
+		_hands[i].GetImplementation()->Rotate( pry );
 	}
 
 	for( unsigned int i = 0; i < _gestures.size(); i++ )
 	{
-		_gestures[i].GetImplementation()->Rotate( v );
+		_gestures[i].GetImplementation()->Rotate( pry );
 	}
 }
 

@@ -191,27 +191,32 @@ void HandImplementation::Translate( const Vector &v )
 	_palmPosition += v;
 	_stabilizedPalmPosition += v;
 	_sphereCenter += v;
+
+	for( unsigned int i = 0; i < _fingers.size(); i++ )
+	{
+		_fingers[i].GetImplementation()->Translate( v );
+	}
+
+	_arm.GetImplementation()->Translate( v );
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-void HandImplementation::Rotate( const Vector &v )
+void HandImplementation::Rotate( const Matrix &pry )
 {
-	Matrix pitch( Vector::right(), v.x );
-	Matrix roll( Vector::backward(), v.y );
-	Matrix yaw( Vector::up(), v.z );
+	_palmPosition = pry.transformDirection( _palmPosition );
+	_stabilizedPalmPosition = pry.transformDirection( _stabilizedPalmPosition );
+	_palmVelocity = pry.transformDirection( _palmVelocity );
+	_palmNormal = pry.transformDirection( _palmNormal );
+	_direction = pry.transformDirection( _direction );
+	_sphereCenter = pry.transformDirection( _sphereCenter );
 
-	const Matrix *m[] = { &pitch, &roll, &yaw };
-
-	for( int i = 0; i < 3; i++ )
+	for( unsigned int i = 0; i < _fingers.size(); i++ )
 	{
-		_palmPosition = m[i]->transformDirection( _palmPosition );
-		_stabilizedPalmPosition = m[i]->transformDirection( _stabilizedPalmPosition );
-		_palmVelocity = m[i]->transformDirection( _palmVelocity );
-		_palmNormal = m[i]->transformDirection( _palmNormal );
-		_direction = m[i]->transformDirection( _direction );
-		_sphereCenter = m[i]->transformDirection( _sphereCenter );
+		_fingers[i].GetImplementation()->Rotate( pry );
 	}
+
+	_arm.GetImplementation()->Rotate( pry );
 }
 
 //-----------------------------------------------------------------------------
