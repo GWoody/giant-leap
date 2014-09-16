@@ -137,6 +137,92 @@ void FingerImplementation::Rotate( const Matrix &pry )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+FingerImplementation FingerImplementation::operator+( const FingerImplementation &rhs ) const
+{
+	FingerImplementation f = *this;
+
+	f._type = _type;
+	
+	for( int i = 0; i < 4; i++ )
+	{
+		Bone::Type type = (Bone::Type)i;
+		BoneImplementation *thisBone = GetBoneByType( type );
+		BoneImplementation *rhsBone = GetBoneByType( type );
+
+		if( !thisBone && !rhsBone )
+		{
+			continue;
+		}
+
+		BoneImplementation *newBone = new BoneImplementation();
+		Bone b( newBone );
+		if( thisBone && rhsBone )
+		{
+			(*newBone) = (*thisBone) + (*rhsBone);
+		}
+		else if( thisBone )
+		{
+			(*newBone) = (*thisBone);
+		}
+		else if( rhsBone )
+		{
+			(*newBone) =  (*rhsBone);
+		}
+
+		f._bones.push_back( BonePair_t( b, newBone ) );
+	}
+
+	f.PointableAdd( rhs );
+
+	return f;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+FingerImplementation FingerImplementation::operator*( float scale ) const
+{
+	FingerImplementation f = *this;
+
+	f._type = _type;
+	for( unsigned int i = 0; i < _bones.size(); i++ )
+	{
+		BoneImplementation *newBone = new BoneImplementation();
+		Bone b( newBone );
+
+		(*newBone) = (*_bones[i].GetImplementation()) * scale;
+
+		f._bones.push_back( BonePair_t( b, newBone ) );
+	}
+
+	f.PointableMultiply( scale );
+
+	return f;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+FingerImplementation FingerImplementation::operator/( float scale ) const
+{
+	FingerImplementation f = *this;
+
+	f._type = _type;
+	for( unsigned int i = 0; i < _bones.size(); i++ )
+	{
+		BoneImplementation *newBone = new BoneImplementation();
+		Bone b( newBone );
+
+		(*newBone) = (*_bones[i].GetImplementation()) / scale;
+
+		f._bones.push_back( BonePair_t( b, newBone ) );
+	}
+
+	f.PointableDivide( scale );
+
+	return f;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 Bone FingerImplementation::bone( Bone::Type idx ) const
 {
 	idx = (Bone::Type)C_clamp( idx, 0, (int)_bones.size() );
@@ -156,4 +242,19 @@ const char *FingerImplementation::toCString() const
 {
 	C_breakpoint();
 	return "";
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+BoneImplementation * FingerImplementation::GetBoneByType( Bone::Type type ) const
+{
+	for( unsigned int i = 0; i < _bones.size(); i++ )
+	{
+		if( _bones[i].GetImplementation()->type() == type )
+		{
+			return _bones[i].GetImplementation();
+		}
+	}
+
+	return NULL;
 }

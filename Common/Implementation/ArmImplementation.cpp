@@ -99,6 +99,45 @@ void ArmImplementation::Rotate( const Matrix &pry )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+ArmImplementation ArmImplementation::operator+( const ArmImplementation &rhs ) const
+{
+	ArmImplementation a;
+
+	a._width = _width + rhs._width;
+	a._elbowPosition = _elbowPosition + rhs._elbowPosition;
+	a._wristPosition = _wristPosition + rhs._wristPosition;
+
+	return a;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+ArmImplementation ArmImplementation::operator*( float scale ) const
+{
+	ArmImplementation a;
+
+	a._width = _width * scale;
+	a._elbowPosition = _elbowPosition * scale;
+	a._wristPosition = _wristPosition * scale;
+
+	return a;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+ArmImplementation ArmImplementation::operator/( float scale ) const
+{
+	ArmImplementation a;
+
+	a._width = _width / scale;
+	a._elbowPosition = _elbowPosition / scale;
+	a._wristPosition = _wristPosition / scale;
+
+	return a;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 float ArmImplementation::width() const
 {
 	return _width;

@@ -44,6 +44,10 @@ namespace GiantLeap
 		virtual void		Translate( const Vector &v );
 		virtual void		Rotate( const Matrix &pry );
 
+		FingerImplementation	operator+( const FingerImplementation &rhs ) const;
+		FingerImplementation	operator*( float scale ) const;
+		FingerImplementation	operator/( float scale ) const;
+
 		// Leap interface.
 		Bone				bone( Bone::Type idx ) const;
 		Finger::Type		type() const;
@@ -51,6 +55,8 @@ namespace GiantLeap
 		const char *		toCString() const;
 
 	private:
+		BoneImplementation *	GetBoneByType( Bone::Type type ) const;
+
 		Finger::Type		_type;
 
 		std::vector<BonePair_t>	_bones;

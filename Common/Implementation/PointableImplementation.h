@@ -63,6 +63,11 @@ namespace GiantLeap
 
 		const char *		toCString() const;
 
+	protected:
+		void				PointableAdd( const PointableImplementation &rhs );
+		void				PointableMultiply( float scale );
+		void				PointableDivide( float scale );
+
 	private:
 		int32_t				_id;
 		Vector				_tipPosition;

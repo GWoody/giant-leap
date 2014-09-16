@@ -40,8 +40,11 @@ namespace GiantLeap
 		virtual void		Translate( const Vector &v );
 		virtual void		Rotate( const Matrix &pry );
 
-		// Leap interface.
+		ArmImplementation	operator+( const ArmImplementation &rhs ) const;
+		ArmImplementation	operator*( float scale ) const;
+		ArmImplementation	operator/( float scale ) const;
 
+		// Leap interface.
 		float				width() const;
 		Vector				direction() const;
 		Matrix				basis() const;

@@ -230,3 +230,39 @@ const char *PointableImplementation::toCString() const
 	C_breakpoint();
 	return "";
 }
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void PointableImplementation::PointableAdd( const PointableImplementation &rhs )
+{
+	_tipPosition += rhs._tipPosition;
+	_stabilizedTipPosition += rhs._stabilizedTipPosition;
+	_tipVelocity += rhs._tipVelocity;
+	_direction += rhs._direction;
+	_width += rhs._width;
+	_length += rhs._length;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void PointableImplementation::PointableMultiply( float scale )
+{
+	_tipPosition *= scale;
+	_stabilizedTipPosition *= scale;
+	_tipVelocity *= scale;
+	_direction *= scale;
+	_width *= scale;
+	_length *= scale;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void PointableImplementation::PointableDivide( float scale )
+{
+	_tipPosition /= scale;
+	_stabilizedTipPosition /= scale;
+	_tipVelocity /= scale;
+	_direction /= scale;
+	_width /= scale;
+	_length /= scale;
+}

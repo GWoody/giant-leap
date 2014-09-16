@@ -221,6 +221,163 @@ void HandImplementation::Rotate( const Matrix &pry )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+HandImplementation HandImplementation::operator+( const HandImplementation &rhs ) const
+{
+	HandImplementation h;
+
+	//
+	// Merge general.
+	//
+	h._id = std::min( _id, rhs._id );
+	h._palmPosition = _palmPosition + rhs._palmPosition;
+	h._stabilizedPalmPosition = _stabilizedPalmPosition + rhs._stabilizedPalmPosition;
+	h._palmVelocity = _palmVelocity + rhs._palmVelocity;
+	h._palmNormal = _palmNormal + rhs._palmNormal;
+	h._palmWidth = _palmWidth + rhs._palmWidth;
+	h._direction = _direction + rhs._direction;
+	h._sphereCenter = _sphereCenter + rhs._sphereCenter;
+	h._sphereRadius = _sphereRadius + rhs._sphereRadius;
+	h._pinchStrength = _pinchStrength + rhs._pinchStrength;
+	h._grabStrength = _grabStrength + rhs._grabStrength;
+	h._confidence = _confidence + rhs._confidence;
+
+	//
+	// Merge fingers.
+	//
+	for( int i = 0; i < 5; i++ )
+	{
+		Finger::Type type = (Finger::Type)i;
+		FingerImplementation *thisFinger = GetFingerByType( type );
+		FingerImplementation *rhsFinger = GetFingerByType( type );
+
+		if( !thisFinger && !rhsFinger )
+		{
+			continue;
+		}
+
+		FingerImplementation *newFinger = new FingerImplementation();
+		Finger f( newFinger );
+		if( thisFinger && rhsFinger )
+		{
+			(*newFinger) = (*thisFinger) + (*rhsFinger);
+		}
+		else if( thisFinger )
+		{
+			(*newFinger) = (*thisFinger);
+		}
+		else if( rhsFinger )
+		{
+			(*newFinger) =  (*rhsFinger);
+		}
+
+		h._fingers.push_back( FingerPair_t( f, newFinger ) );
+	}
+
+	//
+	// Merge arm.
+	//
+	ArmImplementation *newArm = new ArmImplementation;
+	Arm a( newArm );
+	(*newArm) = (*_arm.GetImplementation()) + (*rhs._arm.GetImplementation());
+
+	h._arm = ArmPair_t( a, newArm );
+
+	return h;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+HandImplementation HandImplementation::operator*( float scale ) const
+{
+	HandImplementation h;
+
+	h._id = _id;
+	h._palmPosition = _palmPosition * scale;
+	h._stabilizedPalmPosition = _stabilizedPalmPosition * scale;
+	h._palmVelocity = _palmVelocity * scale;
+	h._palmNormal = _palmNormal * scale;
+	h._palmWidth = _palmWidth * scale;
+	h._direction = _direction * scale;
+	h._sphereCenter = _sphereCenter * scale;
+	h._sphereRadius = _sphereRadius * scale;
+	h._pinchStrength = _pinchStrength * scale;
+	h._grabStrength = _grabStrength * scale;
+	h._confidence = _confidence * scale;
+
+	//
+	// Merge fingers.
+	//
+	for( unsigned int i = 0; i < _fingers.size(); i++ )
+	{
+		FingerImplementation *thisFinger = _fingers[i].GetImplementation();
+		FingerImplementation *newFinger = new FingerImplementation();
+		Finger f( newFinger );
+
+		(*newFinger) = (*thisFinger) * scale;
+
+		h._fingers.push_back( FingerPair_t( f, newFinger ) );
+	}
+
+	//
+	// Merge arm.
+	//
+	ArmImplementation *newArm = new ArmImplementation;
+	Arm a( newArm );
+	(*newArm) = (*_arm.GetImplementation()) * scale;
+	h._arm = ArmPair_t( a, newArm );
+
+	return h;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+HandImplementation HandImplementation::operator/( float scale ) const
+{
+	HandImplementation h;
+
+	//
+	// Merge misc.
+	//
+	h._id = _id;
+	h._palmPosition = _palmPosition / scale;
+	h._stabilizedPalmPosition = _stabilizedPalmPosition / scale;
+	h._palmVelocity = _palmVelocity / scale;
+	h._palmNormal = _palmNormal / scale;
+	h._palmWidth = _palmWidth / scale;
+	h._direction = _direction / scale;
+	h._sphereCenter = _sphereCenter / scale;
+	h._sphereRadius = _sphereRadius / scale;
+	h._pinchStrength = _pinchStrength / scale;
+	h._grabStrength = _grabStrength / scale;
+	h._confidence = _confidence / scale;
+
+	//
+	// Merge fingers.
+	//
+	for( unsigned int i = 0; i < _fingers.size(); i++ )
+	{
+		FingerImplementation *thisFinger = _fingers[i].GetImplementation();
+		FingerImplementation *newFinger = new FingerImplementation();
+		Finger f( newFinger );
+
+		(*newFinger) = (*thisFinger) / scale;
+
+		h._fingers.push_back( FingerPair_t( f, newFinger ) );
+	}
+
+	//
+	// Merge arm.
+	//
+	ArmImplementation *newArm = new ArmImplementation;
+	Arm a( newArm );
+	(*newArm) = (*_arm.GetImplementation()) / scale;
+	h._arm = ArmPair_t( a, newArm );
+
+	return h;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 int32_t HandImplementation::id() const
 {
 	return _id;
@@ -497,4 +654,19 @@ const char * HandImplementation::toCString() const
 {
 	C_breakpoint();
 	return "";
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+FingerImplementation *HandImplementation::GetFingerByType( Finger::Type type ) const
+{
+	for( unsigned int i = 0; i < _fingers.size(); i++ )
+	{
+		if( _fingers[i].GetImplementation()->type() == type )
+		{
+			return _fingers[i].GetImplementation();
+		}
+	}
+
+	return NULL;
 }

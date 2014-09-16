@@ -45,6 +45,10 @@ namespace GiantLeap
 		virtual void		Translate( const Vector &v );
 		virtual void		Rotate( const Vector &v );
 
+		FrameImplementation	operator+( const FrameImplementation &rhs ) const;
+		FrameImplementation	operator*( float scale ) const;
+		FrameImplementation	operator/( float scale ) const;
+
 		// Leap interface.
 		int64_t				id() const;
 		int64_t				timestamp() const;
@@ -73,6 +77,8 @@ namespace GiantLeap
 		float				scaleProbability( const Frame &sinceFrame ) const;
 
 	private:
+		HandImplementation *	FindMatchingHand( HandImplementation *hand, const FrameImplementation &frame ) const;
+
 		int64_t				_id, _timestamp;
 
 		std::vector<HandPair_t>	_hands;

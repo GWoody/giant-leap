@@ -45,6 +45,10 @@ namespace GiantLeap
 		virtual void		Translate( const Vector &v );
 		virtual void		Rotate( const Matrix &pry );
 
+		HandImplementation	operator+( const HandImplementation &rhs ) const;
+		HandImplementation	operator*( float scale ) const;
+		HandImplementation	operator/( float scale ) const;
+
 		// Leap interface.
 		int32_t				id() const;
 		Frame				frame() const;
@@ -86,6 +90,8 @@ namespace GiantLeap
 		const char *		toCString() const;
 
 	private:
+		FingerImplementation *	GetFingerByType( Finger::Type type ) const;
+
 		int32_t				_id;
 
 		std::vector<FingerPair_t>	_fingers;

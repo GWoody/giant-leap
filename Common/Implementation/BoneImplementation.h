@@ -41,6 +41,10 @@ namespace GiantLeap
 		virtual void		Translate( const Vector &v );
 		virtual void		Rotate( const Matrix &pry );
 
+		BoneImplementation	operator+( const BoneImplementation &rhs ) const;
+		BoneImplementation	operator*( float scale ) const;
+		BoneImplementation	operator/( float scale ) const;
+
 		// Leap interface.
 		Vector				prevJoint() const;
 		Vector				nextJoint() const;

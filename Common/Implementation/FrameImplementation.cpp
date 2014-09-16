@@ -228,6 +228,91 @@ void FrameImplementation::Rotate( const Vector &v )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+FrameImplementation	FrameImplementation::operator+( const FrameImplementation &rhs ) const
+{
+	FrameImplementation f;
+
+	f._id = min( _id, rhs._id );
+	f._timestamp = min( _timestamp, rhs._timestamp );
+
+	for( unsigned int i = 0; i < _hands.size(); i++ )
+	{
+		HandImplementation *lh = _hands[i].GetImplementation();
+		HandImplementation *rh = FindMatchingHand( lh, rhs );
+
+		if( !rh )
+		{
+			f._hands.push_back( _hands[i] );
+		}
+		else
+		{
+			HandImplementation *newHand = new HandImplementation();
+			(*newHand) = (*lh) + (*rh);
+
+			Hand newh( newHand );
+			f._hands.push_back( HandPair_t( newh, newHand ) );
+		}
+	}
+
+	// TODO: merge gestures
+
+	return f;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+FrameImplementation	FrameImplementation::operator*( float scale ) const
+{
+	FrameImplementation f;
+
+	f._id = _id;
+	f._timestamp = _timestamp;
+
+	for( unsigned int i = 0; i < _hands.size(); i++ )
+	{
+		const HandImplementation currentHand = *_hands[i].GetImplementation();
+
+		HandImplementation *newHand = new HandImplementation( currentHand );
+		Hand h( newHand );
+
+		(*newHand) = (*newHand) * scale;
+
+		f._hands.push_back( HandPair_t( h, newHand ) );
+	}
+
+	// TODO: scale gestures
+
+	return f;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+FrameImplementation	FrameImplementation::operator/( float scale ) const
+{
+	FrameImplementation f;
+
+	f._id = _id;
+	f._timestamp = _timestamp;
+
+	for( unsigned int i = 0; i < _hands.size(); i++ )
+	{
+		const HandImplementation currentHand = *_hands[i].GetImplementation();
+
+		HandImplementation *newHand = new HandImplementation( currentHand );
+		Hand h( newHand );
+
+		(*newHand) = (*newHand) / scale;
+
+		f._hands.push_back( HandPair_t( h, newHand ) );
+	}
+
+	// TODO: scale gestures
+
+	return f;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 int64_t FrameImplementation::id() const
 {
 	return _id;
@@ -446,4 +531,26 @@ float FrameImplementation::scaleProbability( const Frame &sinceFrame ) const
 {
 	C_breakpoint();
 	return 0.0f;
+}
+
+//-----------------------------------------------------------------------------
+// Find a hand that closely matches the position of the given hand.
+//-----------------------------------------------------------------------------
+HandImplementation *FrameImplementation::FindMatchingHand( HandImplementation *hand, const FrameImplementation &frame ) const
+{
+	const Vector &palmPosition = hand->palmPosition();
+
+	for( int i = 0; i < frame._hands.size(); i++ )
+	{
+		HandImplementation *test = frame._hands[i].GetImplementation();
+		const Vector &testPosition = test->palmPosition();
+
+		// Just ensure they're within 5cm of each other.
+		if( palmPosition.distanceTo( testPosition ) < 50 )
+		{
+			return test;
+		}
+	}
+
+	return NULL;
 }

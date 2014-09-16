@@ -99,6 +99,45 @@ void BoneImplementation::Rotate( const Matrix &pry )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+BoneImplementation BoneImplementation::operator+( const BoneImplementation &rhs ) const
+{
+	BoneImplementation b;
+
+	b._type = _type;
+	b._nextJoint = _nextJoint + rhs._nextJoint;
+	b._prevJoint = _prevJoint + rhs._prevJoint;
+
+	return b;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+BoneImplementation BoneImplementation::operator*( float scale ) const
+{
+	BoneImplementation b;
+
+	b._type = _type;
+	b._nextJoint = _nextJoint * scale;
+	b._prevJoint = _prevJoint * scale;
+
+	return b;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+BoneImplementation BoneImplementation::operator/( float scale ) const
+{
+	BoneImplementation b;
+
+	b._type = _type;
+	b._nextJoint = _nextJoint / scale;
+	b._prevJoint = _prevJoint / scale;
+
+	return b;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 Vector BoneImplementation::prevJoint() const
 {
 	return _prevJoint;
