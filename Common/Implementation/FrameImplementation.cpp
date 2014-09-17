@@ -93,6 +93,7 @@ BufferWrite FrameImplementation::Serialize()
 	//
 	// Write frame info.
 	//
+	buf.WriteVector( _deviceTranslation );
 	buf.WriteLongLong( _id );
 	buf.WriteLongLong( _timestamp );
 
@@ -141,6 +142,7 @@ void FrameImplementation::Unserialize( BufferRead *buffer )
 	//
 	// Read frame info.
 	//
+	_deviceTranslation = buffer->ReadVector();
 	_id = buffer->ReadLongLong();
 	_timestamp = buffer->ReadLongLong();
 
@@ -235,19 +237,23 @@ FrameImplementation	FrameImplementation::operator+( const FrameImplementation &r
 	f._id = min( _id, rhs._id );
 	f._timestamp = min( _timestamp, rhs._timestamp );
 
-	for( unsigned int i = 0; i < _hands.size(); i++ )
+	// Use the frame with the largest number of hands as the "master" frame.
+	// Try to match frames from the "slave" hand to the master.
+	const std::vector<HandPair_t> &master = ( _hands.size() < rhs._hands.size() ) ? rhs._hands : _hands;
+	const FrameImplementation &slave = ( _hands.size() < rhs._hands.size() ) ? *this : rhs;
+	for( unsigned int i = 0; i < master.size(); i++ )
 	{
-		HandImplementation *lh = _hands[i].GetImplementation();
-		HandImplementation *rh = FindMatchingHand( lh, rhs );
+		HandImplementation *mh = master[i].GetImplementation();
+		HandImplementation *sh = FindMatchingHand( mh, slave );
 
-		if( !rh )
+		if( !sh )
 		{
-			f._hands.push_back( _hands[i] );
+			f._hands.push_back( master[i] );
 		}
 		else
 		{
 			HandImplementation *newHand = new HandImplementation();
-			(*newHand) = (*lh) + (*rh);
+			(*newHand) = (*mh) + (*sh);
 
 			Hand newh( newHand );
 			f._hands.push_back( HandPair_t( newh, newHand ) );
@@ -540,7 +546,7 @@ HandImplementation *FrameImplementation::FindMatchingHand( HandImplementation *h
 {
 	const Vector &palmPosition = hand->palmPosition();
 
-	for( int i = 0; i < frame._hands.size(); i++ )
+	for( unsigned int i = 0; i < frame._hands.size(); i++ )
 	{
 		HandImplementation *test = frame._hands[i].GetImplementation();
 		const Vector &testPosition = test->palmPosition();

@@ -138,6 +138,8 @@ void ClientListener::onFrame( const Leap::Controller &controller )
 	// Make a copy of the Leap Motion frame we can manipulate.
 	FrameImplementation frame( controller.frame() );
 
+	frame.SetDeviceOffset( global_device_translation );
+
 	// Transform the data for the server.
 	frame.Rotate( -global_device_rotation );
 	frame.Translate( global_device_translation );

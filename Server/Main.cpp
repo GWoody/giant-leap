@@ -33,11 +33,13 @@ using namespace std;
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 typedef map<string, FrameImplementation> FrameMap_t;
+typedef map<string, bool> AddressMap_t;
 
 //-----------------------------------------------------------------------------
 // Prototypes.
 //-----------------------------------------------------------------------------
 DWORD WINAPI		thread_main( LPVOID lpParam );
+bool				received_from_all_addresses( const AddressMap_t &addresses );
 void				dispatch_frame( const FrameMap_t &frames );
 FrameImplementation	create_final_frame( const FrameMap_t &frames );
 
@@ -83,19 +85,23 @@ DWORD WINAPI thread_main( LPVOID lpParam )
 	address_t addr;
 
 	FrameMap_t frames;
+	AddressMap_t addresses;
 
 	int len = global_socket.Recv( buf, 65535, &addr );
 	string masterAddress = addr._address;
 
 	while( !global_quit )
 	{
+		addresses[addr._address] = true;
+
 		BufferRead rb( buf, len );
 		frames[addr._address] = FrameImplementation( &rb );
 
-		if( addr._address == masterAddress )
+		if( received_from_all_addresses( addresses ) )
 		{
 			dispatch_frame( frames );
 			frames.clear();
+			addresses.clear();
 		}
 
 		len = global_socket.Recv( buf, 65535, &addr );
@@ -103,6 +109,21 @@ DWORD WINAPI thread_main( LPVOID lpParam )
 
 	free( buf );
 	return 0;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+bool received_from_all_addresses( const AddressMap_t &addresses )
+{
+	for( AddressMap_t::const_iterator it = addresses.begin(); it != addresses.end(); it++ )
+	{
+		if( !it->second )
+		{
+			return false;
+		}
+	}
+
+	return true;
 }
 
 //-----------------------------------------------------------------------------
@@ -124,5 +145,29 @@ void dispatch_frame( const FrameMap_t &frames )
 //-----------------------------------------------------------------------------
 FrameImplementation	create_final_frame( const FrameMap_t &frames )
 {
-	return frames.begin()->second;
+	FrameImplementation f;
+	float totalWeight = 0.0f;
+
+	for( FrameMap_t::const_iterator it = frames.begin(); it != frames.end(); it++ )
+	{
+		if( !it->second.hands().count() )
+		{
+			continue;
+		}
+
+		Vector pos = it->second.hands()[0].palmPosition();
+
+		float weight = it->second.hands()[0].confidence();
+		f = f + ( it->second * weight );
+		
+		totalWeight += weight;
+	}
+
+	if( totalWeight )
+	{
+		// `totalWeight` is valid, and therefore we have valid frame data.
+		f = f / totalWeight;
+	}
+
+	return f;
 }

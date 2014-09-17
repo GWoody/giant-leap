@@ -45,6 +45,9 @@ namespace GiantLeap
 		virtual void		Translate( const Vector &v );
 		virtual void		Rotate( const Vector &v );
 
+		void				SetDeviceOffset( const Vector &v )			{ _deviceTranslation = v; }
+		Vector				GetDeviceTranslation( const Vector &v )		{ return _deviceTranslation; }
+
 		FrameImplementation	operator+( const FrameImplementation &rhs ) const;
 		FrameImplementation	operator*( float scale ) const;
 		FrameImplementation	operator/( float scale ) const;
@@ -83,6 +86,8 @@ namespace GiantLeap
 
 		std::vector<HandPair_t>	_hands;
 		std::vector<GesturePair_t>	_gestures;
+
+		Vector				_deviceTranslation;
 	};
 
 }
