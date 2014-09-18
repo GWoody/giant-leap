@@ -140,6 +140,7 @@ void FingerImplementation::Rotate( const Matrix &pry )
 FingerImplementation FingerImplementation::operator+( const FingerImplementation &rhs ) const
 {
 	FingerImplementation f = *this;
+	f._bones.clear();
 
 	f._type = _type;
 	
@@ -147,7 +148,7 @@ FingerImplementation FingerImplementation::operator+( const FingerImplementation
 	{
 		Bone::Type type = (Bone::Type)i;
 		BoneImplementation *thisBone = GetBoneByType( type );
-		BoneImplementation *rhsBone = GetBoneByType( type );
+		BoneImplementation *rhsBone = rhs.GetBoneByType( type );
 
 		if( !thisBone && !rhsBone )
 		{
@@ -182,6 +183,7 @@ FingerImplementation FingerImplementation::operator+( const FingerImplementation
 FingerImplementation FingerImplementation::operator*( float scale ) const
 {
 	FingerImplementation f = *this;
+	f._bones.clear();
 
 	f._type = _type;
 	for( unsigned int i = 0; i < _bones.size(); i++ )
@@ -204,6 +206,7 @@ FingerImplementation FingerImplementation::operator*( float scale ) const
 FingerImplementation FingerImplementation::operator/( float scale ) const
 {
 	FingerImplementation f = *this;
+	f._bones.clear();
 
 	f._type = _type;
 	for( unsigned int i = 0; i < _bones.size(); i++ )

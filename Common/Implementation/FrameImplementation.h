@@ -46,7 +46,9 @@ namespace GiantLeap
 		virtual void		Rotate( const Vector &v );
 
 		void				SetDeviceOffset( const Vector &v )			{ _deviceTranslation = v; }
-		Vector				GetDeviceTranslation( const Vector &v )		{ return _deviceTranslation; }
+		Vector				GetDeviceTranslation() const				{ return _deviceTranslation; }
+
+		void				Merge( const FrameImplementation &rhs );
 
 		FrameImplementation	operator+( const FrameImplementation &rhs ) const;
 		FrameImplementation	operator*( float scale ) const;

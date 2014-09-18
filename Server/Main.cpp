@@ -42,6 +42,7 @@ DWORD WINAPI		thread_main( LPVOID lpParam );
 bool				received_from_all_addresses( const AddressMap_t &addresses );
 void				dispatch_frame( const FrameMap_t &frames );
 FrameImplementation	create_final_frame( const FrameMap_t &frames );
+void				reset_address_status( AddressMap_t *addresses );
 
 //-----------------------------------------------------------------------------
 // Global variables.
@@ -101,7 +102,8 @@ DWORD WINAPI thread_main( LPVOID lpParam )
 		{
 			dispatch_frame( frames );
 			frames.clear();
-			addresses.clear();
+			
+			reset_address_status( &addresses );
 		}
 
 		len = global_socket.Recv( buf, 65535, &addr );
@@ -146,28 +148,21 @@ void dispatch_frame( const FrameMap_t &frames )
 FrameImplementation	create_final_frame( const FrameMap_t &frames )
 {
 	FrameImplementation f;
-	float totalWeight = 0.0f;
 
 	for( FrameMap_t::const_iterator it = frames.begin(); it != frames.end(); it++ )
 	{
-		if( !it->second.hands().count() )
-		{
-			continue;
-		}
-
-		Vector pos = it->second.hands()[0].palmPosition();
-
-		float weight = it->second.hands()[0].confidence();
-		f = f + ( it->second * weight );
-		
-		totalWeight += weight;
-	}
-
-	if( totalWeight )
-	{
-		// `totalWeight` is valid, and therefore we have valid frame data.
-		f = f / totalWeight;
+		f.Merge( it->second );
 	}
 
 	return f;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void reset_address_status( AddressMap_t *addresses )
+{
+	for( AddressMap_t::iterator it = addresses->begin(); it != addresses->end(); it++ )
+	{
+		it->second = false;
+	}
 }

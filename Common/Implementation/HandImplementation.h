@@ -20,7 +20,6 @@
 #include "ArmImplementation.h"
 #include <vector>
 
-
 namespace GiantLeap
 {
 
@@ -44,6 +43,8 @@ namespace GiantLeap
 		// Manipulations.
 		virtual void		Translate( const Vector &v );
 		virtual void		Rotate( const Matrix &pry );
+
+		void				Merge( const FrameImplementation &thisFrame, const FrameImplementation &rhsFrame, const HandImplementation &rhs );
 
 		HandImplementation	operator+( const HandImplementation &rhs ) const;
 		HandImplementation	operator*( float scale ) const;
@@ -91,6 +92,10 @@ namespace GiantLeap
 
 	private:
 		FingerImplementation *	GetFingerByType( Finger::Type type ) const;
+
+		float				CalculateWeight( const HandImplementation &target, const FrameImplementation &targetFrame, float targetDistance, const HandImplementation &other, float otherDistance ) const;
+		void				InternalMerge( float thisWeight, const HandImplementation &rhs, float rhsWeight );
+		template<typename T> T	MergeVar( const T &x, float xWeight, const T &y, float yWeight );
 
 		int32_t				_id;
 

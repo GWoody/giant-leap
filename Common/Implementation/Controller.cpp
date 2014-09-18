@@ -21,6 +21,8 @@ using namespace GiantLeap;
 
 #include "MemDebugOn.h"
 
+outfunc_t GiantLeap::Con_Printf = NULL;
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 Controller::Controller( ControllerImplementation *ref ) : Interface( ref, ref )

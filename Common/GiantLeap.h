@@ -14,10 +14,15 @@
 
 namespace GiantLeap {
 
+	typedef void (*outfunc_t)( const char *fmt, ... );
+	extern outfunc_t Con_Printf;
+
   class LEAP_EXPORT_CLASS Init {
   public:
     LEAP_EXPORT Init();
 	LEAP_EXPORT ~Init();
+
+	LEAP_EXPORT void SetOut( outfunc_t func )	{ Con_Printf = func; }
   };
 
   // Interface for internal use only

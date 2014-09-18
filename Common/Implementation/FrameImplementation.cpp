@@ -230,6 +230,45 @@ void FrameImplementation::Rotate( const Vector &v )
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+void FrameImplementation::Merge( const FrameImplementation &rhs )
+{
+	if( !_id )
+	{
+		// This frame is invalid. Just assume the attributes of the `rhs` frame.
+		*this = rhs;
+		return;
+	}
+
+	// Merge common hands.
+	for( unsigned int i = 0; i < _hands.size(); i++ )
+	{
+		HandImplementation *thisHand = _hands[i].GetImplementation();
+		HandImplementation *rhsHand = FindMatchingHand( thisHand, rhs );
+
+		if( rhsHand )
+		{
+			thisHand->Merge( *this, rhs, *rhsHand );
+		}
+	}
+
+	// Insert RHS hands.
+	for( unsigned int i = 0; i < rhs._hands.size(); i++ )
+	{
+		HandImplementation *rhsHand = rhs._hands[i].GetImplementation();
+		HandImplementation *thisHand = FindMatchingHand( rhsHand, *this );
+
+		if( !thisHand )
+		{
+			// A matching hand wasn't found in this frame. Insert it.
+			_hands.push_back( rhs._hands[i] );
+		}
+	}
+
+	// TODO: merge gestures.
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 FrameImplementation	FrameImplementation::operator+( const FrameImplementation &rhs ) const
 {
 	FrameImplementation f;
@@ -544,6 +583,7 @@ float FrameImplementation::scaleProbability( const Frame &sinceFrame ) const
 //-----------------------------------------------------------------------------
 HandImplementation *FrameImplementation::FindMatchingHand( HandImplementation *hand, const FrameImplementation &frame ) const
 {
+#if 0
 	const Vector &palmPosition = hand->palmPosition();
 
 	for( unsigned int i = 0; i < frame._hands.size(); i++ )
@@ -559,4 +599,12 @@ HandImplementation *FrameImplementation::FindMatchingHand( HandImplementation *h
 	}
 
 	return NULL;
+#else
+	if( !frame._hands.size() )
+	{
+		return NULL;
+	}
+
+	return frame._hands[0].GetImplementation();
+#endif
 }

@@ -17,6 +17,7 @@
 #include "GiantLeap.h"
 #include "HandImplementation.h"
 #include "ListBaseImplementation.h"
+#include "FrameImplementation.h"
 using namespace GiantLeap;
 
 #include "MemDebugOn.h"
@@ -220,6 +221,30 @@ void HandImplementation::Rotate( const Matrix &pry )
 }
 
 //-----------------------------------------------------------------------------
+// Takes a single hand as seen from multiple devices.
+// `this` and `rhs` represent the same hand.
+// `thisFrame` is the frame to which `this` belongs.
+// `rhsFrame` is the frame to which `rhs` belongs.
+//-----------------------------------------------------------------------------
+void HandImplementation::Merge( const FrameImplementation &thisFrame, const FrameImplementation &rhsFrame, const HandImplementation &rhs )
+{
+	// Calculate the distance between each hand-frame pair.
+	// As the confidence of each hand approaches 0, make the distance large.
+	float thisDistance = _palmPosition.distanceTo( thisFrame.GetDeviceTranslation() ) * ( 1.0f / _confidence );
+	float rhsDistance = rhs._palmPosition.distanceTo( rhsFrame.GetDeviceTranslation() ) * ( 1.0f / rhs._confidence );
+
+	float thisWeight = CalculateWeight( *this, thisFrame, thisDistance, rhs, rhsDistance );
+	float rhsWeight = CalculateWeight( rhs, rhsFrame, rhsDistance, *this, thisDistance );
+
+	// Merge all local variables.
+	InternalMerge( thisWeight, rhs, rhsWeight );
+
+	// Merge fingers.
+
+	// Merge the arm.
+}
+
+//-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 HandImplementation HandImplementation::operator+( const HandImplementation &rhs ) const
 {
@@ -248,7 +273,7 @@ HandImplementation HandImplementation::operator+( const HandImplementation &rhs 
 	{
 		Finger::Type type = (Finger::Type)i;
 		FingerImplementation *thisFinger = GetFingerByType( type );
-		FingerImplementation *rhsFinger = GetFingerByType( type );
+		FingerImplementation *rhsFinger = rhs.GetFingerByType( type );
 
 		if( !thisFinger && !rhsFinger )
 		{
@@ -267,7 +292,7 @@ HandImplementation HandImplementation::operator+( const HandImplementation &rhs 
 		}
 		else if( rhsFinger )
 		{
-			(*newFinger) =  (*rhsFinger);
+			(*newFinger) = (*rhsFinger);
 		}
 
 		h._fingers.push_back( FingerPair_t( f, newFinger ) );
@@ -669,4 +694,54 @@ FingerImplementation *HandImplementation::GetFingerByType( Finger::Type type ) c
 	}
 
 	return NULL;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+float HandImplementation::CalculateWeight( const HandImplementation &target, const FrameImplementation &targetFrame, float targetDistance, const HandImplementation &other, float otherDistance ) const
+{
+	// The closer the target hand is to the target device, the higher it will be weighted.
+	float weight = ( otherDistance / targetDistance );
+
+	// The closer the target hands palm normal is to the `hand->device` vector, the higher it will be weighted.
+	Vector handDeviceDir = target._palmPosition - targetFrame.GetDeviceTranslation();
+	handDeviceDir = handDeviceDir.normalized();
+	float cosTheta = target._palmNormal.dot( handDeviceDir ) / ( target._palmNormal.magnitude() * handDeviceDir.magnitude() );
+
+	weight *= fabs( cosTheta );
+
+	return weight;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+void HandImplementation::InternalMerge( float thisWeight, const HandImplementation &rhs, float rhsWeight )
+{
+	const float totalWeight = thisWeight + rhsWeight;
+
+	_palmPosition = MergeVar( _palmPosition, thisWeight, rhs._palmPosition, rhsWeight );
+	_stabilizedPalmPosition = MergeVar( _stabilizedPalmPosition, thisWeight, rhs._stabilizedPalmPosition, rhsWeight );
+	_palmVelocity = MergeVar( _palmVelocity, thisWeight, rhs._palmVelocity, rhsWeight );
+	_palmNormal = MergeVar( _palmNormal, thisWeight, rhs._palmNormal, rhsWeight );
+	_palmWidth = MergeVar( _palmWidth, thisWeight, rhs._palmWidth, rhsWeight );
+	_direction = MergeVar( _direction, thisWeight, rhs._direction, rhsWeight );
+	_sphereCenter = MergeVar( _sphereCenter, thisWeight, rhs._sphereCenter, rhsWeight );
+	_sphereRadius = MergeVar( _sphereRadius, thisWeight, rhs._sphereRadius, rhsWeight );
+	_pinchStrength = MergeVar( _pinchStrength, thisWeight, rhs._pinchStrength, rhsWeight );
+	_grabStrength = MergeVar( _grabStrength, thisWeight, rhs._grabStrength, rhsWeight );
+	_confidence = MergeVar( _confidence, thisWeight, rhs._confidence, rhsWeight );
+
+	(*_arm.GetImplementation()) = MergeVar( (*_arm.GetImplementation()), thisWeight, (*rhs._arm.GetImplementation()), rhsWeight );
+
+	for( unsigned int i = 0; i < 5; i++ )
+	{
+		*_fingers[i].GetImplementation() = MergeVar( (*_fingers[i].GetImplementation()), thisWeight, (*rhs._fingers[i].GetImplementation()), rhsWeight );
+	}
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+template<typename T> T HandImplementation::MergeVar( const T &x, float xWeight, const T &y, float yWeight )
+{
+	return ( (x * xWeight) + (y * yWeight) ) / ( xWeight + yWeight );
 }
