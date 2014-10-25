@@ -20,6 +20,8 @@ using namespace GiantLeap;
 
 #include "MemDebugOn.h"
 
+IdMap_t global_finger_id_map;
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 FingerImplementation::FingerImplementation()
@@ -45,6 +47,11 @@ FingerImplementation::FingerImplementation( BufferRead *buffer )
 //-----------------------------------------------------------------------------
 void FingerImplementation::FromLeap( const Leap::Finger &finger )
 {
+	if( !finger.isValid() )
+	{
+		return;
+	}
+
 	_type = (GiantLeap::Finger::Type)finger.type();
 
 	_bones.clear();
@@ -99,7 +106,7 @@ bool FingerImplementation::Unserialize( BufferRead *buffer )
 		BoneImplementation *bi = new BoneImplementation();
 		if( !bi->Unserialize( buffer ) )
 		{
-			std::cerr << "FingerImplementation::Unserialize - failed to read bone" << std::endl;
+			Con_Printf( "FingerImplementation::Unserialize - failed to read bone\n" );
 			delete bi;
 			return false;
 		}

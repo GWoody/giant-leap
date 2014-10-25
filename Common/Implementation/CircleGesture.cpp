@@ -73,3 +73,10 @@ LEAP_EXPORT Pointable CircleGesture::pointable() const
 {
 	return isValid() ? get<CircleGestureImplementation>()->pointable() : Pointable();
 }
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+LEAP_EXPORT bool CircleGesture::clockwise() const
+{
+	return isValid() ? get<CircleGestureImplementation>()->clockwise() : false;
+}

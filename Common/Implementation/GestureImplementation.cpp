@@ -230,6 +230,8 @@ Frame GestureImplementation::frame() const
 //-----------------------------------------------------------------------------
 HandList GestureImplementation::hands() const
 {
+	C_breakpoint();
+
 	ListBaseImplementation<Hand> *list = new ListBaseImplementation<Hand>;
 
 	for( unsigned int i = 0; i < _handIds.size(); i++ )

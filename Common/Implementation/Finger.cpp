@@ -37,7 +37,7 @@ Finger::Finger( FingerImplementation *finger ) : Pointable( finger )
 //-----------------------------------------------------------------------------
 LEAP_EXPORT Finger::Finger( const Pointable &pointable ) : Pointable( pointable )
 {
-	if( !pointable.isFinger() )
+	if( isValid() && !pointable.isFinger() )
 	{
 		m_object->DecrementRefCount();
 		m_object = NULL;

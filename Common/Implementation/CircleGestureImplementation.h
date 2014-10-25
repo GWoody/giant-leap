@@ -45,6 +45,7 @@ namespace GiantLeap
 		float				progress() const;
 		float				radius() const;
 		Pointable			pointable() const;
+		bool				clockwise() const;
 
 	private:
 		int32_t				_pointableId;
@@ -52,6 +53,8 @@ namespace GiantLeap
 		Vector				_normal;
 		float				_progress;
 		float				_radius;
+
+		bool				_clockwise;
 	};
 
 }

@@ -2298,6 +2298,8 @@ namespace GiantLeap {
      * @since 1.0
      */
     LEAP_EXPORT Pointable pointable() const;
+
+	LEAP_EXPORT bool clockwise() const;
   };
 
   /**

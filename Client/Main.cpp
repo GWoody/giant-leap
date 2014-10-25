@@ -68,9 +68,9 @@ int main( int argc, char **argv )
 	ClientListener listener;
 	Leap::Controller controller( listener );
 	controller.enableGesture( Leap::Gesture::TYPE_CIRCLE );
-	controller.enableGesture( Leap::Gesture::TYPE_SWIPE );
-	controller.enableGesture( Leap::Gesture::TYPE_KEY_TAP );
-	controller.enableGesture( Leap::Gesture::TYPE_SCREEN_TAP );
+	//controller.enableGesture( Leap::Gesture::TYPE_SWIPE );
+	//controller.enableGesture( Leap::Gesture::TYPE_KEY_TAP );
+	//controller.enableGesture( Leap::Gesture::TYPE_SCREEN_TAP );
 
 	cout << endl;
 	cout << "Leap Motion initialized!" << endl;

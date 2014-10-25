@@ -22,6 +22,8 @@ using namespace GiantLeap;
 
 #include "MemDebugOn.h"
 
+IdMap_t global_hand_id_map;
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 HandImplementation::HandImplementation() :
@@ -65,6 +67,7 @@ void HandImplementation::FromLeap( const Leap::Hand &hand )
 	_pinchStrength = hand.pinchStrength();
 	_grabStrength = hand.grabStrength();
 	_confidence = hand.confidence();
+	_isLeft = hand.isLeft();
 
 	//
 	// Read fingers.
@@ -107,6 +110,7 @@ bool HandImplementation::Serialize( BufferWrite *buffer )
 	buffer->WriteFloat( _pinchStrength );
 	buffer->WriteFloat( _grabStrength );
 	buffer->WriteFloat( _confidence );
+	buffer->WriteShort( _isLeft );
 
 	//
 	// Write fingers.
@@ -151,6 +155,7 @@ bool HandImplementation::Unserialize( BufferRead *buffer )
 	_pinchStrength = buffer->ReadFloat();
 	_grabStrength = buffer->ReadFloat();
 	_confidence = buffer->ReadFloat();
+	_isLeft = buffer->ReadShort() != 0 ? true : false;
 
 	//
 	// Read fingers.
@@ -161,7 +166,7 @@ bool HandImplementation::Unserialize( BufferRead *buffer )
 		FingerImplementation *fi = new FingerImplementation();
 		if( !fi->Unserialize( buffer ) )
 		{
-			std::cerr << "HandImplementation::Unserialize - failed to read finger" << std::endl;
+			Con_Printf( "HandImplementation::Unserialize - failed to read finger\n" );
 			delete fi;
 			return false;
 		}
@@ -228,6 +233,18 @@ void HandImplementation::Rotate( const Matrix &pry )
 //-----------------------------------------------------------------------------
 void HandImplementation::Merge( const FrameImplementation &thisFrame, const FrameImplementation &rhsFrame, const HandImplementation &rhs )
 {
+	IdMap_t::iterator it = global_hand_id_map.find( _id );
+	if( it != global_hand_id_map.end() )
+	{
+		// This frame was previously merged into another. Take on the old ID.
+		_id = it->second;
+	}
+	else
+	{
+		// Store the RHS frame ID that we are merging.
+		global_hand_id_map[rhs._id] = _id;
+	}
+
 	// Calculate the distance between each hand-frame pair.
 	// As the confidence of each hand approaches 0, make the distance large.
 	float thisDistance = _palmPosition.distanceTo( thisFrame.GetDeviceTranslation() ) * ( 1.0f / _confidence );
@@ -238,10 +255,6 @@ void HandImplementation::Merge( const FrameImplementation &thisFrame, const Fram
 
 	// Merge all local variables.
 	InternalMerge( thisWeight, rhs, rhsWeight );
-
-	// Merge fingers.
-
-	// Merge the arm.
 }
 
 //-----------------------------------------------------------------------------
@@ -249,6 +262,8 @@ void HandImplementation::Merge( const FrameImplementation &thisFrame, const Fram
 HandImplementation HandImplementation::operator+( const HandImplementation &rhs ) const
 {
 	HandImplementation h;
+
+	C_breakpoint();
 
 	//
 	// Merge general.
@@ -316,6 +331,8 @@ HandImplementation HandImplementation::operator*( float scale ) const
 {
 	HandImplementation h;
 
+	C_breakpoint();
+
 	h._id = _id;
 	h._palmPosition = _palmPosition * scale;
 	h._stabilizedPalmPosition = _stabilizedPalmPosition * scale;
@@ -359,6 +376,8 @@ HandImplementation HandImplementation::operator*( float scale ) const
 HandImplementation HandImplementation::operator/( float scale ) const
 {
 	HandImplementation h;
+
+	C_breakpoint();
 
 	//
 	// Merge misc.
@@ -528,16 +547,14 @@ float HandImplementation::confidence() const
 //-----------------------------------------------------------------------------
 bool HandImplementation::isLeft() const
 {
-	C_breakpoint();
-	return false;
+	return _isLeft;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 bool HandImplementation::isRight() const
 {
-	C_breakpoint();
-	return false;
+	return !_isLeft;
 }
 
 //-----------------------------------------------------------------------------

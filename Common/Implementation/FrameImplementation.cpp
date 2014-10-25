@@ -23,7 +23,12 @@
 #include "ControllerImplementation.h"
 using namespace GiantLeap;
 
+#include <vector>
+#include <map>
+
 #include "MemDebugOn.h"
+
+IdMap_t global_frame_id_map;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -135,7 +140,7 @@ void FrameImplementation::Unserialize( BufferRead *buffer )
 
 	if( buffer->ReadInt() != 'frmh' )
 	{
-		std::cerr << "FrameImplementation::Unserialize - failed to frame head" << std::endl;
+		Con_Printf( "FrameImplementation::Unserialize - failed to frame head\n" );
 		return;
 	}
 
@@ -149,13 +154,13 @@ void FrameImplementation::Unserialize( BufferRead *buffer )
 	//
 	// Read hands.
 	//
-	short handCount = buffer->ReadShort();
+	int handCount = buffer->ReadShort();
 	while( handCount )
 	{
 		HandImplementation *hi = new HandImplementation();
 		if( !hi->Unserialize( buffer ) )
 		{
-			std::cerr << "FrameImplementation::Unserialize - failed to read hand" << std::endl;
+			Con_Printf( "FrameImplementation::Unserialize - failed to read hand\n" );
 			delete hi;
 			return;
 		}
@@ -176,7 +181,7 @@ void FrameImplementation::Unserialize( BufferRead *buffer )
 		GestureImplementation *gi = GestureImplementation::Create( *this, type );
 		if( !gi->Unserialize( buffer ) )
 		{
-			std::cerr << "FrameImplementation::Unserialize - failed to read gesture" << std::endl;
+			Con_Printf( "FrameImplementation::Unserialize - failed to read gesture\n" );
 			delete gi;
 			return;
 		}
@@ -188,7 +193,7 @@ void FrameImplementation::Unserialize( BufferRead *buffer )
 
 	if( buffer->ReadInt() != 'frmt' )
 	{
-		std::cerr << "FrameImplementation::Unserialize - failed to frame tail" << std::endl;
+		Con_Printf( "FrameImplementation::Unserialize - failed to frame tail\n" );
 		return;
 	}
 }
@@ -239,6 +244,18 @@ void FrameImplementation::Merge( const FrameImplementation &rhs )
 		return;
 	}
 
+	IdMap_t::iterator it = global_frame_id_map.find( _id );
+	if( it != global_frame_id_map.end() )
+	{
+		// This frame was previously merged into another. Take on the old ID.
+		_id = it->second;
+	}
+	else
+	{
+		// Store the RHS frame ID that we are merging.
+		global_frame_id_map[rhs._id] = _id;
+	}
+
 	// Merge common hands.
 	for( unsigned int i = 0; i < _hands.size(); i++ )
 	{
@@ -272,6 +289,8 @@ void FrameImplementation::Merge( const FrameImplementation &rhs )
 FrameImplementation	FrameImplementation::operator+( const FrameImplementation &rhs ) const
 {
 	FrameImplementation f;
+
+	C_breakpoint();
 
 	f._id = min( _id, rhs._id );
 	f._timestamp = min( _timestamp, rhs._timestamp );
@@ -310,6 +329,8 @@ FrameImplementation	FrameImplementation::operator*( float scale ) const
 {
 	FrameImplementation f;
 
+	C_breakpoint();
+
 	f._id = _id;
 	f._timestamp = _timestamp;
 
@@ -335,6 +356,8 @@ FrameImplementation	FrameImplementation::operator*( float scale ) const
 FrameImplementation	FrameImplementation::operator/( float scale ) const
 {
 	FrameImplementation f;
+
+	C_breakpoint();
 
 	f._id = _id;
 	f._timestamp = _timestamp;

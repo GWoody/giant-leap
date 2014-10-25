@@ -113,6 +113,7 @@ namespace GiantLeap
 		float				_pinchStrength;
 		float				_grabStrength;
 		float				_confidence;
+		bool				_isLeft;
 	};
 
 }

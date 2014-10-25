@@ -21,7 +21,11 @@ using namespace GiantLeap;
 
 #include "MemDebugOn.h"
 
-outfunc_t GiantLeap::Con_Printf = NULL;
+void null_printf( const char *fmt, ... )
+{
+}
+
+outfunc_t GiantLeap::Con_Printf = null_printf;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

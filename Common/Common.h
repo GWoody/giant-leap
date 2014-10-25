@@ -16,12 +16,15 @@
 #define __COMMON_H__
 
 #include <string>
+#include <map>
 #include "GiantLeap.h"
 
 #ifdef _DEBUG
 	#define _CRTDBG_MAP_ALLOC
 	#include <crtdbg.h>
 #endif
+
+typedef std::map<int64_t, int64_t> IdMap_t;
 
 //-----------------------------------------------------------------------------
 // Interface->Implementation pairing.

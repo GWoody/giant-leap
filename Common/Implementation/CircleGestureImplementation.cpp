@@ -46,6 +46,9 @@ void CircleGestureImplementation::FromLeap( const Leap::CircleGesture &circle )
 	_progress = circle.progress();
 	_radius = circle.radius();
 
+	const GiantLeap::Vector &pointableDir = circle.pointable().direction();
+	_clockwise = pointableDir.angleTo( circle.normal() ) <= ( PI / 2 );
+
 	GestureImplementation::FromLeap( circle );
 }
 
@@ -60,6 +63,7 @@ bool CircleGestureImplementation::Serialize( BufferWrite *buffer )
 	buffer->WriteVector( _normal );
 	buffer->WriteFloat( _progress );
 	buffer->WriteFloat( _radius );
+	buffer->WriteShort( _clockwise );
 
 	return GestureImplementation::Serialize( buffer );
 }
@@ -79,6 +83,7 @@ bool CircleGestureImplementation::Unserialize( BufferRead *buffer )
 	_normal = buffer->ReadVector();
 	_progress = buffer->ReadFloat();
 	_radius = buffer->ReadFloat();
+	_clockwise = buffer->ReadShort() != 0 ? true : false;
 
 	return GestureImplementation::Unserialize( buffer );
 }
@@ -134,5 +139,14 @@ float CircleGestureImplementation::radius() const
 //-----------------------------------------------------------------------------
 Pointable CircleGestureImplementation::pointable() const
 {
+	C_breakpoint();
+
 	return _frame.pointable( _pointableId );
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+bool CircleGestureImplementation::clockwise() const
+{
+	return _clockwise;
 }

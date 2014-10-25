@@ -63,6 +63,7 @@ namespace GiantLeap
 		Gesture::Type		_type;
 		int64_t				_duration;
 		float				_durationSeconds;
+		bool				_clockwise;
 
 		std::vector<int32_t>	_handIds;
 	};
