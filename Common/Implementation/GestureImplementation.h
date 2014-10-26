@@ -55,6 +55,8 @@ namespace GiantLeap
 		
 		const char *		toCString() const;
 
+		const std::vector<int32_t> &	handIds() const;
+
 	protected:
 		FrameImplementation &	_frame;
 

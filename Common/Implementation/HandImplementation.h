@@ -90,10 +90,11 @@ namespace GiantLeap
 
 		const char *		toCString() const;
 
+		static float		CalculateWeight( const HandImplementation &target, const FrameImplementation &targetFrame, float targetDistance, float otherDistance );
+
 	private:
 		FingerImplementation *	GetFingerByType( Finger::Type type ) const;
 
-		float				CalculateWeight( const HandImplementation &target, const FrameImplementation &targetFrame, float targetDistance, const HandImplementation &other, float otherDistance ) const;
 		void				InternalMerge( float thisWeight, const HandImplementation &rhs, float rhsWeight );
 		template<typename T> T	MergeVar( const T &x, float xWeight, const T &y, float yWeight );
 

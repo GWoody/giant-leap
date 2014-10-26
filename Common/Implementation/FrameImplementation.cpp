@@ -281,7 +281,8 @@ void FrameImplementation::Merge( const FrameImplementation &rhs )
 		}
 	}
 
-	// TODO: merge gestures.
+	// Ok, the hands have already been merged.
+	// So what we need to do is take all gestures and map them to their new hand IDs.
 }
 
 //-----------------------------------------------------------------------------
@@ -319,6 +320,7 @@ FrameImplementation	FrameImplementation::operator+( const FrameImplementation &r
 	}
 
 	// TODO: merge gestures
+	f._gestures = _gestures;
 
 	return f;
 }
@@ -347,6 +349,7 @@ FrameImplementation	FrameImplementation::operator*( float scale ) const
 	}
 
 	// TODO: scale gestures
+	f._gestures = _gestures;
 
 	return f;
 }
@@ -375,6 +378,7 @@ FrameImplementation	FrameImplementation::operator/( float scale ) const
 	}
 
 	// TODO: scale gestures
+	f._gestures = _gestures;
 
 	return f;
 }
@@ -606,28 +610,27 @@ float FrameImplementation::scaleProbability( const Frame &sinceFrame ) const
 //-----------------------------------------------------------------------------
 HandImplementation *FrameImplementation::FindMatchingHand( HandImplementation *hand, const FrameImplementation &frame ) const
 {
-#if 0
 	const Vector &palmPosition = hand->palmPosition();
 
 	for( unsigned int i = 0; i < frame._hands.size(); i++ )
 	{
 		HandImplementation *test = frame._hands[i].GetImplementation();
-		const Vector &testPosition = test->palmPosition();
 
+#if 1
+		// HACK: Just assume hands of the same type are matches.
+		if( hand->isLeft() == test->isLeft() )
+		{
+			return test;
+		}
+#else
 		// Just ensure they're within 5cm of each other.
+		const Vector &testPosition = test->palmPosition();
 		if( palmPosition.distanceTo( testPosition ) < 50 )
 		{
 			return test;
 		}
+#endif
 	}
 
 	return NULL;
-#else
-	if( !frame._hands.size() )
-	{
-		return NULL;
-	}
-
-	return frame._hands[0].GetImplementation();
-#endif
 }

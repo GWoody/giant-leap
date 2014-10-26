@@ -247,11 +247,11 @@ void HandImplementation::Merge( const FrameImplementation &thisFrame, const Fram
 
 	// Calculate the distance between each hand-frame pair.
 	// As the confidence of each hand approaches 0, make the distance large.
-	float thisDistance = _palmPosition.distanceTo( thisFrame.GetDeviceTranslation() ) * ( 1.0f / _confidence );
-	float rhsDistance = rhs._palmPosition.distanceTo( rhsFrame.GetDeviceTranslation() ) * ( 1.0f / rhs._confidence );
+	float thisDistance = _palmPosition.distanceTo( thisFrame.GetDeviceTranslation() );
+	float rhsDistance = rhs._palmPosition.distanceTo( rhsFrame.GetDeviceTranslation() );
 
-	float thisWeight = CalculateWeight( *this, thisFrame, thisDistance, rhs, rhsDistance );
-	float rhsWeight = CalculateWeight( rhs, rhsFrame, rhsDistance, *this, thisDistance );
+	float thisWeight = CalculateWeight( *this, thisFrame, thisDistance, rhsDistance );
+	float rhsWeight = CalculateWeight( rhs, rhsFrame, rhsDistance, thisDistance );
 
 	// Merge all local variables.
 	InternalMerge( thisWeight, rhs, rhsWeight );
@@ -715,8 +715,10 @@ FingerImplementation *HandImplementation::GetFingerByType( Finger::Type type ) c
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-float HandImplementation::CalculateWeight( const HandImplementation &target, const FrameImplementation &targetFrame, float targetDistance, const HandImplementation &other, float otherDistance ) const
+float HandImplementation::CalculateWeight( const HandImplementation &target, const FrameImplementation &targetFrame, float targetDistance, float otherDistance )
 {
+	targetDistance *= ( 1.0f / target._confidence );
+
 	// The closer the target hand is to the target device, the higher it will be weighted.
 	float weight = ( otherDistance / targetDistance );
 

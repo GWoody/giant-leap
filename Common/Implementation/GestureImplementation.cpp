@@ -258,3 +258,10 @@ const char *GestureImplementation::toCString() const
 	C_breakpoint();
 	return "";
 }
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+const std::vector<int32_t> &GestureImplementation::handIds() const
+{
+	return _handIds;
+}
