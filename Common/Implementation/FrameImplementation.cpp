@@ -29,6 +29,7 @@ using namespace GiantLeap;
 #include "MemDebugOn.h"
 
 IdMap_t global_frame_id_map;
+extern IdMap_t global_hand_id_map;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -63,6 +64,7 @@ void FrameImplementation::FromLeap( const Leap::Frame &frame )
 	//
 	_id = frame.id();
 	_timestamp = frame.timestamp();
+	_fps = frame.currentFramesPerSecond();
 
 	//
 	// Store hands.
@@ -101,6 +103,7 @@ BufferWrite FrameImplementation::Serialize()
 	buf.WriteVector( _deviceTranslation );
 	buf.WriteLongLong( _id );
 	buf.WriteLongLong( _timestamp );
+	buf.WriteFloat( _fps );
 
 	//
 	// Write hands.
@@ -150,6 +153,7 @@ void FrameImplementation::Unserialize( BufferRead *buffer )
 	_deviceTranslation = buffer->ReadVector();
 	_id = buffer->ReadLongLong();
 	_timestamp = buffer->ReadLongLong();
+	_fps = buffer->ReadFloat();
 
 	//
 	// Read hands.
@@ -233,6 +237,33 @@ void FrameImplementation::Rotate( const Vector &v )
 	}
 }
 
+struct HandWeight_t
+{
+	HandWeight_t()
+	{
+		_id = -1;
+		_weight = 0.0f;
+	}
+
+	void AddWeight( const HandImplementation *hand, const FrameImplementation *frame )
+	{
+		Vector handDeviceDir = hand->palmPosition() - frame->GetDeviceTranslation();
+		handDeviceDir = handDeviceDir.normalized();
+		float cosTheta = hand->palmNormal().dot( handDeviceDir ) / ( hand->palmNormal().magnitude() * handDeviceDir.magnitude() );
+
+		float weight = fabs( cosTheta ) * ( 1.0f / hand->confidence() );
+
+		if( weight > _weight )
+		{
+			_weight = weight;
+			_id = hand->id();
+		}
+	}
+
+	float _weight;
+	int32_t _id;
+};
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 void FrameImplementation::Merge( const FrameImplementation &rhs )
@@ -256,14 +287,19 @@ void FrameImplementation::Merge( const FrameImplementation &rhs )
 		global_frame_id_map[rhs._id] = _id;
 	}
 
+	HandWeight_t handWeights[2];
+
 	// Merge common hands.
 	for( unsigned int i = 0; i < _hands.size(); i++ )
 	{
 		HandImplementation *thisHand = _hands[i].GetImplementation();
 		HandImplementation *rhsHand = FindMatchingHand( thisHand, rhs );
 
+		handWeights[thisHand->isLeft()].AddWeight( thisHand, this );
+
 		if( rhsHand )
 		{
+			handWeights[rhsHand->isLeft()].AddWeight( rhsHand, &rhs );
 			thisHand->Merge( *this, rhs, *rhsHand );
 		}
 	}
@@ -274,6 +310,8 @@ void FrameImplementation::Merge( const FrameImplementation &rhs )
 		HandImplementation *rhsHand = rhs._hands[i].GetImplementation();
 		HandImplementation *thisHand = FindMatchingHand( rhsHand, *this );
 
+		handWeights[rhsHand->isLeft()].AddWeight( rhsHand, &rhs );
+
 		if( !thisHand )
 		{
 			// A matching hand wasn't found in this frame. Insert it.
@@ -283,6 +321,37 @@ void FrameImplementation::Merge( const FrameImplementation &rhs )
 
 	// Ok, the hands have already been merged.
 	// So what we need to do is take all gestures and map them to their new hand IDs.
+	{
+		std::vector<GesturePair_t> finalGestures;
+
+		for( unsigned int i = 0; i < _gestures.size(); i++ )
+		{
+			GestureImplementation *gesture = _gestures[i].GetImplementation();
+			const std::vector<int32_t> &handIds = gesture->handIds();
+			int32_t handId = handIds[0];
+
+			Hand h = hand( handId );
+			if( handWeights[h.isLeft()]._id == handId )
+			{
+				finalGestures.push_back( _gestures[i] );
+			}
+		}
+
+		for( unsigned int i = 0; i < rhs._gestures.size(); i++ )
+		{
+			GestureImplementation *gesture = rhs._gestures[i].GetImplementation();
+			const std::vector<int32_t> &handIds = gesture->handIds();
+			int32_t handId = handIds[0];
+
+			Hand h = rhs.hand( handId );
+			if( handWeights[h.isLeft()]._id == handId )
+			{
+				finalGestures.push_back( rhs._gestures[i] );
+			}
+		}
+
+		_gestures = finalGestures;
+	}
 }
 
 //-----------------------------------------------------------------------------
@@ -409,7 +478,7 @@ InteractionBox FrameImplementation::interactionBox() const
 //-----------------------------------------------------------------------------
 float FrameImplementation::currentFramesPerSecond() const
 {
-	return 60.0f;
+	return _fps;
 }
 
 //-----------------------------------------------------------------------------
@@ -616,20 +685,19 @@ HandImplementation *FrameImplementation::FindMatchingHand( HandImplementation *h
 	{
 		HandImplementation *test = frame._hands[i].GetImplementation();
 
-#if 1
+
 		// HACK: Just assume hands of the same type are matches.
 		if( hand->isLeft() == test->isLeft() )
 		{
 			return test;
 		}
-#else
-		// Just ensure they're within 5cm of each other.
+
+		// Just ensure they're within 10cm of each other.
 		const Vector &testPosition = test->palmPosition();
-		if( palmPosition.distanceTo( testPosition ) < 50 )
+		if( palmPosition.distanceTo( testPosition ) < 100 )
 		{
 			return test;
 		}
-#endif
 	}
 
 	return NULL;

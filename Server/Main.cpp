@@ -19,6 +19,7 @@
 #include "Network/Network.h"
 #include "Implementation/FrameImplementation.h"
 #include "Implementation/ControllerImplementation.h"
+#include "Timer.h"
 using namespace GiantLeap;
 
 #include <Windows.h>
@@ -30,10 +31,16 @@ using namespace std;
 
 #include "MemDebugOn.h"
 
+struct RecvInfo_t
+{
+	bool _recv;
+	int _maxSkipCount;
+};
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 typedef map<string, FrameImplementation> FrameMap_t;
-typedef map<string, bool> AddressMap_t;
+typedef map<string, RecvInfo_t> AddressMap_t;
 
 //-----------------------------------------------------------------------------
 // Prototypes.
@@ -93,10 +100,11 @@ DWORD WINAPI thread_main( LPVOID lpParam )
 
 	while( !global_quit )
 	{
-		addresses[addr._address] = true;
-
 		BufferRead rb( buf, len );
 		frames[addr._address] = FrameImplementation( &rb );
+
+		addresses[addr._address]._recv = true;
+		addresses[addr._address]._maxSkipCount = (int)( 60 / frames[addr._address].currentFramesPerSecond() ) + 1;
 
 		if( received_from_all_addresses( addresses ) )
 		{
@@ -119,7 +127,7 @@ bool received_from_all_addresses( const AddressMap_t &addresses )
 {
 	for( AddressMap_t::const_iterator it = addresses.begin(); it != addresses.end(); it++ )
 	{
-		if( !it->second )
+		if( !it->second._recv && !it->second._maxSkipCount )
 		{
 			return false;
 		}
@@ -163,6 +171,7 @@ void reset_address_status( AddressMap_t *addresses )
 {
 	for( AddressMap_t::iterator it = addresses->begin(); it != addresses->end(); it++ )
 	{
-		it->second = false;
+		it->second._recv = false;
+		it->second._maxSkipCount = max( 0, it->second._maxSkipCount - 1 );
 	}
 }

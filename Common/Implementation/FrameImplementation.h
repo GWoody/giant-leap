@@ -90,6 +90,7 @@ namespace GiantLeap
 		std::vector<GesturePair_t>	_gestures;
 
 		Vector				_deviceTranslation;
+		float				_fps;
 	};
 
 }
